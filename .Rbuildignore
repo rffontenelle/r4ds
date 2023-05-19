@@ -1,9 +1,0 @@
-^.*\.Rproj$
-^\.Rproj\.user$
-^packrat/
-^\.Rprofile$
-^\.github$
-_book/
-_bookdown_files/
-packrat/lib*/
-docs/

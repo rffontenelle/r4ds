@@ -1,7 +1,0 @@
-bookdown::gitbook:
-  config:
-    toc:
-      collapse: section
-      before: |
-        <li><strong><a href="./">R para Ciencia de Datos</a></strong></li>
-  css: style.css
