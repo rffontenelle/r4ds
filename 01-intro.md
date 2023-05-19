@@ -298,7 +298,7 @@ devtools::session_info(c("tidyverse"))
 #>  collate  C.UTF-8
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2023-05-17
+#>  date     2023-05-19
 #>  pandoc   2.19.2 @ /usr/bin/ (via rmarkdown)
 #> 
 #> ─ Packages ───────────────────────────────────────────────────────────────────
@@ -358,7 +358,7 @@ devtools::session_info(c("tidyverse"))
 #>  lubridate     * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)
 #>  magrittr        2.0.3   2022-03-30 [1] CRAN (R 4.3.0)
 #>  MASS            7.3-60  2023-05-04 [1] CRAN (R 4.3.0)
-#>  Matrix          1.5-4   2023-04-04 [2] CRAN (R 4.3.0)
+#>  Matrix          1.5-4.1 2023-05-18 [1] CRAN (R 4.3.0)
 #>  memoise         2.0.1   2021-11-26 [1] CRAN (R 4.3.0)
 #>  mgcv            1.8-42  2023-03-02 [2] CRAN (R 4.3.0)
 #>  mime            0.12    2021-09-28 [1] CRAN (R 4.3.0)

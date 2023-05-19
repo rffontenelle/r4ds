@@ -42,9 +42,9 @@ Para obtener la fecha o fecha-hora actual, puedes usar `today()` (_hoy_) o `now(
 
 ```r
 today()
-#> [1] "2023-05-17"
+#> [1] "2023-05-19"
 now()
-#> [1] "2023-05-17 02:37:57 UTC"
+#> [1] "2023-05-19 22:47:46 UTC"
 ```
 
 Hay tres modos en los que puedes crear una fecha/hora:
@@ -202,9 +202,9 @@ Puedes querer cambiar entre una fecha-hora y una fecha. Ese es el trabajo de `as
 
 ```r
 as_datetime(today())
-#> [1] "2023-05-17 UTC"
+#> [1] "2023-05-19 UTC"
 as_date(now())
-#> [1] "2023-05-17"
+#> [1] "2023-05-19"
 ```
 
 A veces tendrás fechas/horas como desfases numéricos de la "Época Unix" similares a 1970-01-01. Si el desfase es en segundos, usa `as_datetime()`; si es en días, usa `as_date()`.
@@ -437,7 +437,7 @@ Cuando restas dos fechas en R obtienes un objeto de diferencia temporal (en ingl
 # ¿Qué edad tiene Hadley?
 edad_h <- today() - ymd(19791014)
 edad_h
-#> Time difference of 15921 days
+#> Time difference of 15923 days
 ```
 
 Un objeto de clase _difftime_ registra un lapso de tiempo de segundos, minutos, horas, días o semanas. Esta ambiguedad hace que los _difftimes_ sean un poco complicados de trabajar, por lo que __lubridate__ provee una alternativa que siempre usa segundos: la __duración__.
@@ -445,7 +445,7 @@ Un objeto de clase _difftime_ registra un lapso de tiempo de segundos, minutos, 
 
 ```r
 as.duration(edad_h)
-#> [1] "1375574400s (~43.59 years)"
+#> [1] "1375747200s (~43.59 years)"
 ```
 
 Las duraciones traen un conveniente grupo de constructores:

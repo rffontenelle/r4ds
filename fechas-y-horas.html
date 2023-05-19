@@ -863,9 +863,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Siempre deberías usar el tipo de datos más sencillo que se ajuste a tus necesidades. Esto significa que si puedes usar <code>date</code> en lugar de <code>date-time</code>, deberías hacerlo. Las fechas-horas son sustancialmente más complicadas porque necesitas gestionar los husos horarios, a los que volveremos al final del capítulo.</p>
 <p>Para obtener la fecha o fecha-hora actual, puedes usar <code>today()</code> (<em>hoy</em>) o <code>now()</code> (<em>ahora</em>):</p>
 <div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="fechas-y-horas.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="fu">today</span>()</span>
-<span id="cb383-2"><a href="fechas-y-horas.html#cb383-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2023-05-17&quot;</span></span>
+<span id="cb383-2"><a href="fechas-y-horas.html#cb383-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2023-05-19&quot;</span></span>
 <span id="cb383-3"><a href="fechas-y-horas.html#cb383-3" aria-hidden="true" tabindex="-1"></a><span class="fu">now</span>()</span>
-<span id="cb383-4"><a href="fechas-y-horas.html#cb383-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2023-05-17 02:37:57 UTC&quot;</span></span></code></pre></div>
+<span id="cb383-4"><a href="fechas-y-horas.html#cb383-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2023-05-19 22:47:46 UTC&quot;</span></span></code></pre></div>
 <p>Hay tres modos en los que puedes crear una fecha/hora:</p>
 <ul>
 <li>Desde una cadena de caracteres (o <em>string</em>, en inglés).</li>
@@ -970,9 +970,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">16.2.3</span> Desde otros tipos<a href="fechas-y-horas.html#desde-otros-tipos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Puedes querer cambiar entre una fecha-hora y una fecha. Ese es el trabajo de <code>as_datetime()</code> (<em>como fecha-hora</em>) y <code>as_date()</code> (<em>como fecha</em>):</p>
 <div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="fechas-y-horas.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_datetime</span>(<span class="fu">today</span>())</span>
-<span id="cb393-2"><a href="fechas-y-horas.html#cb393-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2023-05-17 UTC&quot;</span></span>
+<span id="cb393-2"><a href="fechas-y-horas.html#cb393-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2023-05-19 UTC&quot;</span></span>
 <span id="cb393-3"><a href="fechas-y-horas.html#cb393-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as_date</span>(<span class="fu">now</span>())</span>
-<span id="cb393-4"><a href="fechas-y-horas.html#cb393-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2023-05-17&quot;</span></span></code></pre></div>
+<span id="cb393-4"><a href="fechas-y-horas.html#cb393-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2023-05-19&quot;</span></span></code></pre></div>
 <p>A veces tendrás fechas/horas como desfases numéricos de la “Época Unix” similares a 1970-01-01. Si el desfase es en segundos, usa <code>as_datetime()</code>; si es en días, usa <code>as_date()</code>.</p>
 <div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="fechas-y-horas.html#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_datetime</span>(<span class="dv">60</span> <span class="sc">*</span> <span class="dv">60</span> <span class="sc">*</span> <span class="dv">10</span>)</span>
 <span id="cb394-2"><a href="fechas-y-horas.html#cb394-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;1970-01-01 10:00:00 UTC&quot;</span></span>
@@ -1122,10 +1122,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="fechas-y-horas.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ¿Qué edad tiene Hadley?</span></span>
 <span id="cb408-2"><a href="fechas-y-horas.html#cb408-2" aria-hidden="true" tabindex="-1"></a>edad_h <span class="ot">&lt;-</span> <span class="fu">today</span>() <span class="sc">-</span> <span class="fu">ymd</span>(<span class="dv">19791014</span>)</span>
 <span id="cb408-3"><a href="fechas-y-horas.html#cb408-3" aria-hidden="true" tabindex="-1"></a>edad_h</span>
-<span id="cb408-4"><a href="fechas-y-horas.html#cb408-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Time difference of 15921 days</span></span></code></pre></div>
+<span id="cb408-4"><a href="fechas-y-horas.html#cb408-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Time difference of 15923 days</span></span></code></pre></div>
 <p>Un objeto de clase <em>difftime</em> registra un lapso de tiempo de segundos, minutos, horas, días o semanas. Esta ambiguedad hace que los <em>difftimes</em> sean un poco complicados de trabajar, por lo que <strong>lubridate</strong> provee una alternativa que siempre usa segundos: la <strong>duración</strong>.</p>
 <div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="fechas-y-horas.html#cb409-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.duration</span>(edad_h)</span>
-<span id="cb409-2"><a href="fechas-y-horas.html#cb409-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;1375574400s (~43.59 years)&quot;</span></span></code></pre></div>
+<span id="cb409-2"><a href="fechas-y-horas.html#cb409-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;1375747200s (~43.59 years)&quot;</span></span></code></pre></div>
 <p>Las duraciones traen un conveniente grupo de constructores:</p>
 <div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="fechas-y-horas.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dseconds</span>(<span class="dv">15</span>)</span>
 <span id="cb410-2"><a href="fechas-y-horas.html#cb410-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;15s&quot;</span></span>
