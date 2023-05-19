@@ -572,7 +572,7 @@ Hasta ahora, los pares de tablas siempre se han unido de acuerdo a una única va
 
 5. ¿Qué sucedió el día 13 de junio de 2013? Muestra el patrón espacial de los atrasos. Luego, usa un buscador para encontrar referencias cruzadas con el clima.
 
- 
+
 
 ### Otras implementaciones
 
