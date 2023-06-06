@@ -26,7 +26,7 @@ Puedes generar el libro directamente desde el archivo `index.rmd`. Asegurate de 
 
 ```{r}
 install.packages("bookdown")
-devtools::install_github("hadley/r4ds")
+devtools::install_github("cienciadedatos/r4ds")
 devtools::install_github("cienciadedatos/datos")
 ```
 
