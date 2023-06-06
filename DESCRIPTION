@@ -30,7 +30,7 @@ Suggests:
   htmlwidgets,
   jpeg,
   jsonlite,
-  knitr (== 1.42),
+  knitr,
   png,
   sessioninfo,
   rmarkdown,
