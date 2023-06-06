@@ -33,6 +33,7 @@ Suggests:
   knitr (== 1.42),
   png,
   sessioninfo,
+  rmarkdown,
   xml2,
   devtools
 License: CC BY-NC-SA 4.0
