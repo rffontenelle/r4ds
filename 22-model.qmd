@@ -1,5 +1,3 @@
-# (PART) Modelar {-}
-
 # Introducción {#model-intro}
 
 Ahora que estás equipado con herramientas de programación poderosas, finalmente podemos regresar a modelar. Utilizarás tus nuevas herramientas de domador de datos y de programación para ajustar muchos modelos y entender como funcionan. El foco de este libro es la exploración, no la confirmación o la inferencia formal. Pero aprenderás un par de herramientas básicas que te ayudarán a entender la variación en tus modelos.

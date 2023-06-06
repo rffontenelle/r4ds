@@ -1,9 +1,14 @@
-Package: r4ds
+Package: r4dses
 Title: R para Ciencia de Datos
-Version: 0.1
+Description: Meta paquete que facilita la instalación de los paquetes necesarios
+  para compilar el libro 'R Para Ciencia de Datos'.
+Version: 0.2.0.9000
 Authors@R: c(
-  person("Hadley", "Wickham", , "hadley@rstudio.com", c("aut", "cre")),
-  person("Garrett", "Grolemund", , "garrett@rstudio.com", "aut")
+  person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
+  person("Garrett", "Grolemund", , "garrett@rstudio.com", "aut"),
+  person("Mauricio", "Vargas Sepulveda",
+    email = "m.sepulveda@mail.utoronto.ca", role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0003-1017-7574"))
   )
 Depends: R (>= 3.1.0)
 URL: https://github.com/cienciadedatos/r4ds
@@ -21,15 +26,13 @@ Imports:
   viridis,
   datos
 Suggests:
-  bookdown,
-  bslib,
-  downlit,
   htmltools,
   htmlwidgets,
   jpeg,
   jsonlite,
-  knitr,
+  knitr (== 1.42),
   png,
   sessioninfo,
   xml2,
   devtools
+License: CC BY-NC-SA 4.0

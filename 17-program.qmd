@@ -1,5 +1,3 @@
-# (PART) Programar {-}
-
 # Introducción {#programar-intro}
 
 En esta parte del libro mejorarás tus habilidades de programación. La programación es una destreza transversal en todo el trabajo en ciencia de datos: es necesario usar una computadora para hacer ciencia de datos, no puedes hacerla solo con tu cabeza o con lápiz y papel.

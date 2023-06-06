@@ -175,7 +175,7 @@ molesto <- tibble(
   `1` = 1:10,
   `2` = `1` * 2 + rnorm(length(`1`))
 )
- ```
+```
 
 5. ¿Qué hace `tibble::enframe()`? ¿Cuándo lo usarías?
 

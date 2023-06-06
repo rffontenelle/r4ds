@@ -1,4 +1,4 @@
-# Análisis exploratorio de datos (_EDA_)
+# Análisis exploratorio de datos (EDA)
 
 ## Introducción
 

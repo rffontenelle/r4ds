@@ -22,12 +22,13 @@ Este es el repositorio (y branch) para la traducción de [R for Data Science](ht
 3. Crea un branch propio (e.g. correcciones-andrea, puedes hacer `git checkout -b correcciones-miusuario`)
 4. Cuando quieras subir tus cambios, haz _push_ a tu cuenta y luego haz un *Pull Request* indicando el branch `traducción` del repositorio `cienciadedatos/r4ds`.
 
-Puedes generar el libro directamente desde el archivo `index.rmd`. Asegurate de tener los siguientes paquetes instalados:
+Puedes generar el libro directamente desde el archivo `index.qmd`. Asegurate de tener los siguientes paquetes instalados:
 
-```{r}
-install.packages("bookdown")
+```r
 devtools::install_github("cienciadedatos/r4ds")
 devtools::install_github("cienciadedatos/datos")
 ```
+
+Además debes instalar [Quarto](https://quarto.org/docs/get-started/).
 
 Revisa el código de conducta en el siguiente enlace: https://github.com/cienciadedatos/descripcion-y-orientaciones/issues/1

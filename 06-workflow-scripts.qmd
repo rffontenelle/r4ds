@@ -1,4 +1,4 @@
-# Flujo de trabajo: *Scripts*
+# Flujo de trabajo: Scripts
 
 Hasta ahora estuviste utilizando la consola para ejecutar código. Ese es un buen punto de partida, pero verás que se vuelve incómodo rápidamente a medida que creas gráficos de **ggplot2** y *pipes* en **dplyr** más complejos. Para tener más espacio de trabajo, una buena idea es usar el editor de *script*. Ábrelo ya sea haciendo clic en el menú de Archivo (*File*), seleccionando Nuevo Archivo (*New File*), y luego Script de R (*R Script*), o bien, utilizando el atajo del teclado `Cmd/Ctrl` + `Shift` + `N`. Ahora verás cuatro paneles: 
 ```{r echo = FALSE, out.width = "75%"}

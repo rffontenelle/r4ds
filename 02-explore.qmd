@@ -1,5 +1,3 @@
-# (PART) Explorar {-}
-
 # Introducción {#explorar-introduccion}
 
 El objetivo de la primera parte de este libro es introducirte en las herramientas básicas de _exploración de datos_ de la manera más veloz posible. La exploración de datos es el arte de mirar tus datos, generar hipótesis rápidamente, testearlas con celeridad y luego repetir el proceso de manera iterativa. El objetivo de la exploración de datos es generar muchos hallazgos prometedores que luego puedas retomar para explorarlos en mayor profundidad.

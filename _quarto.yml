@@ -1,0 +1,52 @@
+project:
+  type: book
+  output-dir: docs
+  
+book:
+  title: "R Para Ciencia de Datos"
+  date: "2023-06-06"
+  chapters:
+    - index.qmd
+    - 01-intro.qmd
+    - part: "Explorar"
+      chapters:
+      - 02-explore.qmd
+      - 03-visualize.qmd
+      - 04-workflow-basics.qmd
+      - 05-transform.qmd
+      - 06-workflow-scripts.qmd
+      - 07-eda.qmd
+      - 08-workflow-projects.qmd
+    - part: "Manejar o domar datos"
+      chapters:
+      - 09-wrangle.qmd
+      - 10-tibble.qmd
+      - 11-import.qmd
+      - 12-tidy.qmd
+      - 13-relational-data.qmd
+      - 14-strings.qmd
+      - 15-factors.qmd
+      - 16-datetimes.qmd
+    - part: "Programar"
+      chapters:
+      - 17-program.qmd
+      - 18-pipes.qmd
+      - 19-functions.qmd
+      - 20-vectors.qmd
+      - 21-iteration.qmd
+    - part: "Modelar"
+      chapters:
+      - 22-model.qmd
+      - 23-model-basics.qmd
+      - 24-model-building.qmd
+      - 25-model-many.qmd
+    - part: "Comunicar"
+      chapters:
+      - 26-communicate.qmd
+      - 27-rmarkdown.qmd
+      - 28-communicate-plots.qmd
+      - 29-rmarkdown-formats.qmd
+      - 30-rmarkdown-workflow.qmd
+format:
+  html:
+    theme: cosmo
