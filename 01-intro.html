@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R Para Ciencia de Datos - 1&nbsp; Introducción</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02-explore.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R Para Ciencia de Datos</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Explorar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-explore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-visualize.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualización de datos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-workflow-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Flujo de trabajo: conocimientos básicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-transform.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transformación de datos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-workflow-scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Flujo de trabajo: <em>Scripts</em></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análisis exploratorio de datos (<em>EDA</em>)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-workflow-projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Flujo de trabajo: proyectos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Manejar o domar datos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-wrangle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-tibble.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tibbles</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-import.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Importación de datos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Datos ordenados</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-relational-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datos relacionales</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Cadenas de caracteres</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factores</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-datetimes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Fechas y horas</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Programar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-program.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">(PART) Programar</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-pipes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Pipes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Funciones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-vectors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Vectores</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21-iteration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Iteración</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Modelar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./22-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./23-model-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Modelos: conceptos básicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./24-model-building.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Construcción de modelos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./25-model-many.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Muchos modelos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Comunicar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./26-communicate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./27-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">R Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./28-communicate-plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Comunicar con gráficos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./29-rmarkdown-formats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Formatos de R Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30-rmarkdown-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Flujo de trabajo en R Markdown</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#lo-que-aprenderás" id="toc-lo-que-aprenderás" class="nav-link active" data-scroll-target="#lo-que-aprenderás"><span class="header-section-number">1.1</span> Lo que aprenderás</a></li>
+  <li><a href="#cómo-está-organizado-este-libro" id="toc-cómo-está-organizado-este-libro" class="nav-link" data-scroll-target="#cómo-está-organizado-este-libro"><span class="header-section-number">1.2</span> Cómo está organizado este libro</a></li>
+  <li><a href="#qué-no-vas-a-aprender" id="toc-qué-no-vas-a-aprender" class="nav-link" data-scroll-target="#qué-no-vas-a-aprender"><span class="header-section-number">1.3</span> Qué no vas a aprender</a>
+  <ul class="collapse">
+  <li><a href="#big-data" id="toc-big-data" class="nav-link" data-scroll-target="#big-data"><span class="header-section-number">1.3.1</span> Big data</a></li>
+  <li><a href="#python-julia-y-amigos" id="toc-python-julia-y-amigos" class="nav-link" data-scroll-target="#python-julia-y-amigos"><span class="header-section-number">1.3.2</span> Python, Julia y amigos</a></li>
+  <li><a href="#datos-no-rectangulares" id="toc-datos-no-rectangulares" class="nav-link" data-scroll-target="#datos-no-rectangulares"><span class="header-section-number">1.3.3</span> Datos no rectangulares</a></li>
+  <li><a href="#confirmación-de-hipótesis" id="toc-confirmación-de-hipótesis" class="nav-link" data-scroll-target="#confirmación-de-hipótesis"><span class="header-section-number">1.3.4</span> Confirmación de hipótesis</a></li>
+  </ul></li>
+  <li><a href="#prerrequisitos" id="toc-prerrequisitos" class="nav-link" data-scroll-target="#prerrequisitos"><span class="header-section-number">1.4</span> Prerrequisitos</a>
+  <ul class="collapse">
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r"><span class="header-section-number">1.4.1</span> R</a></li>
+  <li><a href="#rstudio" id="toc-rstudio" class="nav-link" data-scroll-target="#rstudio"><span class="header-section-number">1.4.2</span> RStudio</a></li>
+  <li><a href="#el-tidyverse" id="toc-el-tidyverse" class="nav-link" data-scroll-target="#el-tidyverse"><span class="header-section-number">1.4.3</span> El Tidyverse</a></li>
+  <li><a href="#el-paquete-datos" id="toc-el-paquete-datos" class="nav-link" data-scroll-target="#el-paquete-datos"><span class="header-section-number">1.4.4</span> El paquete <code>datos</code></a></li>
+  <li><a href="#otros-paquetes" id="toc-otros-paquetes" class="nav-link" data-scroll-target="#otros-paquetes"><span class="header-section-number">1.4.5</span> Otros paquetes</a></li>
+  </ul></li>
+  <li><a href="#ejecutar-código-en-r" id="toc-ejecutar-código-en-r" class="nav-link" data-scroll-target="#ejecutar-código-en-r"><span class="header-section-number">1.5</span> Ejecutar código en R</a></li>
+  <li><a href="#pedir-ayuda-y-aprender-más" id="toc-pedir-ayuda-y-aprender-más" class="nav-link" data-scroll-target="#pedir-ayuda-y-aprender-más"><span class="header-section-number">1.6</span> Pedir ayuda y aprender más</a></li>
+  <li><a href="#agradecimientos" id="toc-agradecimientos" class="nav-link" data-scroll-target="#agradecimientos"><span class="header-section-number">1.7</span> Agradecimientos</a></li>
+  <li><a href="#colofón" id="toc-colofón" class="nav-link" data-scroll-target="#colofón"><span class="header-section-number">1.8</span> Colofón</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>La ciencia de datos (<em>data science</em>) es una disciplina fascinante que te permite convertir datos sin procesar en entendimiento, comprensión y conocimiento. El objetivo de este libro es ayudarte a aprender las herramientas más importantes para que puedas hacer ciencia de datos en R. Luego de leerlo, tendrás las herramientas para enfrentar una gran variedad de desafíos propios de esta área, usando las mejores partes de R.</p>
+<section id="lo-que-aprenderás" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="lo-que-aprenderás"><span class="header-section-number">1.1</span> Lo que aprenderás</h2>
+<p>La ciencia de datos es un campo muy amplio y no hay manera de que puedas dominarlo leyendo un solo libro. El objetivo de este, en particular, es entregarte una base sólida acerca de las herramientas más importantes. Nuestro modelo sobre cuáles son las herramientas necesarias para un proyecto típico de ciencia de datos se ve así:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="diagrams_w_text_as_path/es/data-science.svg" class="img-fluid" style="width:75.0%"></p>
+</div>
+</div>
+<p>Primero, debes <strong>importar</strong> tus datos hacia R. Típicamente, esto implica tomar datos que están guardados en un archivo, base de datos o API y cargarlos como <em>data frame</em> en R. Si no puedes llevar tus datos a R, no puedes hacer ciencia de datos con él.</p>
+<p>Una vez que has importado los datos, es una buena idea <strong>ordenarlos</strong>. Ordenar los datos significa guardarlos de una manera consistente que haga coincidir la semántica del set de datos con la manera en que está guardado. En definitiva, cuando tus datos están ordenados, cada columna es una variable y cada fila una observación. Tener datos ordenados es importante porque si su estructura es consistente, puedes enfocar tus esfuerzos en las preguntas sobre los datos y no en luchar para que estos tengan la forma necesaria para diferentes funciones.</p>
+<p>Cuando tus datos están ordenados, un primer paso suele ser <strong>transformarlos</strong>. La transformación implica reducir las observaciones a aquellas que sean de interés (como todas las personas de una ciudad o todos los datos del último año), crear nuevas variables que sean funciones de variables ya existentes (como calcular la rapidez a partir de la velocidad y el tiempo) y calcular una serie de estadísticos de resumen (como recuentos y medias). Juntos, a ordenar y transformar, se les llama <strong>manejar o domar</strong> los datos, porque hacer que estos tengan la forma con la que es natural trabajarlos, suele sentirse como una lucha.</p>
+<p>Una vez que tienes los datos ordenados con las variables que necesitas, hay dos principales fuentes generadoras de conocimiento: la visualización y el modelado. Ambas tienen fortalezas y debilidades complementarias, por lo que cualquier análisis real iterará entre ellas varias veces.</p>
+<p>La <strong>visualización</strong> es una actividad humana fundamental. Una buena visualización te mostrará cosas que no esperabas o hará surgir nuevas preguntas acerca de los datos. También puede darte pistas acerca de si estás haciendo las preguntas equivocadas o si necesitas recolectar datos diferentes. Las visualizaciones pueden sorprenderte, pero no escalan particularmente bien, ya que requieren ser interpretadas por una persona.</p>
+<p>Los <strong>modelos</strong> son herramientas complementarias a la visualización. Una vez que tus preguntas son lo suficientemente precisas, puedes utilizar un modelo para responderlas. Los modelos son herramientas matemáticas o computacionales, por lo que generalmente escalan bien. Incluso cuando no lo hacen, resulta más económico comprar más computadores que comprar más cerebros. Sin embargo, cada modelo tiene supuestos y, debido a su propia naturaleza, un modelo no puede cuestionar sus propios supuestos. Esto significa que un modelo, por definición, no puede sorprenderte.</p>
+<p>El último paso de la ciencia de datos es la <strong>comunicación</strong>, una parte crítica de cualquier proyecto de análisis de datos. No importa qué tan bien tus modelos y visualizaciones te hayan permitido entender tus datos, a menos que también puedas comunicar esos resultados a otras personas.</p>
+<p>Alrededor de todas estas herramientas se encuentra la <strong>programación</strong>. La programación es una herramienta transversal que usarás en todas las partes de tu proyecto. No necesitas ser una personas experta en programación para hacer ciencia de datos, pero aprender más sobre ella es una gran ventaja porque te permite automatizar tareas recurrentes y resolver problemas con mayor facilidad.</p>
+<p>En cualquier proyecto de ciencia de datos tendrás que ocupar estas herramientas, pero en muchos casos estas no serán suficientes. Hay un regla aproximada de 80-20 en juego: puedes enfrentar alrededor del 80 % de cualquier proyecto usando las herramientas que aprenderás en este libro, pero necesitarás utilizar otras para abordar el 20 % restante. A lo largo del libro te iremos señalando recursos donde puedes aprender más.</p>
+</section>
+<section id="cómo-está-organizado-este-libro" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="cómo-está-organizado-este-libro"><span class="header-section-number">1.2</span> Cómo está organizado este libro</h2>
+<p>La descripción anterior de las herramientas propias de las ciencia de datos está organizada aproximadamente de acuerdo al orden en que usualmente se usan en el análisis (aunque, por supuesto, tendrás que iterar entre ellas múltiples veces). Sin embargo, en nuestra experiencia esa no es la mejor manera de aprenderlas:</p>
+<ul>
+<li><p>Partir con la ingesta y orden de los datos no es lo óptimo porque el 80% del tiempo es un proceso rutinario y aburrido y el 20% restante es extraño y frustrante. ¡No es un buen lugar para aprender un tema nuevo! En cambio, partiremos con la visualización y transformación de datos que ya han sido importados y ordenados. De esta manera, cuando tengas que importar y ordenar tus propios datos, tu motivación se mantendrá alta porque sabrás que ese sufrimiento vale la pena.</p></li>
+<li><p>Algunos temas se explican mejor con otras herramientas. Por ejemplo, creemos que es más fácil entender qué es un modelo si ya sabes sobre visualización, datos ordenados y programación.</p></li>
+<li><p>Las herramientas de programación no son necesariamente interesantes en sí mismas; sin embargo, te permiten enfrentar problemas desafiantes. Te entregaremos una selección de herramientas de programación en la mitad del libro y luego verás cómo se pueden combinar con las herramientas propias de la ciencia de datos para enfrentar problemas de modelado interesantes.</p></li>
+</ul>
+<p>En cada capítulo hemos tratado de mantener un patrón similar: partir con algunos ejemplos motivantes que te permitan ver el panorama completo y luego sumergirnos en los detalles. Cada sección del libro incluye ejercicios que te ayudarán a practicar lo que has aprendido. Pese a que puede ser tentador saltarse los ejercicios, no hay mejor manera de aprender que practicar con problemas reales.</p>
+</section>
+<section id="qué-no-vas-a-aprender" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="qué-no-vas-a-aprender"><span class="header-section-number">1.3</span> Qué no vas a aprender</h2>
+<p>Hay algunos temas importantes que este libro no aborda. Creemos que es importante mantenernos enfocados con determinación en los aspectos esenciales, con el fin de que puedas ponerte en marcha lo más rápido posible. Eso implica que este libro no puede abordar todos los temas importantes.</p>
+<section id="big-data" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="big-data"><span class="header-section-number">1.3.1</span> Big data</h3>
+<p>Este libro se enfoca con orgullo en conjuntos de datos pequeños procesables en la memoria de tu computadora. Este es el lugar adecuado para partir, ya que no es posible que te enfrentes a datos de gran tamaño sin antes haber tenido experiencia con otros más pequeños. Las herramientas que aprenderás en este libro permiten manejar fácilmente datos de cientos de megabytes y, con un poco de cuidado, normalmente podrías hacerlas funcionar con 1 o 2 Gb de datos. Si habitualmente trabajas con datos más grandes (por ejemplo, 10-100 Gb), sería bueno que aprendieras sobre <a href="https://github.com/Rdatatable/data.table">data.table</a>. Este libro no enseña <code>data.table</code>, ya que su interfaz concisa hace que sea difícil de aprender por las pocas pistas lingüísticas que entrega. Sin embargo, si trabajas con datos grandes, la ventaja en términos de rendimiento hace que valga la pena el esfuerzo extra que requiere aprenderlo. Si tus datos son más grandes que eso, es importante que consideres cuidadosamente si tu problema de <em>big data</em> no es, en realidad, un problema de datos pequeños oculto. Si bien los datos completos pueden ser grandes, muchas veces los necesarios para responder una pregunta específica son menos. Puede que encuentres un subconjunto, una submuestra o un resumen de datos que sí caben en la memoria y que de todos modos te permiten responder la pregunta que te interesa. El desafío en este caso es encontrar los datos pequeños adecuados, lo que usualmente requiere muchas iteraciones.</p>
+<p>Otra posibilidad es que tu problema de <em>big data</em> sea realmente una suma de problemas de datos pequeños. Puede que cada uno de estos problema individuales quepa en la memoria; el problema es que tienes millones de ellos. Por ejemplo, puedes querer ajustar un modelo para cada persona de tu conjunto de datos. Eso sería trivial si tuvieras solo 10 o 100 personas, pero no si tienes un millón. Afortunadamente, cada problema es independiente del resto (una configuración a la que a veces se le llama de manera vergonzosa <em>paralela</em>), por lo que solo necesitas un sistema (como Hadoop o Spark) que te permita enviar diferentes sets de datos a diferentes computadoras para procesarlos. Una vez que hayas resuelto cómo responder la pregunta para un subset de datos usando las herramientas descritas en este libro, podrás aprender otras nuevas como <code>sparklyr</code>, <code>RHIPE</code> y <code>ddr</code> para responder la pregunta para todo el <em>dataset</em>.</p>
+</section>
+<section id="python-julia-y-amigos" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="python-julia-y-amigos"><span class="header-section-number">1.3.2</span> Python, Julia y amigos</h3>
+<p>En este libro no aprenderás nada sobre Python, Julia u otros lenguajes de programación útiles para hacer ciencia de datos. No es que creamos que estas herramientas sean malas. ¡No lo son! En la práctica, la mayoría de los equipos de ciencia de datos utilizan una mezcla de lenguajes, habitualmente al menos R y Python.</p>
+<p>Sin embargo, creemos fuertemente que es preferible dominar una sola herramienta a la vez. Mejorarás más rápido si te sumerges en un tema con profundidad, en vez de dispersarte entre muchos temas distintos. Esto no quiere decir que solo tengas que saber una cosa, solamente que aprenderás más rápido si te enfocas en una a la vez. Debes tratar de aprender cosas nuevas a lo largo de tu carrera, pero asegúrate de que tu entendimiento sea sólido antes de moverte hacia el siguiente tema interesante.</p>
+<p>Creemos que R es un gran lugar para empezar tu camino en la ciencia de datos, ya que es un ambiente diseñado desde las bases hacia arriba para apoyarla. R no es solo un lenguaje de programación, sino también un ambiente interactivo para hacer ciencia de datos. Para apoyar esta interacción, R es mucho más flexible que muchos de sus equivalentes. Si bien esta flexibilidad tiene desventajas, su lado positivo es que permite desarrollar con facilidad gramáticas que se ajustan a las distintas partes de la ciencia de datos. Estos mini-lenguajes te ayudan a pensar los problemas como científico/a de datos, al tiempo que apoyan una interacción fluida entre tu cerebro y la computadora.</p>
+</section>
+<section id="datos-no-rectangulares" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="datos-no-rectangulares"><span class="header-section-number">1.3.3</span> Datos no rectangulares</h3>
+<p>Este libro se enfoca exclusivamente en datos rectangulares, esto es, en conjuntos de valores que están asociados cada uno con una variable y una observación. Hay muchos conjuntos de datos que no se ajustan naturalmente a este paradigma, los que incluyen imágenes, sonidos, árboles y texto. Sin embargo, los <em>data frames</em> rectangulares son tan comunes en la ciencia y en la industria, que creemos que son un buen lugar para iniciar tu camino en la ciencia de datos.</p>
+</section>
+<section id="confirmación-de-hipótesis" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="confirmación-de-hipótesis"><span class="header-section-number">1.3.4</span> Confirmación de hipótesis</h3>
+<p>Es posible dividir el análisis de datos en dos áreas: generación de hipótesis y confirmación de hipótesis (a veces llamada análisis confirmatorio). El foco de este libro está puesto decididamente en la generación de hipótesis o exploración de datos. Acá mirarás con profundidad los datos y, en combinación con tu propio conocimiento, generarás muchas hipótesis interesantes que ayudarán a explicar por qué se comportan como lo hacen. Evaluarás las hipótesis informalmente, usando tu escepticismo para cuestionar los datos de distintas maneras.</p>
+<p>El complemento de la generación de hipótesis es la confirmación de hipótesis. Esta última es difícil por dos razones:</p>
+<ol type="1">
+<li><p>Necesitas un modelo matemático con el fin de generar predicciones falseables. Esto usualmente requiere considerable sofisticación estadística.</p></li>
+<li><p>Cada observación puede ser utilizada una sola vez para confirmar una hipótesis. En el momento en que la usas más de una vez ya estás de vuelta haciendo análisis exploratorio. Esto quiere decir que para hacer confirmación de hipótesis tienes que haber “pre-registrado” (es decir, haber escrito con anticipación) tu plan de análisis y no desviarte de él incluso cuando hayas visto tus datos. Hablaremos un poco acerca de estrategias que puedes utilizar para hacer esto más fácil en el capítulo sobre <a href="22-model.html">modelos</a>.</p></li>
+</ol>
+<p>Es habitual pensar en el modelado como una herramienta para la confirmación de hipótesis y a la visualización como una herramienta para la generación de hipótesis. Sin embargo, esa es una falsa dicotomía: los modelos son utilizados usualmente para la exploración y, con un poco de cuidado, puedes usar la visualización para confirmar una hipótesis. La diferencia clave es qué tan seguido mires cada observación: si la miras solo una vez es confirmación; si la miras más de una vez es exploración.</p>
+</section>
+</section>
+<section id="prerrequisitos" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="prerrequisitos"><span class="header-section-number">1.4</span> Prerrequisitos</h2>
+<p>Hemos asumido algunas cosas respecto de lo que ya sabes con el fin de poder sacar mayor provecho de este libro. Tienes que tener una <em>literacidad</em> numérica general y sería útil que tuvieses algo de experiencia programando. Si nunca has programado antes y puedes leer en inglés, <a href="https://rstudio-education.github.io/hopr/">Hands on Programming with R</a> escrito por Garrett podría ser un buen acompañamiento para este libro.</p>
+<p>Hay cinco cosas que necesitas para poder ejecutar el código incluido en este libro: R, RStudio, una colección de paquetes llamada <strong>tidyverse</strong>, el paquete <strong>datos</strong> (que incluye los datos en español se se utilizan en los ejemplos y ejercicios) y una serie de otros paquetes. Los paquetes son la unidad fundamental de código reproducible de R. Incluyen funciones reutilizables, la documentación que describe cómo usarlas y datos de muestra.</p>
+<section id="r" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="r"><span class="header-section-number">1.4.1</span> R</h3>
+<p>Para descargar R debes acceder a CRAN, llamado así por sus siglas en inglés: the <strong>c</strong>omprehensive <strong>R</strong> <strong>a</strong>rchive <strong>n</strong>etwork. CRAN está compuesto de una serie de servidores espejo repartidos alrededor del mundo y es utilizado para distribuir tanto R como los paquetes de R. No es necesario que intentes elegir un servidor que esté cerca tuyo: en su lugar, puedes utilizar el servidor en la nube, <a href="https://cloud.r-project.org" class="uri">https://cloud.r-project.org</a>, que automáticamente lo identifica por ti.</p>
+<p>Una vez al año sale una nueva versión importante de R y hay entre 2 y 3 ediciones menores en ese período. Es una buena idea actualizarlo regularmente. El proceso puede ser un poco engorroso, especialmente en el caso de las versiones mayores, que requieren que reinstales todos los paquetes que ya tienes. Sin embargo, no hacerlo puede ser peor. Para este libro, asegúrate de tener al menos la versión 3.5.</p>
+</section>
+<section id="rstudio" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="rstudio"><span class="header-section-number">1.4.2</span> RStudio</h3>
+<p>RStudio es un ambiente de desarrollo integrado (o IDE, por su sigla en inglés: Integrated Development Environment) para programar en R. Puedes descargarlo e instalarlo desde <a href="http://www.rstudio.com/download" class="uri">http://www.rstudio.com/download</a>. RStudio se actualiza un par de veces al año. Cuando haya una nueva versión disponible, el mismo programa te lo hará saber. Es una buena idea mantenerlo actualizado para que puedas aprovechar las mejores y más recientes características. Para este libro, asegúrate de tener al menos la versión 1.0.0.</p>
+<p>Cuando abras RStudio, verás en la interfaz dos regiones clave:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="diagrams_w_text_as_path/es/rstudio-console.svg" class="img-fluid" style="width:75.0%"></p>
+</div>
+</div>
+<p>Por ahora, todo lo que tienes que saber es que el código de R se escribe en la Consola y que hay que presionar Enter para ejecutarlo. ¡Aprenderás más a medida que avancemos!</p>
+</section>
+<section id="el-tidyverse" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="el-tidyverse"><span class="header-section-number">1.4.3</span> El Tidyverse</h3>
+<p>Es necesario que instales también algunos paquetes de R. Un <strong>paquete</strong> es una colección de funciones, datos y documentación que permite extender las capacidades de R base. Los paquetes son clave para usar R de manera exitosa. La mayoría de los paquetes que aprenderás a usar en este libro son parte del llamado “Tidyverse”. Los paquetes del Tidyverse comparten una filosofía acerca de los datos y la programación en R, y están diseñados para trabajar juntos con naturalidad. Su nombre viene de la palabra en inglés “tidy”, que quiere decir “ordenado”.</p>
+<p>Puedes instalar el <strong>tidyverse</strong> completo con una sola línea de código:</p>
+<p>Escribe en tu computadora esa línea de código en la consola y luego presiona Enter para ejecutarla. R descargará los paquetes de CRAN y los instalará en tu computadora. Si tienes problemas durante la instalación, asegúrate que tienes conexión a Internet y que <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a> no está bloqueado por tu firewall o proxy.</p>
+<p>No podrás usar las funciones, objetos y archivos de ayuda de un paquete hasta que lo hayas cargado con <code>library()</code>. Una vez que has instalado un paquete, puedes cargarlo con la función <code>library()</code>:</p>
+<p>Este mensaje te indica que el tidyverse está cargando los paquetes <strong>ggplot2</strong>, <strong>tibble</strong>, <strong>tidyr</strong>, <strong>readr</strong>, <strong>purrr</strong>, <strong>dplyr</strong>, <strong>stringr</strong> y <strong>forcats</strong>. Estos son considerados el <strong>corazón</strong> del Tidyverse porque los usarás prácticamente en cualquier análisis.</p>
+<p>Los paquetes del Tidyverse cambian con bastante frecuencia. Puedes ver si existen actualizaciones disponibles y opcionalmente instalarlas ejecutando <code>tidyverse_update()</code>.</p>
+</section>
+<section id="el-paquete-datos" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="el-paquete-datos"><span class="header-section-number">1.4.4</span> El paquete <code>datos</code></h3>
+<p>Con el fin de que este libro sea más accesible para el público hispanoparlante, además de la traducción del texto se han traducido los datos que se utilizan en los ejemplos y ejercicios.</p>
+<p>El paquete <code>datos</code> se encuentra disponible en CRAN y puedes instalarlo ejecutando el siguiente código:</p>
+</section>
+<section id="otros-paquetes" class="level3" data-number="1.4.5">
+<h3 data-number="1.4.5" class="anchored" data-anchor-id="otros-paquetes"><span class="header-section-number">1.4.5</span> Otros paquetes</h3>
+<p>Existen muchas otros paquetes excelentes que no son parte del <strong>tidyverse</strong> porque resuelven problemas de otros ámbitos o porque los principios en los que se basa su diseño son distintos. Esto no los hace mejores o peores, solo diferentes. En otras palabras, el complemento del <strong>tidyverse</strong> no es el <em>messyverse</em> (del inglés <em>messy</em>, desordenado), sino muchos otros universos de paquetes interrelacionados. A medida que te enfrentes a más proyectos de ciencia de datos con R, aprenderás sobre nuevos paquetes y nuevas formas de pensar los datos.</p>
+</section>
+</section>
+<section id="ejecutar-código-en-r" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="ejecutar-código-en-r"><span class="header-section-number">1.5</span> Ejecutar código en R</h2>
+<p>En la sección anterior te mostramos algunos ejemplos de cómo ejecutar código en R. En el libro, el código se ve así:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>Si ejecutas el mismo código en tu consola local, se verá así:</p>
+<pre><code>&gt; 1 + 2
+[1] 3</code></pre>
+<p>Hay dos diferencias principales. La primera, es que en tu consola debes escribir el código después del signo <code>&gt;</code>, llamado <em>prompt</em>; en el libro no te mostraremos el <em>prompt</em>. La segunda, es que en el libro el <em>output</em>, es decir, el resultado de ejecutar el código, está comentado: <code>#&gt;</code>. En tu consola, el output aparecerá directamente después del código. Estas dos diferencias implican que, como esta es una versión electrónica del libro, puedes copiar directamente el código que aparece acá y pegarlo en tu consola.</p>
+<p>A lo largo del libro usaremos una serie consistente de convenciones para referirnos al código:</p>
+<ul>
+<li><p>Las funciones están escritas en una fuente para código y seguidas de paréntesis. La primera vez que son mencionadas ofreceremos una traducción al español: <code>sum()</code> (del inglés <em>suma</em>) o <code>mean()</code> (del inglés <em>media</em>).</p></li>
+<li><p>Otros tipos de objetos de R (como datos o argumentos de funciones) estarán en fuente para código, pero sin paréntesis: <code>vuelos</code> o <code>x</code>.</p></li>
+<li><p>Si queremos dejar claro de qué paquete viene un objeto, usaremos el nombre del paquete seguido de doble dos puntos: <code>dplyr::mutate()</code> o <code>datos::paises</code>. Esto también es válido para el código de R.</p></li>
+</ul>
+</section>
+<section id="pedir-ayuda-y-aprender-más" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="pedir-ayuda-y-aprender-más"><span class="header-section-number">1.6</span> Pedir ayuda y aprender más</h2>
+<p>Este libro no es una isla. No existe ningún recurso que por sí mismo te permita dominar R. A medida que empieces a aplicar las técnicas descritas en este libro a tus propios datos te encontrarás con preguntas que acá no respondemos. En esta sección se describen algunas sugerencias sobre cómo pedir ayuda y cómo seguir aprendiendo.</p>
+<p>Si en algún momento ya no puedes avanzar, empieza buscando en Google. Usualmente, agregar “R” a tu búsqueda es suficiente para que se restrinja solo a resultados relevantes. Si lo que encuentras no es útil, probablemente sea porque no hay resultados disponibles en español. Google es particularmente útil para los mensajes de error. Si te aparece uno y no tienes idea de lo que significa, ¡prueba buscando en Google! Lo más probable es que alguien más se haya confundido con ese mensaje en el pasado y que haya ayuda en la web. Si el error te aparece en español u otro idioma, ejecuta en la consola <code>Sys.setenv(LANGUAGE = "en")</code> y luego vuelve a ejecutar el código. Es más probable que encuentres ayuda si el error que arroja R está en inglés.</p>
+<p>Si Google no ayuda, prueba con la versión en español de <a href="https://es.stackoverflow.com/">Stack Overflow</a>. Parte dedicando un tiempo a buscar si existe ya una respuesta a tu pregunta agregando <code>[R]</code> a tu búsqueda para restringir los resultados a preguntas y respuestas que usen R. Si no encuentras nada útil, prepara un ejemplo reproducible o <strong>reprex</strong>. Un buen <em>reprex</em> hace más fácil que otras personas te puedan ayudar y al prepararlo probablemente resuelvas el problema por tu cuenta.</p>
+<p>Hay tres cosas que debes incluir para hacer que tu ejemplo sea reproducible: los paquetes necesarios, datos y código.</p>
+<ol type="1">
+<li><p>Los <strong>paquetes</strong> deben ser cargados al inicio del <em>script</em> (que es como se le llama a la secuencia de comandos) para que sea fácil ver cuáles se necesitan para el ejemplo. Es una buena oportunidad para chequear que estás utilizando la última versión de cada paquete. Es posible que hayas descubierto un error (o <em>bug</em>, en inglés) que ya fue resuelto desde que instalaste el paquete. Para los paquetes del <strong>tidyverse</strong>, la manera más fácil de hacerlo es ejecutando <code>tidyverse_update()</code>.</p></li>
+<li><p>La manera más simple de incluir <strong>datos</strong> en una pregunta es usar <code>dput()</code> para generar el código de R que los recree. Por ejemplo, para recrear el conjunto de datos <code>mtautos</code> en R, tendríamos que realizar los siguientes pasos.</p></li>
+<li><p>Cargar el paquete que contiene los datos: <code>library(datos</code>)</p></li>
+<li><p>Ejecutar <code>dput(mtautos)</code> en R</p></li>
+<li><p>Copiar el output</p></li>
+<li><p>En tu script reproducible, escribir <code>mtautos &lt;-</code> y luego pegar lo copiado.</p></li>
+</ol>
+<p>Trata de buscar el subconjunto más pequeño de tus datos que te permita mostrar tu problema.</p>
+<ol type="1">
+<li>Dedica tiempo a asegurarte que tu <strong>código</strong> puede ser fácilmente leído por otras personas:</li>
+</ol>
+<ul>
+<li><p>Asegúrate de haber utilizado espacios y que los nombre de tus variables son a la vez concisos e informativos.</p></li>
+<li><p>Realiza comentarios que indiquen dónde se encuentra el problema.</p></li>
+<li><p>Haz lo posible por remover todo lo que no esté relacionado con el problema. Mientras más breve tu código, más fácil de entender y más fácil de arreglar.</p></li>
+</ul>
+<p>Finalmente, revisa que tu ejemplo es efectivamente reproducible. Para ello, inicia una nueva sesión de R y copia y pega tu script ahí.</p>
+<p>También deberías dedicar tiempo a prepararte para resolver problemas por tu cuenta antes de que ocurran. Invertir un poco de tiempo cada día aprendiendo R te entrega grandes beneficios a largo plazo. Una manera es siguiendo lo que hacen Hadley, Garrett y todas las personas de RStudio en el <a href="https://blog.rstudio.org">blog de RStudio</a>. Ahí es donde se publican anuncios sobre nuevos paquetes, nuevas características del entorno de desarrollo integrado (IDE) y talleres presenciales. También te podría interesar seguir a Hadley (<a href="https://twitter.com/hadleywickham">@hadleywickham</a>) o a Garrett (<a href="https://twitter.com/statgarrett">@statgarrett</a>) en Twitter, o a la cuenta <a href="https://twitter.com/rstudiotips">@rstudiotips</a> para mantenerte al día sobre las nuevas características RStudio.</p>
+<p>Para estar al tanto acerca de la comunidad de R en general, puedes leer <a href="http://www.r-bloggers.com" class="uri">http://www.r-bloggers.com</a>: que agrupa cerca de 500 blogs sobre R de todas partes del mundo, algunos incluso en español. Si tienes cuenta en Twitter, puedes seguir el hashtag <code>#rstatsES</code> (en español) o <code>#rstats</code> (en inglés). Twitter es una de las herramientas clave que usa Hadley para mantenerse al día sobre los nuevos desarrollos de la comunidad.</p>
+</section>
+<section id="agradecimientos" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="agradecimientos"><span class="header-section-number">1.7</span> Agradecimientos</h2>
+<p>Este libro no es solo el producto de Hadley y Garrett, sino el resultado de muchas conversaciones (en persona y en línea) que hemos tenido con gente de la comunidad de R. Hay algunas personas a las que nos gustaría agradecer de manera particular, ya que han invertido muchas horas respondiendo preguntas tontas y ayudándonos a pensar mejor acerca de la ciencia de datos:</p>
+<ul>
+<li><p>Jenny Bryan y Lionel Henry, por las muchas conversaciones útiles en torno al trabajo con listas y listas-columnas.</p></li>
+<li><p>Los tres capítulos sobre flujo de trabajo fueron adaptados (con permiso) de <a href="http://stat545.com/block002_hello-r-workspace-wd-project.html" class="uri">http://stat545.com/block002_hello-r-workspace-wd-project.html</a> de Jenny Bryan.</p></li>
+<li><p>Genevera Allen por las dicusiones acerca de modelos, modelado, la perspectiva sobre de aprendizaje estadístico y la diferencia entre generación de hipótesis y confirmación de hipótesis.</p></li>
+<li><p>Yihui Xie por su trabajo en el paquete <a href="https://github.com/rstudio/bookdown">bookdown</a>, y por responder incansablemente las peticiones de nuevas características.</p></li>
+<li><p>Bill Behrman por la lectura atenta del libro completo y por probarlo en su curso de Ciencia de Datos en Stanford.</p></li>
+<li><p>A la comunidad en Twitter de #rstats que revisó todos los borradores de los capítulos y ofreció un montón de retroalimentación útil.</p></li>
+<li><p>Tal Galili, por aumentar su paquete <strong>dendextend</strong> para soportar una sección sobre <em>clustering</em> que no llegó al borrador final.</p></li>
+</ul>
+<p>Este libro fue escrito de manera abierta y muchas personas contribuyeron con <em>pull requests</em> para resolver problemas pequeños. Especiales agradecimientos para todos quienes contribuyeron via Github:</p>
+<p>Thanks go to all contributers in alphabetical order: Ahmed ElGabbas, Ajay Deonarine, <span class="citation" data-cites="Alex">@Alex</span>, Andrew Landgraf, Ben Marwick, Bill Behrman, Brandon Greenwell, Brett Klamer, Christian G. Warden, Christian Mongeau, Colin Gillespie, Cooper Morris, Curtis Alexander, Daniel Gromer, David Clark, Derwin McGeary, Devin Pastoor, Dylan Cashman, Earl Brown, Eric Watt, Etienne B. Racine, Flemming Villalona, Gregory Jefferis, Hengni Cai, Ian Lyttle, Ian Sealy, Jakub Nowosad, Jennifer (Jenny) Bryan, Jeroen Janssens, Jim Hester, Joanne Jang, John Sears, Jon Calder, Jonathan Page, Jose Roberto Ayala Solares, Julia Stewart Lowndes, Julian During, Justinas Petuchovas, Kara Woo, Kenny Darrell, Kirill Sevastyanenko, <span class="citation" data-cites="KyleHumphrey">@KyleHumphrey</span>, Lawrence Wu, <span class="citation" data-cites="MJMarshall">@MJMarshall</span>, Matthew Sedaghatfar, Mine Cetinkaya-Rundel, Mustafa Ascha, Nelson Areal, Nick Clark, Nirmal Patel, <span class="citation" data-cites="OaCantona">@OaCantona</span>, Patrick Kennedy, <span class="citation" data-cites="Paul">@Paul</span>, Peter Hurford, Rademeyer Vermaak, Radu Grosu, Robert Schuessler, S’busiso Mkhondwane, Shannon Ellis, Steve Mortimer, TJ Mahr, Terence Teo, Thomas Klebel, Tom Prior, Will Beasley, Yihui Xie, adi pradhan, bahadir cankardes, <span class="citation" data-cites="batpigandme">@batpigandme</span>, <span class="citation" data-cites="behrman">@behrman</span>, <span class="citation" data-cites="harrismcgehee">@harrismcgehee</span>, <span class="citation" data-cites="jennybc">@jennybc</span>, <span class="citation" data-cites="jjchern">@jjchern</span>, <span class="citation" data-cites="jonathanflint">@jonathanflint</span>, <span class="citation" data-cites="kdpsingh">@kdpsingh</span>, <span class="citation" data-cites="koalabearski">@koalabearski</span>, <span class="citation" data-cites="nate-d-olson">@nate-d-olson</span>, <span class="citation" data-cites="nickelas">@nickelas</span>, <span class="citation" data-cites="nwaff">@nwaff</span>, <span class="citation" data-cites="rlzijdeman">@rlzijdeman</span>, <span class="citation" data-cites="robinlovelace">@robinlovelace</span>, <span class="citation" data-cites="robinsones">@robinsones</span>, <span class="citation" data-cites="seamus-mckinsey">@seamus-mckinsey</span>, <span class="citation" data-cites="seanpwilliams">@seanpwilliams</span>, <span class="citation" data-cites="shoili">@shoili</span>, <span class="citation" data-cites="sibusiso16">@sibusiso16</span>, <span class="citation" data-cites="spirgel">@spirgel</span>, <span class="citation" data-cites="svenski">@svenski</span>, <span class="citation" data-cites="yahwes">@yahwes</span>, <span class="citation" data-cites="zeal626">@zeal626</span>.</p>
+</section>
+<section id="colofón" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="colofón"><span class="header-section-number">1.8</span> Colofón</h2>
+<p>La versión <em>online</em> de este libro está disponible en <a href="http://es.r4ds.hadley.nz" class="uri">http://es.r4ds.hadley.nz</a>. El original en inglés puedes encontrarlo en <a href="http://r4ds.had.co.nz" class="uri">http://r4ds.had.co.nz</a>. Las versiones <em>online</em> seguirán evolucionando entre reimpresiones del libro físico. La fuente del libro en español está disponible en <a href="https://github.com/cienciadedatos/r4ds" class="uri">https://github.com/cienciadedatos/r4ds</a> y la del libro en inglés en <a href="https://github.com/hadley/r4ds" class="uri">https://github.com/hadley/r4ds</a>. El libro funciona con <a href="https://bookdown.org" class="uri">https://bookdown.org</a>, que hace fácil convertir archivos de R Markdown a HTML, PDF e EPUB.</p>
+<p>Este libro fue construido con:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.3.0 (2023-04-21)
+ os       Linux Mint 21.1
+ system   x86_64, linux-gnu
+ ui       X11
+ language en_CA:en
+ collate  en_CA.UTF-8
+ ctype    en_CA.UTF-8
+ tz       America/Toronto
+ date     2023-06-06
+ pandoc   2.9.2.1 @ /usr/bin/ (via rmarkdown)
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ package       * version    date (UTC) lib source
+ askpass         1.1        2019-01-13 [3] CRAN (R 4.0.2)
+ backports       1.4.1      2021-12-13 [3] CRAN (R 4.2.0)
+ base64enc       0.1-3      2015-07-28 [3] CRAN (R 4.0.2)
+ bit             4.0.5      2022-11-15 [1] CRAN (R 4.3.0)
+ bit64           4.0.5      2020-08-30 [3] CRAN (R 4.2.0)
+ blob            1.2.4      2023-03-17 [3] CRAN (R 4.2.3)
+ broom           1.0.4      2023-03-11 [3] CRAN (R 4.2.2)
+ bslib           0.4.2      2022-12-16 [1] CRAN (R 4.3.0)
+ cachem          1.0.8      2023-05-01 [3] CRAN (R 4.3.0)
+ callr           3.7.3      2022-11-02 [3] CRAN (R 4.2.2)
+ cellranger      1.1.0      2016-07-27 [3] CRAN (R 4.0.1)
+ cli             3.6.1      2023-03-23 [3] CRAN (R 4.2.3)
+ clipr           0.8.0      2022-02-22 [3] CRAN (R 4.2.0)
+ colorspace      2.1-0      2023-01-23 [3] CRAN (R 4.2.2)
+ conflicted      1.2.0      2023-02-01 [3] CRAN (R 4.2.2)
+ cpp11         * 0.4.3.9000 2023-05-31 [1] local
+ crayon          1.5.2      2022-09-29 [3] CRAN (R 4.2.1)
+ curl            5.0.0      2023-01-12 [3] CRAN (R 4.2.2)
+ data.table      1.14.8     2023-02-17 [3] CRAN (R 4.2.2)
+ DBI             1.1.3      2022-06-18 [3] CRAN (R 4.2.1)
+ dbplyr          2.3.2      2023-03-21 [3] CRAN (R 4.2.3)
+ digest          0.6.31     2022-12-11 [1] CRAN (R 4.3.0)
+ dplyr         * 1.1.2      2023-04-20 [3] CRAN (R 4.3.0)
+ dtplyr          1.3.1      2023-03-22 [3] CRAN (R 4.2.3)
+ ellipsis        0.3.2      2021-04-29 [3] CRAN (R 4.1.1)
+ evaluate        0.21       2023-05-05 [3] CRAN (R 4.3.0)
+ fansi           1.0.4      2023-01-22 [3] CRAN (R 4.2.2)
+ farver          2.1.1      2022-07-06 [3] CRAN (R 4.2.1)
+ fastmap         1.1.1      2023-02-24 [3] CRAN (R 4.2.2)
+ fontawesome     0.5.1      2023-04-18 [3] CRAN (R 4.3.0)
+ forcats       * 1.0.0      2023-01-29 [3] CRAN (R 4.2.2)
+ fs              1.6.2      2023-04-25 [3] CRAN (R 4.3.0)
+ gargle          1.4.0      2023-04-15 [3] CRAN (R 4.3.0)
+ generics        0.1.3      2022-07-05 [3] CRAN (R 4.2.1)
+ ggplot2       * 3.4.2      2023-04-03 [3] CRAN (R 4.3.0)
+ glue            1.6.2      2022-02-24 [3] CRAN (R 4.2.0)
+ googledrive     2.1.0      2023-03-22 [3] CRAN (R 4.2.3)
+ googlesheets4   1.1.0      2023-03-23 [3] CRAN (R 4.2.3)
+ gtable          0.3.3      2023-03-21 [3] CRAN (R 4.2.3)
+ haven           2.5.2      2023-02-28 [3] CRAN (R 4.2.2)
+ highr           0.10       2022-12-22 [1] CRAN (R 4.3.0)
+ hms             1.1.3      2023-03-21 [3] CRAN (R 4.2.3)
+ htmltools       0.5.5      2023-03-23 [3] CRAN (R 4.2.3)
+ httr            1.4.6      2023-05-08 [3] CRAN (R 4.3.0)
+ ids             1.0.1      2017-05-31 [3] CRAN (R 4.1.1)
+ isoband         0.2.7      2022-12-20 [1] CRAN (R 4.3.0)
+ jquerylib       0.1.4      2021-04-26 [3] CRAN (R 4.1.2)
+ jsonlite        1.8.4      2022-12-06 [1] CRAN (R 4.3.0)
+ knitr           1.43       2023-05-25 [1] CRAN (R 4.3.0)
+ labeling        0.4.2      2020-10-20 [3] CRAN (R 4.2.0)
+ lattice         0.21-8     2023-04-05 [4] CRAN (R 4.3.0)
+ lifecycle       1.0.3      2022-10-07 [3] CRAN (R 4.2.1)
+ lubridate     * 1.9.2      2023-02-10 [3] CRAN (R 4.2.2)
+ magrittr        2.0.3      2022-03-30 [3] CRAN (R 4.2.0)
+ MASS            7.3-60     2023-05-04 [4] CRAN (R 4.3.0)
+ Matrix          1.5-4.1    2023-05-18 [1] CRAN (R 4.3.0)
+ memoise         2.0.1      2021-11-26 [3] CRAN (R 4.2.0)
+ mgcv            1.8-42     2023-03-02 [4] CRAN (R 4.2.3)
+ mime            0.12       2021-09-28 [3] CRAN (R 4.2.0)
+ modelr          0.1.11     2023-03-22 [3] CRAN (R 4.2.3)
+ munsell         0.5.0      2018-06-12 [3] CRAN (R 4.0.1)
+ nlme            3.1-162    2023-01-31 [4] CRAN (R 4.2.2)
+ openssl         2.0.6      2023-03-09 [3] CRAN (R 4.2.2)
+ pillar          1.9.0      2023-03-22 [3] CRAN (R 4.2.3)
+ pkgconfig       2.0.3      2019-09-22 [3] CRAN (R 4.0.1)
+ prettyunits     1.1.1      2020-01-24 [3] CRAN (R 4.0.1)
+ processx        3.8.1      2023-04-18 [3] CRAN (R 4.3.0)
+ progress        1.2.2      2019-05-16 [3] CRAN (R 4.0.1)
+ ps              1.7.5      2023-04-18 [3] CRAN (R 4.3.0)
+ purrr         * 1.0.1      2023-01-10 [3] CRAN (R 4.2.2)
+ R6              2.5.1      2021-08-19 [3] CRAN (R 4.2.0)
+ ragg            1.2.5      2023-01-12 [1] CRAN (R 4.3.0)
+ rappdirs        0.3.3      2021-01-31 [3] CRAN (R 4.2.0)
+ RColorBrewer    1.1-3      2022-04-03 [3] CRAN (R 4.2.0)
+ readr         * 2.1.4      2023-02-10 [3] CRAN (R 4.2.2)
+ readxl          1.4.2      2023-02-09 [3] CRAN (R 4.2.2)
+ rematch         1.0.1      2016-04-21 [3] CRAN (R 4.0.1)
+ rematch2        2.1.2      2020-05-01 [3] CRAN (R 4.0.1)
+ reprex          2.0.2      2022-08-17 [3] CRAN (R 4.2.1)
+ rlang           1.1.1      2023-04-28 [3] CRAN (R 4.3.0)
+ rmarkdown       2.21       2023-03-26 [3] CRAN (R 4.3.0)
+ rstudioapi      0.14       2022-08-22 [3] CRAN (R 4.2.1)
+ rvest           1.0.3      2022-08-19 [3] CRAN (R 4.2.1)
+ sass            0.4.6      2023-05-03 [3] CRAN (R 4.3.0)
+ scales          1.2.1      2022-08-20 [3] CRAN (R 4.2.1)
+ selectr         0.4-2      2019-11-20 [3] CRAN (R 4.0.1)
+ stringi         1.7.12     2023-01-11 [3] CRAN (R 4.2.2)
+ stringr       * 1.5.0      2022-12-02 [3] CRAN (R 4.3.0)
+ sys             3.4.2      2023-05-23 [1] CRAN (R 4.3.0)
+ systemfonts     1.0.4      2022-02-11 [3] CRAN (R 4.2.0)
+ textshaping     0.3.6      2021-10-13 [3] CRAN (R 4.1.1)
+ tibble        * 3.2.1      2023-03-20 [3] CRAN (R 4.2.3)
+ tidyr         * 1.3.0      2023-01-24 [3] CRAN (R 4.2.2)
+ tidyselect      1.2.0      2022-10-10 [3] CRAN (R 4.2.1)
+ tidyverse     * 2.0.0      2023-02-22 [3] CRAN (R 4.2.2)
+ timechange      0.2.0      2023-01-11 [3] CRAN (R 4.2.2)
+ tinytex         0.45       2023-04-18 [3] CRAN (R 4.3.0)
+ tzdb            0.4.0      2023-05-12 [3] CRAN (R 4.3.0)
+ utf8            1.2.3      2023-01-31 [3] CRAN (R 4.2.2)
+ uuid            1.1-0      2022-04-19 [3] CRAN (R 4.2.0)
+ vctrs           0.6.2      2023-04-19 [3] CRAN (R 4.3.0)
+ viridisLite     0.4.2      2023-05-02 [3] CRAN (R 4.3.0)
+ vroom           1.6.3      2023-04-28 [3] CRAN (R 4.3.0)
+ withr           2.5.0      2022-03-03 [3] CRAN (R 4.2.0)
+ xfun            0.39       2023-04-20 [3] CRAN (R 4.3.0)
+ xml2            1.3.4      2023-04-27 [3] CRAN (R 4.3.0)
+ yaml            2.3.7      2023-01-23 [3] CRAN (R 4.2.2)
+
+ [1] /home/pacha/R/x86_64-pc-linux-gnu-library/4.3
+ [2] /usr/local/lib/R/site-library
+ [3] /usr/lib/R/site-library
+ [4] /usr/lib/R/library
+
+──────────────────────────────────────────────────────────────────────────────</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Bienvenida</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./02-explore.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

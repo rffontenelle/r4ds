@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R Para Ciencia de Datos - 11&nbsp; Importación de datos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./12-tidy.html" rel="next">
+<link href="./10-tibble.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-wrangle.html">Manejar o domar datos</a></li><li class="breadcrumb-item"><a href="./11-import.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Importación de datos</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R Para Ciencia de Datos</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Explorar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-explore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-visualize.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualización de datos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-workflow-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Flujo de trabajo: conocimientos básicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-transform.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transformación de datos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-workflow-scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Flujo de trabajo: <em>Scripts</em></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análisis exploratorio de datos (<em>EDA</em>)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-workflow-projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Flujo de trabajo: proyectos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Manejar o domar datos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-wrangle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-tibble.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tibbles</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-import.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Importación de datos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Datos ordenados</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-relational-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datos relacionales</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Cadenas de caracteres</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factores</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-datetimes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Fechas y horas</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Programar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-program.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">(PART) Programar</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-pipes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Pipes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Funciones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-vectors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Vectores</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21-iteration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Iteración</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Modelar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./22-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./23-model-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Modelos: conceptos básicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./24-model-building.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Construcción de modelos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./25-model-many.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Muchos modelos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Comunicar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./26-communicate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./27-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">R Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./28-communicate-plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Comunicar con gráficos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./29-rmarkdown-formats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Formatos de R Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30-rmarkdown-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Flujo de trabajo en R Markdown</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">11.1</span> Introducción</a>
+  <ul class="collapse">
+  <li><a href="#prerrequisitos" id="toc-prerrequisitos" class="nav-link" data-scroll-target="#prerrequisitos"><span class="header-section-number">11.1.1</span> Prerrequisitos</a></li>
+  </ul></li>
+  <li><a href="#comenzando" id="toc-comenzando" class="nav-link" data-scroll-target="#comenzando"><span class="header-section-number">11.2</span> Comenzando</a>
+  <ul class="collapse">
+  <li><a href="#comparación-con-r-base" id="toc-comparación-con-r-base" class="nav-link" data-scroll-target="#comparación-con-r-base"><span class="header-section-number">11.2.1</span> Comparación con R base</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">11.2.2</span> Ejercicios</a></li>
+  </ul></li>
+  <li><a href="#segmentar-un-vector" id="toc-segmentar-un-vector" class="nav-link" data-scroll-target="#segmentar-un-vector"><span class="header-section-number">11.3</span> Segmentar un vector</a>
+  <ul class="collapse">
+  <li><a href="#números" id="toc-números" class="nav-link" data-scroll-target="#números"><span class="header-section-number">11.3.1</span> Números</a></li>
+  <li><a href="#readr-strings" id="toc-readr-strings" class="nav-link" data-scroll-target="#readr-strings"><span class="header-section-number">11.3.2</span> Cadenas de texto (<em>strings</em>)</a></li>
+  <li><a href="#readr-factors" id="toc-readr-factors" class="nav-link" data-scroll-target="#readr-factors"><span class="header-section-number">11.3.3</span> Factores</a></li>
+  <li><a href="#readr-datetimes" id="toc-readr-datetimes" class="nav-link" data-scroll-target="#readr-datetimes"><span class="header-section-number">11.3.4</span> Fechas, fechas-horas, y horas</a></li>
+  <li><a href="#ejercicios-1" id="toc-ejercicios-1" class="nav-link" data-scroll-target="#ejercicios-1"><span class="header-section-number">11.3.5</span> Ejercicios</a></li>
+  </ul></li>
+  <li><a href="#segmentar-un-archivo" id="toc-segmentar-un-archivo" class="nav-link" data-scroll-target="#segmentar-un-archivo"><span class="header-section-number">11.4</span> Segmentar un archivo</a>
+  <ul class="collapse">
+  <li><a href="#estrategia" id="toc-estrategia" class="nav-link" data-scroll-target="#estrategia"><span class="header-section-number">11.4.1</span> Estrategia</a></li>
+  <li><a href="#problemas" id="toc-problemas" class="nav-link" data-scroll-target="#problemas"><span class="header-section-number">11.4.2</span> Problemas</a></li>
+  <li><a href="#otras-estrategias" id="toc-otras-estrategias" class="nav-link" data-scroll-target="#otras-estrategias"><span class="header-section-number">11.4.3</span> Otras estrategias</a></li>
+  </ul></li>
+  <li><a href="#escribir-a-un-archivo" id="toc-escribir-a-un-archivo" class="nav-link" data-scroll-target="#escribir-a-un-archivo"><span class="header-section-number">11.5</span> Escribir a un archivo</a></li>
+  <li><a href="#otros-tipos-de-datos" id="toc-otros-tipos-de-datos" class="nav-link" data-scroll-target="#otros-tipos-de-datos"><span class="header-section-number">11.6</span> Otros tipos de datos</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Importación de datos</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introducción" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">11.1</span> Introducción</h2>
+<p>Trabajar con datos incluidos en paquetes de R es una muy buena forma de empezar a conocer las herramientas de la ciencia de datos. Sin embargo, en algún punto deberás parar de aprender y comenzar a trabajar con tus propios datos. En este capítulo aprenderás cómo leer en R archivos rectangulares de texto plano. Si bien solo tocaremos superficialmente el tema de importación, muchos de los principios que veremos son aplicables al trabajo con otras formas de datos. Finalizaremos sugiriendo algunos paquetes que son útiles para otros formatos.</p>
+<section id="prerrequisitos" class="level3" data-number="11.1.1">
+<h3 data-number="11.1.1" class="anchored" data-anchor-id="prerrequisitos"><span class="header-section-number">11.1.1</span> Prerrequisitos</h3>
+<p>En este capítulo aprenderás cómo cargar archivos planos en R con <strong>readr</strong>, uno de los paquetes principales de <strong>tidyverse</strong>.</p>
+</section>
+</section>
+<section id="comenzando" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="comenzando"><span class="header-section-number">11.2</span> Comenzando</h2>
+<p>La mayoría de las funciones de <strong>readr</strong> se enfocan en transformar archivos planos en <em>data frames</em>:</p>
+<ul>
+<li><p><code>read_csv()</code> lee archivos delimitados por coma, <code>read_csv2()</code> lee archivos separados por punto y coma (comunes en países donde ‘,’ es utilizada para separar decimales), <code>read_tsv()</code> lee archivos delimitados por tabulaciones y <code>read_delim()</code> archivos con cualquier delimitador.</p></li>
+<li><p><code>read_fwf()</code> lee archivos de ancho fijo. Puedes especificar los campos ya sea por su ancho, con <code>fwf_widths()</code>, o por su ubicación, con <code>fwf_positions()</code>. <code>read_table()</code> lee una variación común de estos archivos de ancho fijo en los que las columnas se encuentran separadas por espacios.</p></li>
+<li><p><code>read_log()</code> lee archivos de registro estilo Apache. (Revisa también <a href="https://github.com/Ironholds/webreadr">webreadr</a>, que está construido sobre <code>read_log()</code> y proporciona muchas otras herramientas útiles).</p></li>
+</ul>
+<p>Todas estas funciones tienen una sintaxis similar, por lo que una vez que dominas una, puedes utilizar todas las demás con facilidad. En el resto del capítulo nos enfocaremos en <code>read_csv()</code>. Los archivos csv no solo son una de las formas de almacenamiento más comunes, sino que una vez que comprendas <code>read_csv()</code> podrás aplicar fácilmente tus conocimientos a todas las otras funciones de <strong>readr</strong>.</p>
+<p>El primer argumento de <code>read_csv()</code> es el más importante: es la ruta al archivo a leer.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 1192 Columns: 6
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): sex, race
+dbl (4): earn, height, ed, age
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>Cuando ejecutas <code>read_csv()</code>, la función devuelve el nombre y tipo de datos con que se importó cada columna. Esta es una parte importante de <strong>readr</strong>, sobre la cual volveremos luego en <a href="#segmentar-un-archivo">segmentar un archivo</a>.</p>
+<p>Puedes también definir un archivo CSV “en línea” (<em>inline</em>). Esto es útil para experimentar con <strong>readr</strong> y para crear ejemplos reproducibles para ser compartidos.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+      a     b     c
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     1     2     3
+2     4     5     6</code></pre>
+</div>
+</div>
+<p>En ambos casos <code>read_csv()</code> emplea la primera línea de los datos para los nombres de columna, lo que es una convención muy común. Hay dos casos en los que podrías querer ajustar este comportamiento:</p>
+<ol type="1">
+<li><p>A veces hay unas pocas líneas de metadatos al comienzo del archivo. Puedes usar <code>skip = n</code> para omitir las primeras <code>n</code> líneas, o bien, o usar <code>comment = "#"</code> para quitar todas las líneas que comienzan con, por ejemplo, <code>#</code>.</p>
+<p>::: {.cell} ::: {.cell-output .cell-output-stdout} <code># A tibble: 1 × 3        x     y     z    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  1     1     2     3</code> :::</p>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 1 × 3        x     y     z    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  1     1     2     3</code> ::: :::</p></li>
+<li><p>Los datos pueden no tener nombres de columna. En ese caso, puedes utilizar <code>col_names = FALSE</code> para decirle a <code>read_csv()</code> que no trate la primera fila como encabezados y que, en lugar de eso, los etiquete secuencialmente desde <code>X1</code> a <code>Xn</code>:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+     X1    X2    X3
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     1     2     3
+2     4     5     6</code></pre>
+</div>
+</div>
+<p>(<code>"\n"</code> es un atajo conveniente para agregar una línea nueva. Aprenderás más acerca de él y otros modos de evitar texto en la sección [Cadenas: elementos básicos]).</p>
+<p>Alternativamente puedes utilizar <code>col_names</code> con el vector de caracteres que será utilizado como nombres de columna:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+      x     y     z
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     1     2     3
+2     4     5     6</code></pre>
+</div>
+</div></li>
+</ol>
+<p>Otra opción que comúnmente necesita ajustes es <code>na</code> (del inglés, <em>“not available”</em>: Esto especifica el valor (o valores) que se utilizan para representar los valores faltantes en tu archivo:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+      a     b c    
+  &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;
+1     1     2 NA   </code></pre>
+</div>
+</div>
+<p>Esto es todo lo que necesitas saber para leer el ~75% de los archivos csv con los que te encontrarás en la práctica. También puedes adaptar fácilmente lo que has aprendido para leer archivos separados por tabuladores con <code>read_tsv()</code> y archivos de ancho fijo con <code>read_fwf()</code>. Para leer archivos más desafiantes, necesitas aprender un poco más sobre cómo <strong>readr</strong> segmenta cada columna y las transforma en vectores de R.</p>
+<section id="comparación-con-r-base" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="comparación-con-r-base"><span class="header-section-number">11.2.1</span> Comparación con R base</h3>
+<p>Si has utilizado R anteriormente, tal vez te preguntas por qué no usamos <code>read.csv()</code>. Hay unas pocas buenas razones para preferir las funciones de <strong>readr</strong> sobre las equivalentes de R base:</p>
+<ul>
+<li><p>Generalmente son mucho más rápidas (~10x) que sus equivalentes. Los trabajos que tienen un tiempo de ejecución prolongado poseen una barra de progreso para que puedas ver qué está ocurriendo. Si solo te interesa la velocidad, prueba <code>data.table::fread()</code>. No se ajusta tan bien con el <strong>tidyverse</strong>, pero puede ser bastante más rápido.</p></li>
+<li><p>Producen tibbles, no convierten los vectores de caracteres a factores, no usan nombres de filas ni distorsionan los nombres de columnas. Estas son fuentes comunes de frustración al utilizar las funciones de R base.</p></li>
+<li><p>Son más reproducibles. Las funciones de R base heredan ciertos comportamientos de tu sistema operativo y de las variables del ambiente, de modo que importar código que funciona bien en tu computadora puede no funcionar en la de otros.</p></li>
+</ul>
+</section>
+<section id="ejercicios" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">11.2.2</span> Ejercicios</h3>
+<ol type="1">
+<li><p>¿Qué función utilizarías para leer un archivo donde los campos están separados con “|”?</p></li>
+<li><p>Además de <code>file</code>, <code>skip</code> y <code>comment</code>, ¿qué otros argumentos tienen en común <code>read_csv()</code> y <code>read_tsv()</code>?</p></li>
+<li><p>¿Cuáles son los argumentos más importantes de <code>read_fwf()</code>?</p></li>
+<li><p>Algunas veces las cadenas de caracteres en un archivo csv contienen comas. Para evitar que causen problemas, deben estar rodeadas por comillas, como <code>"</code> o <code>'</code>. Por convención, <code>read_csv()</code> asume que el caracter de separación será <code>"</code>.¿Qué argumentos debes especificar para leer el siguiente texto en un <em>data frame</em>?</p>
+<p>::: {.cell}</p>
+<p>:::</p></li>
+<li><p>Identifica qué está mal en cada una de los siguientes archivos csv en línea (<em>inline</em>). ¿Qué pasa cuando corres el código?</p>
+<p>::: {.cell}</p>
+<p>:::</p></li>
+</ol>
+</section>
+</section>
+<section id="segmentar-un-vector" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="segmentar-un-vector"><span class="header-section-number">11.3</span> Segmentar un vector</h2>
+<p>Antes de entrar en detalles sobre cómo <strong>readr</strong> lee archivos del disco, necesitamos desviarnos un poco para hablar sobre las funciones <code>parse_*()</code> (del inglés <em>analizar</em>, <em>segmentar</em>). Estas funciones toman un vector de caracteres y devuelven un vector más especializado, como un vector lógico, numérico o una fecha:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> logi [1:3] TRUE FALSE NA</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> int [1:3] 1 2 3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Date[1:2], format: "2010-01-01" "1979-10-14"</code></pre>
+</div>
+</div>
+<p>Estas funciones son útiles por sí mismas, pero también son un bloque estructural importante para <strong>readr</strong>. Una vez que aprendas en esta sección cómo funcionan los segmentadores individuales, en la próxima volveremos atrás y veremos cómo se combinan entre ellos para analizar un archivo completo.</p>
+<p>Como todas las funciones dentro del <strong>tidyverse</strong>, las funciones <code>parse_*()</code> son uniformes: el primer argumento es un vector de caracteres a analizar y el argumento <code>na</code> especifica qué cadenas deberían ser tratadas como faltantes:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   1 231  NA 456</code></pre>
+</div>
+</div>
+<p>Si la segmentación falla, obtendrás una advertencia:</p>
+<p>Y las fallas aparecerán como faltantes en el output:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 123 345  NA  NA
+attr(,"problems")
+# A tibble: 2 × 4
+    row   col expected               actual
+  &lt;int&gt; &lt;int&gt; &lt;chr&gt;                  &lt;chr&gt; 
+1     3    NA no trailing characters abc   
+2     4    NA no trailing characters 123.45</code></pre>
+</div>
+</div>
+<p>Si hay muchas fallas de segmentación, necesitarás utilizar <code>problems()</code> (del inglés <em>problemas</em>) para obtener la totalidad de ellas. Esto devuelve un tibble que puedes luego manipular con <strong>dplyr</strong>.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+    row   col expected               actual
+  &lt;int&gt; &lt;int&gt; &lt;chr&gt;                  &lt;chr&gt; 
+1     3    NA no trailing characters abc   
+2     4    NA no trailing characters 123.45</code></pre>
+</div>
+</div>
+<p>Utilizar segmentadores es más que nada una cuestión de entender qué está disponible y cómo enfrentar diferentes tipos de input. Hay ocho segmentadores particularmente importantes:</p>
+<ol type="1">
+<li><p><code>parse_logical()</code> y <code>parse_integer()</code> analizan valores lógicos y números enteros respectivamente. No hay prácticamente nada que pueda salir mal con estos segmentadores, así que no los describiremos con detalle aquí.</p></li>
+<li><p><code>parse_double()</code> es un segmentador numérico estricto, y <code>parse_number()</code> es un segmentador numérico flexible. Son más complicados de lo que podrías esperar debido a que los números se escriben de diferentes formas en distintas partes del mundo.</p></li>
+<li><p><code>parse_character()</code> parece tan simple que no debiera ser necesario. Pero una complicación lo hace bastante importante: la codificación de caracteres (el <em>encoding</em>).</p></li>
+<li><p><code>parse_factor()</code> crea factores, la estructura de datos que R usa para representar variables categóricas con valores fijos y conocidos.</p></li>
+<li><p><code>parse_datetime()</code>, <code>parse_date()</code> y <code>parse_time()</code> te permiten analizar diversas especificaciones de fechas y horas. Estos son los más complicados, ya que hay muchas formas diferentes de escribir las fechas.</p></li>
+</ol>
+<p>Las secciones siguientes describen estos analizadores en mayor detalle.</p>
+<section id="números" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="números"><span class="header-section-number">11.3.1</span> Números</h3>
+<p>Pareciera que analizar un número debiese ser algo sencillo, pero hay tres problemas que pueden complicar el proceso:</p>
+<ol type="1">
+<li><p>Las personas escriben los números de forma distinta en diferentes partes del mundo. Por ejemplo, algunos países utilizan <code>.</code> entre el entero y la fracción de un número real, mientras que otros utilizan <code>,</code>.</p></li>
+<li><p>A menudo los números están rodeados por otros caracteres que proporcionan algún contexto, como “$1000” o “10%”.</p></li>
+<li><p>Los números frecuentemente contienen caracteres de “agrupación” para hacerlos más fáciles de leer, como “1,000,000”. Estos caracteres de agrupación varían alrededor del mundo.</p></li>
+</ol>
+<p>Para enfrentar al primer problema, <strong>readr</strong> tiene el concepto de “<em>locale</em>”, un objeto que especifica las opciones de segmentación que difieren de un lugar a otro. Cuando segmentamos números, la opción más importante es el caracter que utilizas como símbolo decimal. Puedes sobreescribir el valor por defecto <code>.</code> creando un nuevo locale y estableciendo el argumento <code>decimal_mark</code> (del inglés <em>marca decimal</em>):</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.23</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.23</code></pre>
+</div>
+</div>
+<p>El locale por defecto de <strong>readr</strong> es EEUU-céntrico, porque generalmente R es EEUU-céntrico (por ejemplo, la documentación de R base está escrita en inglés norteamericano). Una aproximación alternativa podría ser probar y adivinar las opciones por defecto de tu sistema operativo. Esto es difícil de hacer y, lo que es más importante, hace que tu código sea frágil. Incluso si funciona en tu computadora, puede fallar cuando lo envíes a un/a colega en otro país.</p>
+<p><code>parse_number()</code> responde al segundo problema: ignora los caracteres no-numéricos antes y después del número. Esto es particularmente útil para monedas y porcentajes, pero también sirve para extraer números insertos en texto.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 100</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 123.45</code></pre>
+</div>
+</div>
+<p>El problema final se puede enfrentar combinando <code>parse_number()</code> y el locale, ya que <code>parse_number()</code> ignorará el “símbolo decimal”:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 123456789</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 123456789</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 123456789</code></pre>
+</div>
+</div>
+</section>
+<section id="readr-strings" class="level3" data-number="11.3.2">
+<h3 data-number="11.3.2" class="anchored" data-anchor-id="readr-strings"><span class="header-section-number">11.3.2</span> Cadenas de texto (<em>strings</em>)</h3>
+<p>En apariencia, <code>parse_character()</code> debería ser realmente simple — podría tan solo devolver su input. Desafortunadamente, la vida no es tan simple, dado que existen múltiples formas de representar la misma cadena de texto. Para entender qué está pasando, necesitamos profundizar en los detalles de cómo las computadoras representan las cadenas de texto. En R, podemos acceder a su representación subyacente empleando <code>charToRaw()</code>:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 48 61 64 6c 65 79</code></pre>
+</div>
+</div>
+<p>Cada número hexadecimal representa un byte de información: <code>48</code> es <em>H</em>, <code>61</code> es <em>a</em>, y así. El mapeo desde un número hexadecimal a caracteres se denomina codificación o <em>encoding</em> y, en este caso, la codificación utilizada se llama ASCII. ASCII hace un muy buen trabajo representando caracteres del inglés, ya que es el <em><strong>American</strong> Standard Code for Information Interchange</em> (del inglés <em>Código Americano estandarizado para el intercambio de información</em>).</p>
+<p>Las cosas se complican un poco más para lenguas distintas al inglés. En los comienzos de la computación existían muchos estándares de codificación para caracteres no-ingleses compitiendo. Para poder interpretar correctamente una cadena de texto se necesita conocer tanto los valores como la codificación. Por ejemplo, dos codificaciones comunes son Latin1 (conocida también como ISO-8859-1 y utilizada para las lenguas del oeste de Europa) y Latin2 (o ISO-8859-2, utilizada para las lenguas de Europa del este). En Latin1, el byte ‘b1’ es “Â±”, pero en Latin2, ¡es “ą”! Afortunadamente, en la actualidad hay un estándar que tiene soporte casi en todos lados: UTF-8. UTF-8 puede codificar casi cualquier caracter utilizado por humanos, así como muchos símbolos adicionales (¡como los emoji!).</p>
+<p><strong>readr</strong> utiliza UTF-8 en todas partes: asume que tus datos están codificados en UTF-8 cuando los lee y lo emplea siempre cuando los escribe. Esta es una buena opción por defecto, pero fallará con datos producidos por sistemas más viejos que no entienden UTF-8. Si te sucede esto, tus cadenas de texto se verán extrañas cuando las imprimas en la consola. Algunas veces solo uno o dos caracteres estarán errados. Otras veces obtendrás un total jeroglífico. Por ejemplo:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "El Ni\xf1o was particularly bad this year"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "\x82\xb1\x82\xf1\x82ɂ\xbf\x82\xcd"</code></pre>
+</div>
+</div>
+<p>Para corregir el problema necesitas especificar la codificación en <code>parse_character()</code>:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "El Niño was particularly bad this year"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "こんにちは"</code></pre>
+</div>
+</div>
+<p>¿Cómo encontrar la codificación correcta? Si tienes suerte, estará incluida en alguna parte de la documentación de los datos. Desafortunadamente raras veces es ese el caso, así que <strong>readr</strong> provee la función <code>guess_encoding()</code> para ayudarte a adivinarla. No es a prueba de tontos y funciona mejor cuando tienes mucho texto (a diferencia de aquí), pero es un punto de inicio razonable. Es esperable hacer varias pruebas con diferentes codificaciones antes de encontrar la correcta.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  encoding   confidence
+  &lt;chr&gt;           &lt;dbl&gt;
+1 ISO-8859-1       0.46
+2 ISO-8859-9       0.23</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  encoding confidence
+  &lt;chr&gt;         &lt;dbl&gt;
+1 KOI8-R         0.42</code></pre>
+</div>
+</div>
+<p>El primer argumento para <code>guess_encoding()</code> puede ser la ruta a un archivo o, como en este caso, un vector en bruto (útil si el texto ya se encuentra en R). Las codificaciones son un tema rico y complejo y solo te hemos mostrado la superficie acá. Si quieres aprender más al respecto, te recomendamos que leas la explicación detallada en <a href="http://kunststube.net/encoding/" class="uri">http://kunststube.net/encoding/</a>.</p>
+</section>
+<section id="readr-factors" class="level3" data-number="11.3.3">
+<h3 data-number="11.3.3" class="anchored" data-anchor-id="readr-factors"><span class="header-section-number">11.3.3</span> Factores</h3>
+<p>R utiliza factores para representar las variables categóricas que tienen un conjunto conocido de valores posibles. Puedes darle a <code>parse_factor()</code> un vector de niveles conocidos (<code>levels</code>) para generar una advertencia cada vez que haya un valor inesperado:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] manzana banana  &lt;NA&gt;   
+attr(,"problems")
+# A tibble: 1 × 4
+    row   col expected           actual  
+  &lt;int&gt; &lt;int&gt; &lt;chr&gt;              &lt;chr&gt;   
+1     3    NA value in level set bananana
+Levels: manzana banana</code></pre>
+</div>
+</div>
+<p>Si tienes muchas entradas problemáticas, a menudo es más fácil dejarlas como vectores de caracteres y luego utilizar las herramientas sobre las que aprenderás en los capítulos [Cadenas de caracteres] y <a href="#readr-factors">Factores</a> para limpiarlas.</p>
+</section>
+<section id="readr-datetimes" class="level3" data-number="11.3.4">
+<h3 data-number="11.3.4" class="anchored" data-anchor-id="readr-datetimes"><span class="header-section-number">11.3.4</span> Fechas, fechas-horas, y horas</h3>
+<p>Debes elegir entre tres segmentadores dependiendo de si quieres una fecha (el número de los días desde el 01-01-1970), una fecha-hora (el número de segundos desde la medianoche del 01-01-1970) o una hora (el número de segundos desde la medianoche). Cuando se llaman sin argumentos adicionales:</p>
+<ul>
+<li><code>parse_datetime()</code> asume una fecha-hora ISO8601. ISO8601 es un estándar internacional en el que los componentes de una fecha están organizados de mayor a menor: año, mes, día, hora, minuto, segundo.</li>
+</ul>
+<p>::: {.cell} ::: {.cell-output .cell-output-stdout} <code>[1] "2010-10-01 20:10:00 UTC"</code> :::</p>
+<p>::: {.cell-output .cell-output-stdout} <code>[1] "2010-10-10 UTC"</code> ::: :::</p>
+<p>Esta es la estandarización de fecha/hora más importante. Si trabajas con fechas y horas frecuentemente, te recomendamos que leas <a href="https://en.wikipedia.org/wiki/ISO_8601" class="uri">https://en.wikipedia.org/wiki/ISO_8601</a></p>
+<ul>
+<li><p><code>parse_date()</code> asume un año de cuatro dígitos, un guión <code>-</code> o <code>/</code>, el mes, un guión <code>-</code> o <code>/</code> y luego el día.</p>
+<p>::: {.cell} ::: {.cell-output .cell-output-stdout} <code>[1] "2010-10-01"</code> ::: :::</p></li>
+<li><p><code>parse_time()</code> espera la hora, <code>:</code>, minutos, opcionalmente <code>:</code> y segundos, y un especificador opcional am/pm:</p>
+<p>::: {.cell} ::: {.cell-output .cell-output-stdout} <code>01:10:00</code> :::</p>
+<p>::: {.cell-output .cell-output-stdout} <code>20:10:01</code> ::: :::</p>
+<p>R base no tiene incorporada una muy buena clase para datos temporales, por lo que usamos la provista en el paquete <strong>hms</strong>.</p></li>
+</ul>
+<p>Si esos valores por defecto no funcionan con tus datos, puedes proporcionar tu propio formato fecha-hora construido con las siguientes piezas:</p>
+<p><em><strong>Año</strong></em></p>
+<p><code>%Y</code> (4 dígitos).</p>
+<p><code>%y</code> (2 dígitos); 00-69 -&gt; 2000-2069, 70-99 -&gt; 1970-1999.</p>
+<p><em><strong>Mes</strong></em></p>
+<p><code>%m</code> (2 dígitos).</p>
+<p><code>%b</code> (nombre abreviado, como “ene”).</p>
+<p><code>%B</code> (nombre completo, “enero”).</p>
+<p><em><strong>Día</strong></em></p>
+<p><code>%d</code> (2 dígitos).</p>
+<p><code>%e</code> (espacio opcional destacado).</p>
+<p><em><strong>Hora</strong></em></p>
+<p><code>%H</code> 0-23 horas.</p>
+<p><code>%I</code> 0-12, debe utilizarse con <code>%p</code>.</p>
+<p><code>%p</code> indicador AM/PM.</p>
+<p><code>%M</code> minutos.</p>
+<p><code>%S</code> segundos enteros.</p>
+<p><code>%OS</code> segundos reales.</p>
+<p><code>%Z</code> Zona horaria (como nombre, por ejemplo, <code>America/Chicago</code>). Advertencia sobre abreviaturas: si eres de EEUU, ten en cuenta que “EST” es una zona horaria canadiense que no tiene cambios de horario.¡<strong>No</strong> es la hora Estandar del Este! Retomaremos esto más adelante en la sección [Husos horarios].</p>
+<p><code>%z</code> (como complemento para las UTC, por ejemplo, <code>+0800</code>).</p>
+<p><em><strong>No-dígitos</strong></em></p>
+<p><code>%.</code> se salta un caracter no-dígito.</p>
+<p><code>%*</code> se salta cualquier número de caracteres no-dígitos.</p>
+<p>La mejor manera de deducir el formato correcto es crear unos pocos ejemplos en un vector de caracteres y probarlos con una de las funciones de segmentación. Por ejemplo:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2015-01-02"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2015-02-01"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2001-02-15"</code></pre>
+</div>
+</div>
+<p>Si estás utilizando <code>%b</code> o <code>%B</code> con nombres de meses no ingleses, necesitarás ajustar el argumento <code>lang</code> para <code>locale()</code>. Mira la lista de lenguas incorporados en <code>date_names_langs()</code>. Si tu lengua no está incluida, puedes crearla con <code>date_names()</code>.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2015-01-01"</code></pre>
+</div>
+</div>
+</section>
+<section id="ejercicios-1" class="level3" data-number="11.3.5">
+<h3 data-number="11.3.5" class="anchored" data-anchor-id="ejercicios-1"><span class="header-section-number">11.3.5</span> Ejercicios</h3>
+<ol type="1">
+<li><p>¿Cuáles son los argumentos más importantes para <code>locale()</code>?</p></li>
+<li><p>¿Qué pasa si intentas establecer <code>decimal_mark</code> y <code>grouping_mark</code> como el mismo caracter? ¿Qué pasa con el valor por defecto de <code>grouping_mark</code> cuando estableces <code>decimal_mark</code> como <code>,</code>? ¿Qué pasa con el valor por defecto de <code>decimal_mark</code> cuando estableces <code>grouping_mark</code> como <code>.</code>?</p></li>
+<li><p>No discutimos las opciones de <code>date_format</code> y <code>time_format</code> para <code>locale()</code>. ¿Qué hacen? Construye un ejemplo que muestre cuándo podrían ser útiles.</p></li>
+<li><p>Si vives fuera de EEUU, crea un nuevo objeto locale que contenga las opciones para los tipos de archivo que lees más comúnmente.</p></li>
+<li><p>¿Cuál es la diferencia entre <code>read_csv()</code> y <code>read_csv2()</code>?</p></li>
+<li><p>¿Cuáles son las codificaciones más comunes empleadas en Europa? ¿Cuáles son las codificaciones más comunes utilizadas en Asia? ¿Y en América Latina? Googlea un poco para descubrirlo.</p></li>
+<li><p>Genera el formato correcto de texto para segmentar cada una de las siguientes fechas y horas:</p></li>
+</ol>
+</section>
+</section>
+<section id="segmentar-un-archivo" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="segmentar-un-archivo"><span class="header-section-number">11.4</span> Segmentar un archivo</h2>
+<p>Ahora que aprendiste cómo analizar un vector individual, es tiempo de volver al comienzo y explorar cómo <strong>readr</strong> analiza un archivo. Hay dos cosas nuevas que aprenderás al respecto en esta sección:</p>
+<ol type="1">
+<li>Cómo <strong>readr</strong> deduce automáticamente el tipo de cada columna.</li>
+<li>Cómo sobreescribir las especificaciones por defecto.</li>
+</ol>
+<section id="estrategia" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="estrategia"><span class="header-section-number">11.4.1</span> Estrategia</h3>
+<p><strong>readr</strong> utiliza una heurística para deducir el tipo de cada columna: lee las primeras 1000 filas y utiliza una heurística (moderadamente conservadora) para deducir el formato de las columnas. Puedes simular este proceso con un vector de caracteres utilizando <code>guess_parser()</code>, que devuelve la mejor deducción de <strong>readr</strong>, y <code>parse_guess()</code> que utiliza esa deducción para analizar la columna:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "date"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "time"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "number"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Date[1:1], format: "2010-10-10"</code></pre>
+</div>
+</div>
+<p>La heurística prueba cada uno de los siguientes tipos y se detiene cuando encuentra una coincidencia:</p>
+<ul>
+<li>lógico: contiene solo “F”, “T”, “FALSE”, o “TRUE”.</li>
+<li>entero: contiene solo caracteres numéricos (y ‘-’).</li>
+<li>doble: contiene solo dobles válidos (incluyendo números como ‘4.5e-5’).</li>
+<li>número: contiene dobles válidos con la marca de agrupamiento en su interior.</li>
+<li>hora: coincide con el formato horario por defecto (<code>time_format</code>).</li>
+<li>fecha: coincide con el formato fecha por defecto (<code>date_format</code>).</li>
+<li>fecha-hora: cualquier fecha ISO8601.</li>
+</ul>
+<p>Si ninguna de esas reglas se aplica, entonces la columna quedará como un vector de cadenas de caracteres.</p>
+</section>
+<section id="problemas" class="level3" data-number="11.4.2">
+<h3 data-number="11.4.2" class="anchored" data-anchor-id="problemas"><span class="header-section-number">11.4.2</span> Problemas</h3>
+<p>Esos valores por defecto no siempre funcionan para archivos de gran tamaño. Hay dos problemas básicos:</p>
+<ol type="1">
+<li>Las primeras mil filas podrían ser un caso especial y <strong>readr</strong> estaría deduciendo un formato que no es suficientemente general. Por ejemplo, podrías tener una columna de dobles que solo contiene enteros en las primeras 1000 filas.</li>
+<li>La columna podría contener muchos valores faltantes. Si las primeras 1000 filas contienen solo <code>NA</code>, <strong>readr</strong> deducirá que es un vector lógico, mientras que tú probablemente quieras analizarlo como algo más específico.</li>
+</ol>
+<p><strong>readr</strong> contiene un archivo csv desafiante que ilustra ambos problemas:</p>
+<p>(Fíjate en el uso de <code>readr_example()</code>, que encuentra la ruta a uno de los archivos incluidos en el paquete.)</p>
+<p>Hay dos outputs impresos en la consola: la especificación de columna generada al mirar las primeras 1000 filas y las primeras cinco fallas de segmentación. Siempre es una buena idea extraer explícitamente los problemas con <code>problems()</code>, así puedes explorarlos en mayor profundidad:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 5
+# ℹ 5 variables: row &lt;int&gt;, col &lt;int&gt;, expected &lt;chr&gt;, actual &lt;chr&gt;, file &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>Una buena estrategia es trabajar columna por columna hasta que no queden problemas. Aquí podemos ver que hubo muchos problemas de análisis con la columna <code>y</code>. Si miramos la últimas líneas, verás que hay fechas almacenadas en un vector de caracteres.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+      x y         
+  &lt;dbl&gt; &lt;date&gt;    
+1 0.805 2019-11-21
+2 0.164 2018-03-29
+3 0.472 2014-08-04
+4 0.718 2015-08-16
+5 0.270 2020-02-04
+6 0.608 2019-01-06</code></pre>
+</div>
+</div>
+<p>Esto sugiere que mejor sería utilizar un segmentador de fechas. Para arreglar este problema, copia y pega la especificación de las columnas que habías obtenido inicialmente y agrégalas a tu código:</p>
+<p>Y luego ajusta el tipo de la columna <code>y</code> especificando que se trata de una fecha:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+      x y         
+  &lt;dbl&gt; &lt;date&gt;    
+1 0.805 2019-11-21
+2 0.164 2018-03-29
+3 0.472 2014-08-04
+4 0.718 2015-08-16
+5 0.270 2020-02-04
+6 0.608 2019-01-06</code></pre>
+</div>
+</div>
+<p>Cada función <code>parse_*()</code> tiene su correspondiente función <code>col_*()</code>. Se utiliza <code>parse_*()</code> cuando los datos se encuentran en un vector de caracteres que ya está disponible en R; <code>col_*</code> para cuando quieres decirle a <strong>readr</strong> cómo cargar los datos.</p>
+<p>Te recomendamos proporcionar la estructura para <code>col_types</code> a partir de la impresión en consola provista por <strong>readr</strong>. Esto asegura que tienes un script para importar datos consistente y reproducible. Si confías en las deducciones por defecto y tus datos cambian, <strong>readr</strong> continuará leyéndolos. Si quieres ser realmente estricto/a, emplea <code>stop_for_problems()</code> (<em>detenerse en problemas</em>): esto devolverá un mensaje de error y detendrá tu script si hay cualquier problema con la segmentación.</p>
+</section>
+<section id="otras-estrategias" class="level3" data-number="11.4.3">
+<h3 data-number="11.4.3" class="anchored" data-anchor-id="otras-estrategias"><span class="header-section-number">11.4.3</span> Otras estrategias</h3>
+<p>Existen algunas estrategias generales más para ayudarte a segmentar archivos:</p>
+<ul>
+<li><p>En el ejemplo previo simplemente tuvimos mala suerta: si miramos solo una fila más que el número por defecto, podemos segmentar correctamente en un solo intento:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,000 × 2
+       x y     
+   &lt;dbl&gt; &lt;date&gt;
+ 1   404 NA    
+ 2  4172 NA    
+ 3  3004 NA    
+ 4   787 NA    
+ 5    37 NA    
+ 6  2332 NA    
+ 7  2489 NA    
+ 8  1449 NA    
+ 9  3665 NA    
+10  3863 NA    
+# ℹ 1,990 more rows</code></pre>
+</div>
+</div></li>
+<li><p>Algunas veces es más fácil diagnosticar problemas si lees todas las columnas como vectores de caracteres:</p>
+<p>Esto es particularmente útil en combinación con ‘type_convert()’, que aplica la heurística de segmentación a las columnas de caracteres en un data frame.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  x     y    
+  &lt;chr&gt; &lt;chr&gt;
+1 1     1.21 
+2 2     2.32 
+3 3     4.56 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+      x     y
+  &lt;dbl&gt; &lt;dbl&gt;
+1     1  1.21
+2     2  2.32
+3     3  4.56</code></pre>
+</div>
+</div></li>
+<li><p>Si estás leyendo un archivo muy largo, podrías querer seleccionar <code>n_max</code> a un número pequeño como 10000 o 100000. Esto acelerará las iteraciones a la vez que eliminarás problemas comunes.</p></li>
+<li><p>Si tienes problemas de segmentación importantes, a veces es más fácil leer un vector de caracteres de líneas con <code>read_lines()</code>, o incluso un vector de caracteres de largo 1 con <code>read_file()</code>. Luego puedes utilizar las habilidades sobre segmentación de cadenas de caracteres que aprenderás más adelante para segmentar formatos más exóticos.</p></li>
+</ul>
+</section>
+</section>
+<section id="escribir-a-un-archivo" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="escribir-a-un-archivo"><span class="header-section-number">11.5</span> Escribir a un archivo</h2>
+<p><strong>readr</strong> también incluye dos funciones muy útiles para escribir datos de vuelta al disco: <code>write_csv()</code> y <code>write_tsv()</code>. Ambas funciones incrementan las posibilidades de que el archivo resultante sea leído correctamente al:</p>
+<ul>
+<li>codificar siempre las cadenas de caracteres en UTF-8.</li>
+<li>guardar fechas y fechas-horas en formato ISO8601, por lo que son fácilmente segmentadas en cualquier sitio.</li>
+</ul>
+<p>Si quieres exportar un archivo csv a Excel, utiliza <code>write_excel_csv()</code> —esto escribe un caracter especial (una marca de orden de bytes) al comienzo del archivo que le dice a Excel que estás utilizando codificación UTF-8. Los argumentos más importantes son <code>x</code> (el data frame a guardar) y <code>path</code> (la ubicación donde lo guardarás). También puedes especificar cómo se escriben los valores ausentes con <code>na</code> y si quieres <code>append</code> (agregarlo) a un archivo existente.</p>
+<p>Fíjate que la información sobre el tipo de datos se pierde cuando guardas en csv:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,000 × 2
+   x     y    
+   &lt;chr&gt; &lt;chr&gt;
+ 1 404   &lt;NA&gt; 
+ 2 4172  &lt;NA&gt; 
+ 3 3004  &lt;NA&gt; 
+ 4 787   &lt;NA&gt; 
+ 5 37    &lt;NA&gt; 
+ 6 2332  &lt;NA&gt; 
+ 7 2489  &lt;NA&gt; 
+ 8 1449  &lt;NA&gt; 
+ 9 3665  &lt;NA&gt; 
+10 3863  &lt;NA&gt; 
+# ℹ 1,990 more rows</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,000 × 2
+       x y     
+   &lt;dbl&gt; &lt;date&gt;
+ 1   404 NA    
+ 2  4172 NA    
+ 3  3004 NA    
+ 4   787 NA    
+ 5    37 NA    
+ 6  2332 NA    
+ 7  2489 NA    
+ 8  1449 NA    
+ 9  3665 NA    
+10  3863 NA    
+# ℹ 1,990 more rows</code></pre>
+</div>
+</div>
+<p>Esto hace a los CSV poco confiables para almacenar en caché los resultados provisorios — necesitas recrear la especificación de las columnas cada vez que los cargas. Hay dos alternativas:</p>
+<ol type="1">
+<li><p><code>write_rds()</code> and <code>read_rds()</code> son funciones “envoltorio” (<em>wrappers</em>) uniformes sobre las funciones base <code>readRDS()</code> y <code>saveRDS()</code>. Estas almacenan datos en un formato binario propio de R llamado RDS:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,000 × 2
+   x     y    
+   &lt;chr&gt; &lt;chr&gt;
+ 1 404   &lt;NA&gt; 
+ 2 4172  &lt;NA&gt; 
+ 3 3004  &lt;NA&gt; 
+ 4 787   &lt;NA&gt; 
+ 5 37    &lt;NA&gt; 
+ 6 2332  &lt;NA&gt; 
+ 7 2489  &lt;NA&gt; 
+ 8 1449  &lt;NA&gt; 
+ 9 3665  &lt;NA&gt; 
+10 3863  &lt;NA&gt; 
+# ℹ 1,990 more rows</code></pre>
+</div>
+</div></li>
+<li><p>El paquete <strong>feather</strong> implementa un formato rápido de archivos binarios que puede compartirse a través de lenguajes de programación:</p>
+<p>::: {.cell}</p>
+<p>:::</p></li>
+</ol>
+<p><strong>Feather</strong> tiende a ser más rápido que RDS y es utilizable fuera de R. RDS permite columnas-listas (sobre las que aprenderás en el capítulo [Muchos modelos]), algo que <strong>feather</strong> no permite actualmente.</p>
+</section>
+<section id="otros-tipos-de-datos" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="otros-tipos-de-datos"><span class="header-section-number">11.6</span> Otros tipos de datos</h2>
+<p>Para acceder a otros tipos de datos en R te recomendamos comenzar con los paquetes de <strong>tidyverse</strong> listados abajo. Ciertamente no son perfectos, pero son un buen lugar para comenzar. Para datos rectangulares:</p>
+<ul>
+<li><strong>haven</strong> lee archivos SPSS, Stata y SAS.</li>
+<li><strong>readxl</strong> lee archivos excel (tanto <code>.xls</code> como <code>.xlsx</code>).</li>
+<li><strong>DBI</strong>, junto con un <em>backend</em> de base de datos específico (e.g.&nbsp;<strong>RMySQL</strong>, <strong>RSQLite</strong>, <strong>RPostgreSQL</strong>, etc.) te permite correr consultas SQL contra una base de datos y devolver un data frame.</li>
+</ul>
+<p>Para datos jerárquicos: utiliza <strong>jsonlite</strong> (de Jeroen Ooms) para json y <strong>xml2</strong> para XML. Jenny Bryan tiene algunos ejemplos muy bien trabajados en <a href="https://jennybc.github.io/purrr-tutorial/" class="uri">https://jennybc.github.io/purrr-tutorial/</a>.</p>
+<p>Para otros tipos de archivos, prueba el <a href="https://cran.r-project.org/doc/manuals/r-release/R-data.html">manual de importación/exportación de datos de R</a> y el paquete <a href="https://github.com/leeper/rio"><strong>rio</strong></a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./10-tibble.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tibbles</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./12-tidy.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Datos ordenados</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

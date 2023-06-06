@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R Para Ciencia de Datos - 24&nbsp; Muchos modelos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./26-communicate.html" rel="next">
+<link href="./24-model-building.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./22-model.html">Modelar</a></li><li class="breadcrumb-item"><a href="./25-model-many.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Muchos modelos</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R Para Ciencia de Datos</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Explorar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-explore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-visualize.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualización de datos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-workflow-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Flujo de trabajo: conocimientos básicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-transform.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transformación de datos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-workflow-scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Flujo de trabajo: <em>Scripts</em></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análisis exploratorio de datos (<em>EDA</em>)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-workflow-projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Flujo de trabajo: proyectos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Manejar o domar datos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-wrangle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-tibble.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tibbles</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-import.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Importación de datos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Datos ordenados</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-relational-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datos relacionales</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Cadenas de caracteres</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factores</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-datetimes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Fechas y horas</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Programar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-program.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">(PART) Programar</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-pipes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Pipes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Funciones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-vectors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Vectores</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21-iteration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Iteración</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Modelar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./22-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./23-model-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Modelos: conceptos básicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./24-model-building.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Construcción de modelos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./25-model-many.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Muchos modelos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Comunicar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./26-communicate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./27-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">R Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./28-communicate-plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Comunicar con gráficos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./29-rmarkdown-formats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Formatos de R Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30-rmarkdown-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Flujo de trabajo en R Markdown</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">24.1</span> Introducción</a>
+  <ul class="collapse">
+  <li><a href="#prerrequisitos" id="toc-prerrequisitos" class="nav-link" data-scroll-target="#prerrequisitos"><span class="header-section-number">24.1.1</span> Prerrequisitos</a></li>
+  </ul></li>
+  <li><a href="#gapminder" id="toc-gapminder" class="nav-link" data-scroll-target="#gapminder"><span class="header-section-number">24.2</span> gapminder</a>
+  <ul class="collapse">
+  <li><a href="#datos-anidados" id="toc-datos-anidados" class="nav-link" data-scroll-target="#datos-anidados"><span class="header-section-number">24.2.1</span> Datos anidados</a></li>
+  <li><a href="#columnas-lista" id="toc-columnas-lista" class="nav-link" data-scroll-target="#columnas-lista"><span class="header-section-number">24.2.2</span> Columnas-lista</a></li>
+  <li><a href="#desanidando" id="toc-desanidando" class="nav-link" data-scroll-target="#desanidando"><span class="header-section-number">24.2.3</span> Desanidando</a></li>
+  <li><a href="#calidad-del-modelo" id="toc-calidad-del-modelo" class="nav-link" data-scroll-target="#calidad-del-modelo"><span class="header-section-number">24.2.4</span> Calidad del modelo</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">24.2.5</span> Ejercicios</a></li>
+  </ul></li>
+  <li><a href="#columnas-lista-1" id="toc-columnas-lista-1" class="nav-link" data-scroll-target="#columnas-lista-1"><span class="header-section-number">24.3</span> Columnas-lista</a></li>
+  <li><a href="#creando-columnas-lista" id="toc-creando-columnas-lista" class="nav-link" data-scroll-target="#creando-columnas-lista"><span class="header-section-number">24.4</span> Creando columnas-lista</a>
+  <ul class="collapse">
+  <li><a href="#con-anidación" id="toc-con-anidación" class="nav-link" data-scroll-target="#con-anidación"><span class="header-section-number">24.4.1</span> Con anidación</a></li>
+  <li><a href="#a-partir-de-funciones-vectorizadas" id="toc-a-partir-de-funciones-vectorizadas" class="nav-link" data-scroll-target="#a-partir-de-funciones-vectorizadas"><span class="header-section-number">24.4.2</span> A partir de funciones vectorizadas</a></li>
+  <li><a href="#a-partir-de-medidas-de-resumen-con-más-de-un-valor" id="toc-a-partir-de-medidas-de-resumen-con-más-de-un-valor" class="nav-link" data-scroll-target="#a-partir-de-medidas-de-resumen-con-más-de-un-valor"><span class="header-section-number">24.4.3</span> A partir de medidas de resumen con más de un valor</a></li>
+  <li><a href="#a-partir-de-una-lista-nombrada" id="toc-a-partir-de-una-lista-nombrada" class="nav-link" data-scroll-target="#a-partir-de-una-lista-nombrada"><span class="header-section-number">24.4.4</span> A partir de una lista nombrada</a></li>
+  <li><a href="#ejercicios-1" id="toc-ejercicios-1" class="nav-link" data-scroll-target="#ejercicios-1"><span class="header-section-number">24.4.5</span> Ejercicios</a></li>
+  </ul></li>
+  <li><a href="#simplificando-columnas-lista" id="toc-simplificando-columnas-lista" class="nav-link" data-scroll-target="#simplificando-columnas-lista"><span class="header-section-number">24.5</span> Simplificando columnas-lista</a>
+  <ul class="collapse">
+  <li><a href="#lista-a-vector" id="toc-lista-a-vector" class="nav-link" data-scroll-target="#lista-a-vector"><span class="header-section-number">24.5.1</span> Lista a vector</a></li>
+  <li><a href="#desanidando-1" id="toc-desanidando-1" class="nav-link" data-scroll-target="#desanidando-1"><span class="header-section-number">24.5.2</span> Desanidando</a></li>
+  <li><a href="#ejercicios-2" id="toc-ejercicios-2" class="nav-link" data-scroll-target="#ejercicios-2"><span class="header-section-number">24.5.3</span> Ejercicios</a></li>
+  </ul></li>
+  <li><a href="#haciendo-datos-ordenados-con-broom" id="toc-haciendo-datos-ordenados-con-broom" class="nav-link" data-scroll-target="#haciendo-datos-ordenados-con-broom"><span class="header-section-number">24.6</span> Haciendo datos ordenados con broom</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Muchos modelos</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introducción" class="level2" data-number="24.1">
+<h2 data-number="24.1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">24.1</span> Introducción</h2>
+<p>En este capítulo vas a aprender tres ideas poderosas que te van a ayudar a trabajar fácilmente con un gran número de modelos:</p>
+<ol type="1">
+<li><p>Usar muchos modelos simples para entender mejor conjuntos de datos complejos.</p></li>
+<li><p>Usar columnas-lista (<em>list-columns</em>) para almacenar estructuras de datos arbitrarias en un <em>data frame</em>. Esto, por ejemplo, te permitirá tener una columna que contenga modelos lineales.</p></li>
+<li><p>Usar el paquete <strong>broom</strong>, de David Robinson, para transformar modelos en datos ordenados. Esta es una técnica poderosa para trabajar con un gran número de modelos porque una vez que tienes datos ordenados, puedes aplicar todas las técnicas que has aprendido anteriormente en el libro.</p></li>
+</ol>
+<p>Empezaremos entrando de lleno en un ejemplo motivador usando datos sobre la esperanza de vida alrededor del mundo. Es un conjunto de datos pequeño pero que ilustra cuán importante puede ser modelar para mejorar tus visualizaciones. Utilizaremos un número grande de modelos simples para separar algunas de las señales más fuertes y así poder ver las señales sutiles que permanecen. También veremos cómo las medidas de resumen de los modelos nos pueden ayudar a encontrar datos atípicos y tendencias inusuales.</p>
+<p>Las siguientes secciones ahondarán en más detalles acerca de cada una de estas técnicas:</p>
+<ol type="1">
+<li><p>En <a href="#columnas-lista">columnas-lista</a> aprenderás más acerca de la estructura de datos <em>columna-lista</em> y por qué es válido poner listas en <em>data frames</em>.</p></li>
+<li><p>En <a href="#creando-columnas-lista">creando columnas-lista</a> aprenderás las tres maneras principales en las que crearás columnas-lista.</p></li>
+<li><p>En <a href="#simplificando-columnas-lista">simplificando columnas-lista</a> aprenderás cómo convertir columnas-lista de vuelta a vectores atómicos regulares (o conjuntos de vectores atómicos) para que puedas trabajar con ellos más fácilmente.</p></li>
+<li><p>En <a href="#haciendo-datos-ordenados-con-broom">haciendo datos ordenados con broom</a> aprenderás sobre el conjunto de herramientas completo provisto por <strong>broom</strong> (<em>escoba</em>, en inglés) y verás cómo puede ser aplicado a otros tipos de estructuras de datos.</p></li>
+</ol>
+<p>Este capítulo es en cierta medida aspiracional: si este libro es tu primera introducción a R, este capítulo probablemente será un desafío. Requiere que tengas profundamente internalizadas ideas acerca de modelado, estructuras de datos e iteración. Así que no te preocupes si no lo entiendes — solo aparta este capítulo por un par de meses, y vuelve cuando quieras ejercitar tu cerebro.</p>
+<section id="prerrequisitos" class="level3" data-number="24.1.1">
+<h3 data-number="24.1.1" class="anchored" data-anchor-id="prerrequisitos"><span class="header-section-number">24.1.1</span> Prerrequisitos</h3>
+<p>Trabajar con muchos modelos requiere muchos de los paquetes del <strong>tidyverse</strong> (para exploración de datos, manejo y programación) y <strong>modelr</strong> para facilitar el modelado.</p>
+</section>
+</section>
+<section id="gapminder" class="level2" data-number="24.2">
+<h2 data-number="24.2" class="anchored" data-anchor-id="gapminder"><span class="header-section-number">24.2</span> gapminder</h2>
+<p>Como motivación para entender el poder de muchos modelos simples, vamos a mirar los datos de “gapminder”. Estos datos fueron popularizados por Hans Rosling, un doctor y estadístico sueco. Si nunca has escuchado de él, para de leer este capítulo ahora mismo y revisa algunos de sus videos! Es un fantástico presentador de datos e ilustra cómo puedes usar datos para presentar una historia convincente. Un buen lugar para empezar es este video corto filmado en conjunto con la BBC: <a href="https://www.youtube.com/watch?v=jbkSRLYSojo" class="uri">https://www.youtube.com/watch?v=jbkSRLYSojo</a>.</p>
+<p>Los datos de gapminder resumen la progresión de países a través del tiempo, mirando estadísticos como esperanza de vida y PIB. Los datos son de fácil acceso en R gracias a Jenny Bryan, quien creó el paquete <strong>gapminder</strong>. Utilizaremos la versión en español contenida en el paquete <strong>datos</strong>, que incorpora este dataset en el objeto <code>paises</code>.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,704 × 6
+   pais       continente  anio esperanza_de_vida poblacion pib_per_capita
+   &lt;fct&gt;      &lt;fct&gt;      &lt;int&gt;             &lt;dbl&gt;     &lt;int&gt;          &lt;dbl&gt;
+ 1 Afganistán Asia        1952              28.8   8425333           779.
+ 2 Afganistán Asia        1957              30.3   9240934           821.
+ 3 Afganistán Asia        1962              32.0  10267083           853.
+ 4 Afganistán Asia        1967              34.0  11537966           836.
+ 5 Afganistán Asia        1972              36.1  13079460           740.
+ 6 Afganistán Asia        1977              38.4  14880372           786.
+ 7 Afganistán Asia        1982              39.9  12881816           978.
+ 8 Afganistán Asia        1987              40.8  13867957           852.
+ 9 Afganistán Asia        1992              41.7  16317921           649.
+10 Afganistán Asia        1997              41.8  22227415           635.
+# ℹ 1,694 more rows</code></pre>
+</div>
+</div>
+<p>En este caso de estudio, nos enfocaremos solo en tres variables para responder la pregunta “¿Cómo la esperanza de vida (<code>esperanza_de_vida</code>) cambia a través del tiempo (<code>anio</code>) para cada país (<code>pais</code>)?”. Un buen lugar para empezar es con un gráfico:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="25-model-many_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Es un conjunto de datos pequeño: solo tiene ~1,700 observaciones y 3 variables. ¡Pero aun así es difícil ver qué está pasando! En general, pareciera que la esperanza de vida ha estado mejorando en forma constante. Sin embargo, si miras de cerca, puedes notar que algunos países no siguen este patrón. ¿Cómo podemos hacer que esos países se vean más fácilmente?</p>
+<p>Una forma es usar el mismo enfoque que en el último capítulo: hay una señal fuerte (un crecimiento lineal general) que hace difícil ver tendencias más sutiles. Separaremos estos factores estimando un modelo con una tendencia lineal. El modelo captura el crecimiento estable en el tiempo y los residuos mostrarán lo que queda fuera.</p>
+<p>Ya sabes cómo hacer eso si tenemos un solo país:</p>
+<div class="cell" data-fig.asp="1">
+<div class="cell-output-display">
+<p><img src="25-model-many_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" style="width:33.0%"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="25-model-many_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" style="width:33.0%"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="25-model-many_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid" style="width:33.0%"></p>
+</div>
+</div>
+<p>¿Cómo podemos ajustar fácilmente ese modelo para cada país?</p>
+<section id="datos-anidados" class="level3" data-number="24.2.1">
+<h3 data-number="24.2.1" class="anchored" data-anchor-id="datos-anidados"><span class="header-section-number">24.2.1</span> Datos anidados</h3>
+<p>Te puedes imaginar copiando y pegando ese código múltiples veces; sin embargo, ¡ya has aprendido una mejor forma! Extrae el código en común con una función y repítelo usando una función map del paquete <strong>purrr</strong>. Este problema se estructura un poco diferente respecto a lo que has visto antes. En lugar de repetir una acción por cada variable, bnhgqueremos repetirla para cada país, es decir, un subconjunto de filas. Para hacer esto, necesitamos una nueva estructura de datos: el <strong><em>data frame</em> anidado</strong> (<em>nested data frame</em>). Para crear un <em>data frame</em> anidado empezamos con un <em>data frame</em> agrupado, y lo “anidamos”:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 142 × 3
+# Groups:   pais, continente [142]
+   pais       continente data             
+   &lt;fct&gt;      &lt;fct&gt;      &lt;list&gt;           
+ 1 Afganistán Asia       &lt;tibble [12 × 4]&gt;
+ 2 Albania    Europa     &lt;tibble [12 × 4]&gt;
+ 3 Argelia    África     &lt;tibble [12 × 4]&gt;
+ 4 Angola     África     &lt;tibble [12 × 4]&gt;
+ 5 Argentina  Américas   &lt;tibble [12 × 4]&gt;
+ 6 Australia  Oceanía    &lt;tibble [12 × 4]&gt;
+ 7 Austria    Europa     &lt;tibble [12 × 4]&gt;
+ 8 Baréin     Asia       &lt;tibble [12 × 4]&gt;
+ 9 Bangladesh Asia       &lt;tibble [12 × 4]&gt;
+10 Bélgica    Europa     &lt;tibble [12 × 4]&gt;
+# ℹ 132 more rows</code></pre>
+</div>
+</div>
+<p>(Estamos haciendo un poco de trampa agrupando por <code>continente</code> y <code>pais</code> al mismo tiempo. Dado el <code>pais</code>, <code>continente</code> es fijo, así que no agrega ningún grupo más, pero es una forma fácil de llevarnos una variable adicional para el camino.)</p>
+<p>Esto crea un <em>data frame</em> que tiene una fila por grupo (por país), y una columna bastante inusual: <code>data</code>. <code>data</code> es una lista de <em>data frames</em> (o <em>tibbles</em>, para ser precisos). Esto parece una idea un poco loca: ¡tenemos un <em>data frame</em> con una columna que es una lista de otros <em>data frames</em>! Explicaré brevemente por qué pienso que es una buena idea.</p>
+<p>La columna <code>data</code> es un poco difícil de examinar porque es una lista moderadamente complicada y todavía estamos trabajando para tener buenas herramientas para explorar estos objetos. Desafortunadamente, usar <code>str()</code> no es recomendable porque usualmente producirá un <em>output</em> (salida de código) muy extenso. Pero si extraes un solo elemento de la columna <code>data</code> verás que contiene todos los datos para ese país (en este caso, Afganistán).</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 4
+    anio esperanza_de_vida poblacion pib_per_capita
+   &lt;int&gt;             &lt;dbl&gt;     &lt;int&gt;          &lt;dbl&gt;
+ 1  1952              28.8   8425333           779.
+ 2  1957              30.3   9240934           821.
+ 3  1962              32.0  10267083           853.
+ 4  1967              34.0  11537966           836.
+ 5  1972              36.1  13079460           740.
+ 6  1977              38.4  14880372           786.
+ 7  1982              39.9  12881816           978.
+ 8  1987              40.8  13867957           852.
+ 9  1992              41.7  16317921           649.
+10  1997              41.8  22227415           635.
+11  2002              42.1  25268405           727.
+12  2007              43.8  31889923           975.</code></pre>
+</div>
+</div>
+<p>Nota la diferencia entre un <em>data frame</em> agrupado estándar y un <em>data frame</em> anidado: en un <em>data frame</em> agrupado cada fila es una observación; en un <em>data frame</em> anidado, cada fila es un grupo. Otra forma de pensar en un conjunto de datos anidado es que ahora tenemos una meta-observación: una fila que representa todo el transcurso de tiempo para un país, en lugar de solo un punto en el tiempo.</p>
+</section>
+<section id="columnas-lista" class="level3" data-number="24.2.2">
+<h3 data-number="24.2.2" class="anchored" data-anchor-id="columnas-lista"><span class="header-section-number">24.2.2</span> Columnas-lista</h3>
+<p>Ahora que tenemos nuestro <em>data frame</em> anidado, estamos en una buena posición para ajustar algunos modelos. Tenemos una función para ajustar modelos:</p>
+<p>Y queremos aplicarlo a cada <em>data frame</em>. Los <em>data frames</em> están en una lista, así que podemos usar <code>purrr::map()</code> para aplicar <code>modelo_pais</code> a cada elemento:</p>
+<p>Sin embargo, en lugar de dejar la lista de modelos como un objeto suelto, lo mejor sería almacenarlo como una columna en el <em>data frame</em> <code>por_pais</code>. Almacenar objetos relacionados en columnas es una parte clave del valor de los <em>data frames</em>, y por eso creemos que las columnas-lista son tan buena idea. En el transcurso de nuestro trabajo con estos países vamos a tener muchas listas en las que tenemos un elemento por país. ¿Por qué no almacenarlos todos juntos en un <em>data frame</em>?</p>
+<p>En otras palabras, en lugar de crear un nuevo objeto en el entorno global, vamos a crear una nueva variable en el <em>data frame</em> <code>por_pais</code>. Ese es un trabajo para <code>dplyr::mutate()</code>:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 142 × 4
+# Groups:   pais, continente [142]
+   pais       continente data              modelo
+   &lt;fct&gt;      &lt;fct&gt;      &lt;list&gt;            &lt;list&gt;
+ 1 Afganistán Asia       &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 2 Albania    Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 3 Argelia    África     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 4 Angola     África     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 5 Argentina  Américas   &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 6 Australia  Oceanía    &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 7 Austria    Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 8 Baréin     Asia       &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 9 Bangladesh Asia       &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+10 Bélgica    Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+# ℹ 132 more rows</code></pre>
+</div>
+</div>
+<p>Esto tiene una gran ventaja: como todos los objetos relacionados están almacenados juntos, no necesitas manualmente mantenerlos sincronizados cuando filtras o reordenas. La semántica del <em>data frame</em> se ocupa de esto por ti:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 4
+# Groups:   pais, continente [30]
+   pais                 continente data              modelo
+   &lt;fct&gt;                &lt;fct&gt;      &lt;list&gt;            &lt;list&gt;
+ 1 Albania              Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 2 Austria              Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 3 Bélgica              Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 4 Bosnia y Herzegovina Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 5 Bulgaria             Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 6 Croacia              Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 7 República Checa      Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 8 Dinamarca            Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 9 Finlandia            Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+10 Francia              Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+# ℹ 20 more rows</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 142 × 4
+# Groups:   pais, continente [142]
+   pais                     continente data              modelo
+   &lt;fct&gt;                    &lt;fct&gt;      &lt;list&gt;            &lt;list&gt;
+ 1 Argelia                  África     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 2 Angola                   África     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 3 Benin                    África     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 4 Botswana                 África     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 5 Burkina Faso             África     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 6 Burundi                  África     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 7 Camerún                  África     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 8 República Centroafricana África     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+ 9 Chad                     África     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+10 Comoras                  África     &lt;tibble [12 × 4]&gt; &lt;lm&gt;  
+# ℹ 132 more rows</code></pre>
+</div>
+</div>
+<p>Si tu lista de <em>data frames</em> y lista de modelos fueran objetos separados, tendrías que acordarte de que cuando reordenas o seleccionas un subconjunto de un vector, necesitas reordenar o seleccionar el subconjunto de todos los demás para mantenerlos sincronizados. Si te olvidas, tu código va a seguir funcionando, ¡pero va a devolver la respuesta equivocada!</p>
+</section>
+<section id="desanidando" class="level3" data-number="24.2.3">
+<h3 data-number="24.2.3" class="anchored" data-anchor-id="desanidando"><span class="header-section-number">24.2.3</span> Desanidando</h3>
+<p>Previamente calculamos los residuos de un único modelo con un conjunto de datos también único. Ahora tenemos 142 <em>data frames</em> y 142 modelos. Para calcular los residuos, necesitamos llamar a la función <code>add_residuals()</code> (<em>adicionar residuos</em>, en inglés) con cada par modelo-datos:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 142 × 5
+# Groups:   pais, continente [142]
+   pais       continente data              modelo residuos         
+   &lt;fct&gt;      &lt;fct&gt;      &lt;list&gt;            &lt;list&gt; &lt;list&gt;           
+ 1 Afganistán Asia       &lt;tibble [12 × 4]&gt; &lt;lm&gt;   &lt;tibble [12 × 5]&gt;
+ 2 Albania    Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;   &lt;tibble [12 × 5]&gt;
+ 3 Argelia    África     &lt;tibble [12 × 4]&gt; &lt;lm&gt;   &lt;tibble [12 × 5]&gt;
+ 4 Angola     África     &lt;tibble [12 × 4]&gt; &lt;lm&gt;   &lt;tibble [12 × 5]&gt;
+ 5 Argentina  Américas   &lt;tibble [12 × 4]&gt; &lt;lm&gt;   &lt;tibble [12 × 5]&gt;
+ 6 Australia  Oceanía    &lt;tibble [12 × 4]&gt; &lt;lm&gt;   &lt;tibble [12 × 5]&gt;
+ 7 Austria    Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;   &lt;tibble [12 × 5]&gt;
+ 8 Baréin     Asia       &lt;tibble [12 × 4]&gt; &lt;lm&gt;   &lt;tibble [12 × 5]&gt;
+ 9 Bangladesh Asia       &lt;tibble [12 × 4]&gt; &lt;lm&gt;   &lt;tibble [12 × 5]&gt;
+10 Bélgica    Europa     &lt;tibble [12 × 4]&gt; &lt;lm&gt;   &lt;tibble [12 × 5]&gt;
+# ℹ 132 more rows</code></pre>
+</div>
+</div>
+<p>¿Pero cómo puedes graficar una lista de <em>data frames</em>? En lugar de luchar para contestar esa pregunta, transformemos la lista de <em>data frames</em> de vuelta en un <em>data frame</em> regular. Previamente usamos <code>nest()</code> (<em>anidar</em>) para transformar un <em>data frame</em> regular en uno anidado; ahora desanidaremos con <code>unnest()</code>:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,704 × 9
+# Groups:   pais, continente [142]
+   pais       continente data     modelo  anio esperanza_de_vida poblacion
+   &lt;fct&gt;      &lt;fct&gt;      &lt;list&gt;   &lt;list&gt; &lt;int&gt;             &lt;dbl&gt;     &lt;int&gt;
+ 1 Afganistán Asia       &lt;tibble&gt; &lt;lm&gt;    1952              28.8   8425333
+ 2 Afganistán Asia       &lt;tibble&gt; &lt;lm&gt;    1957              30.3   9240934
+ 3 Afganistán Asia       &lt;tibble&gt; &lt;lm&gt;    1962              32.0  10267083
+ 4 Afganistán Asia       &lt;tibble&gt; &lt;lm&gt;    1967              34.0  11537966
+ 5 Afganistán Asia       &lt;tibble&gt; &lt;lm&gt;    1972              36.1  13079460
+ 6 Afganistán Asia       &lt;tibble&gt; &lt;lm&gt;    1977              38.4  14880372
+ 7 Afganistán Asia       &lt;tibble&gt; &lt;lm&gt;    1982              39.9  12881816
+ 8 Afganistán Asia       &lt;tibble&gt; &lt;lm&gt;    1987              40.8  13867957
+ 9 Afganistán Asia       &lt;tibble&gt; &lt;lm&gt;    1992              41.7  16317921
+10 Afganistán Asia       &lt;tibble&gt; &lt;lm&gt;    1997              41.8  22227415
+# ℹ 1,694 more rows
+# ℹ 2 more variables: pib_per_capita &lt;dbl&gt;, resid &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Nota que cada columna regular está repetida una vez por cada fila en la columna anidada.</p>
+<p>Ahora que tenemos un <em>data frame</em> regular, podemos graficar los residuos:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="25-model-many_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Separar facetas por continente es particularmente revelador:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="25-model-many_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Parece que hemos perdido algunos patrones suaves. También hay algo interesante pasando en África: vemos algunos residuos muy grandes, lo que sugiere que nuestro modelo no está ajustando muy bien. Exploraremos más eso en la próxima sección, atacando el problema desde un ángulo un poco diferente.</p>
+</section>
+<section id="calidad-del-modelo" class="level3" data-number="24.2.4">
+<h3 data-number="24.2.4" class="anchored" data-anchor-id="calidad-del-modelo"><span class="header-section-number">24.2.4</span> Calidad del modelo</h3>
+<p>En lugar de examinar los residuos del modelo, podríamos examinar algunas medidas generales de la calidad del modelo. Aprendiste cómo calcular algunas medidas específicas en el capítulo anterior. Aquí mostraremos un enfoque diferente usando el paquete <strong>broom</strong>. El paquete <strong>broom</strong> provee un conjunto de funciones generales para transformar modelos en datos ordenados. Aquí utilizaremos <code>broom::glance()</code> (<em>vistazo</em>, en inglés) para extraer algunas métricas de la calidad del modelo. Si lo aplicamos a un modelo, obtenemos un <em>data frame</em> con una única fila:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared sigma statistic      p.value    df logLik   AIC   BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0.954         0.949 0.804      205. 0.0000000541     1  -13.3  32.6  34.1
+# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+</div>
+<p>Podemos usar <code>mutate()</code> y <code>unnest()</code> para crear un <em>data frame</em> con una fila por cada país:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 142 × 14
+# Groups:   pais, continente [142]
+   pais       continente r.squared adj.r.squared sigma statistic  p.value    df
+   &lt;fct&gt;      &lt;fct&gt;          &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+ 1 Afganistán Asia           0.948         0.942 1.22      181.  9.84e- 8     1
+ 2 Albania    Europa         0.911         0.902 1.98      102.  1.46e- 6     1
+ 3 Argelia    África         0.985         0.984 1.32      662.  1.81e-10     1
+ 4 Angola     África         0.888         0.877 1.41       79.1 4.59e- 6     1
+ 5 Argentina  Américas       0.996         0.995 0.292    2246.  4.22e-13     1
+ 6 Australia  Oceanía        0.980         0.978 0.621     481.  8.67e-10     1
+ 7 Austria    Europa         0.992         0.991 0.407    1261.  7.44e-12     1
+ 8 Baréin     Asia           0.967         0.963 1.64      291.  1.02e- 8     1
+ 9 Bangladesh Asia           0.989         0.988 0.977     930.  3.37e-11     1
+10 Bélgica    Europa         0.995         0.994 0.293    1822.  1.20e-12     1
+# ℹ 132 more rows
+# ℹ 6 more variables: logLik &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;, deviance &lt;dbl&gt;,
+#   df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+</div>
+<p>(Presta atención a las variables que no se imprimieron: hay mucha información útil allí).</p>
+<p>Con este <em>data frame</em> podemos empezar a buscar modelos que no se ajustan bien:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 142 × 14
+# Groups:   pais, continente [142]
+   pais  continente r.squared adj.r.squared sigma statistic p.value    df logLik
+   &lt;fct&gt; &lt;fct&gt;          &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1 Ruan… África        0.0172      -0.0811   6.56     0.175  0.685      1  -38.5
+ 2 Bots… África        0.0340      -0.0626   6.11     0.352  0.566      1  -37.7
+ 3 Zimb… África        0.0562      -0.0381   7.21     0.596  0.458      1  -39.6
+ 4 Zamb… África        0.0598      -0.0342   4.53     0.636  0.444      1  -34.1
+ 5 Swaz… África        0.0682      -0.0250   6.64     0.732  0.412      1  -38.7
+ 6 Leso… África        0.0849      -0.00666  5.93     0.927  0.358      1  -37.3
+ 7 Cost… África        0.283        0.212    3.93     3.95   0.0748     1  -32.3
+ 8 Sudá… África        0.312        0.244    4.74     4.54   0.0588     1  -34.6
+ 9 Ugan… África        0.342        0.276    3.19     5.20   0.0457     1  -29.8
+10 Repú… África        0.348        0.283    2.43     5.34   0.0434     1  -26.6
+# ℹ 132 more rows
+# ℹ 5 more variables: AIC &lt;dbl&gt;, BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;,
+#   nobs &lt;int&gt;</code></pre>
+</div>
+</div>
+<p>Los peores modelos parecieran estar todos en África. Vamos a chequear esto con un gráfico. Tenemos un número relativamente chico de observaciones y una variable discreta, así que usar <code>geom_jitter()</code> es efectivo:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="25-model-many_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Podríamos quitar los países con un <span class="math inline">\(R^2\)</span> particularmente malo y graficar los datos:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="25-model-many_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Vemos dos efectos principales aquí: las tragedias de la epidemia de VIH/SIDA y el genocidio de Ruanda.</p>
+</section>
+<section id="ejercicios" class="level3" data-number="24.2.5">
+<h3 data-number="24.2.5" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">24.2.5</span> Ejercicios</h3>
+<ol type="1">
+<li><p>Una tendencia lineal parece ser demasiado simple para la tendencia general. ¿Puedes hacerlo mejor con un polinomio cuadrático? ¿Cómo puedes interpretar el coeficiente del término cuadrático? (Pista: puedes querer transformar <code>year</code> para que tenga media cero.)</p></li>
+<li><p>Explora otros métodos para visualizar la distribución del <span class="math inline">\(R^2\)</span> por continente. Puedes querer probar el paquete <strong>ggbeeswarm</strong>, que provee métodos similares para evitar superposiciones como jitter, pero usa métodos determinísticos.</p></li>
+<li><p>Para crear el último gráfico (mostrando los datos para los países con los peores ajustes del modelo), precisamos dos pasos: creamos un <em>data frame</em> con una fila por país y después hicimos un <em>semi-join</em> al conjunto de datos original. Es posible evitar este <em>join</em> si usamos <code>unnest()</code> en lugar de <code>unnest(.drop = TRUE)</code>. ¿Cómo?</p></li>
+</ol>
+</section>
+</section>
+<section id="columnas-lista-1" class="level2" data-number="24.3">
+<h2 data-number="24.3" class="anchored" data-anchor-id="columnas-lista-1"><span class="header-section-number">24.3</span> Columnas-lista</h2>
+<p>Ahora que has visto un flujo de trabajo básico para manejar muchos modelos, vamos a sumergirnos en algunos detalles. En esta sección, exploraremos en más detalle la estructura de datos columna-lista. Solo recientemente hemos comenzado a apreciar realmente la idea de la columna-lista. Esta estructura está implícita en la definición de <em>data frame</em>: un <em>data frame</em> es una lista nombrada de vectores de igual largo. Una lista es un vector, así que siempre ha sido legítimo usar una lista como una columna de un <em>data frame</em>. Sin embargo, R base no hace las cosas fáciles para crear columnas-lista, y <code>data.frame()</code> trata a la lista como una lista de columnas:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  x.1.3 x.3.5
+1     1     3
+2     2     4
+3     3     5</code></pre>
+</div>
+</div>
+<p>Puedes prevenir que <code>data.frame()</code> haga esto con <code>I()</code>, pero el resultado no se imprime particularmente bien:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>        x       y
+1 1, 2, 3    1, 2
+2 3, 4, 5 3, 4, 5</code></pre>
+</div>
+</div>
+<p><em>Tibble</em> mitiga este problema siendo más <em>perezoso</em> (<code>tibble()</code> no modifica sus <em>inputs</em>) y proporcionando un mejor método de impresión:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  x         y      
+  &lt;list&gt;    &lt;chr&gt;  
+1 &lt;int [3]&gt; 1, 2   
+2 &lt;int [3]&gt; 3, 4, 5</code></pre>
+</div>
+</div>
+<p>Es incluso más fácil con <code>tribble()</code>, ya que automáticamente puede interpretar que necesitas una lista:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  x         y      
+  &lt;list&gt;    &lt;chr&gt;  
+1 &lt;int [3]&gt; 1, 2   
+2 &lt;int [3]&gt; 3, 4, 5</code></pre>
+</div>
+</div>
+<p>Las columnas-lista son usualmente más útiles como estructuras de datos intermedias. Es difícil trabajar con ellas directamente, porque la mayoría de las funciones de R trabaja con vectores atómicos o <em>data frames</em>, pero la ventaja de mantener ítems relacionados juntos en un <em>data frame</em> hace que valga la pena un poco de molestia.</p>
+<p>Generalmente hay tres partes en un <em>pipeline</em> efectivo de columnas-lista:</p>
+<ol type="1">
+<li><p>Creas la columna-lista usando alguna de estas opciones: <code>nest()</code> o <code>summarise()</code> + <code>list()</code> o <code>mutate()</code> + una función map, como se describe en <a href="#creando-columnas-lista">Creando columnas-lista</a>.</p></li>
+<li><p>Creas otra columna-lista intermedia transformando columnas lista existentes con <code>map()</code>, <code>map2()</code> o <code>pmap()</code>. Por ejemplo, en el caso de estudio de arriba, creamos una columna-lista de modelos transformando una columna-lista de <em>data frames</em>.</p></li>
+<li><p>Simplificas la columna-lista de vuelta en un <em>data frame</em> o vector atómico, como se describe en <a href="#simplificando-columnas-lista">Simplificando columnas-lista</a>.</p></li>
+</ol>
+</section>
+<section id="creando-columnas-lista" class="level2" data-number="24.4">
+<h2 data-number="24.4" class="anchored" data-anchor-id="creando-columnas-lista"><span class="header-section-number">24.4</span> Creando columnas-lista</h2>
+<p>Típicamente, no tendrás que crear columnas-lista con <code>tibble()</code>, sino a partir de columnas regulares usando uno de estos tres métodos:</p>
+<ol type="1">
+<li><p>Con <code>tidyr::nest()</code> para convertir un <em>data frame</em> agrupado en uno anidado en el que tengas columnas-lista de <em>data frames</em>.</p></li>
+<li><p>Con <code>mutate()</code> y funciones vectorizadas que retornan una lista.</p></li>
+<li><p>Con <code>summarise()</code> y funciones de resumen que retornan múltiples resultados.</p></li>
+</ol>
+<p>Alternativamente, podrías crearlas a partir de una lista nombrada, usando <code>tibble::enframe()</code>.</p>
+<p>Generalmente, cuando creas columnas-lista, debes asegurarte de que sean homogéneas: cada elemento debe contener el mismo tipo de cosa. No hay chequeos para asegurarte de que sea así, pero si usas <strong>purrr</strong> y recuerdas lo que aprendiste sobre funciones de tipo estable (<em>type-stable functions</em>), encontrarás que eso pasa naturalmente.</p>
+<section id="con-anidación" class="level3" data-number="24.4.1">
+<h3 data-number="24.4.1" class="anchored" data-anchor-id="con-anidación"><span class="header-section-number">24.4.1</span> Con anidación</h3>
+<p><code>nest()</code> crea un <em>data frame</em> anidado, que es un <em>data frame</em> con una columna-lista de <em>data frames</em>. En un <em>data frame</em> anidado cada fila es una meta-observación: las otras columnas son variables que definen la observación (como país y continente arriba), y la columna-lista de <em>data frames</em> tiene las observaciones individuales que construyen la meta-observación.</p>
+<p>Hay dos formas de usar <code>nest()</code>. Hasta ahora has visto cómo usarlo con un <em>data frame</em> agrupado. Cuando se aplica a un <em>data frame</em> agrupado, <code>nest()</code> mantiene las columnas que agrupan tal cual, y envuelve todo lo demás en la columna-lista:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 142 × 3
+# Groups:   pais, continente [142]
+   pais       continente data             
+   &lt;fct&gt;      &lt;fct&gt;      &lt;list&gt;           
+ 1 Afganistán Asia       &lt;tibble [12 × 4]&gt;
+ 2 Albania    Europa     &lt;tibble [12 × 4]&gt;
+ 3 Argelia    África     &lt;tibble [12 × 4]&gt;
+ 4 Angola     África     &lt;tibble [12 × 4]&gt;
+ 5 Argentina  Américas   &lt;tibble [12 × 4]&gt;
+ 6 Australia  Oceanía    &lt;tibble [12 × 4]&gt;
+ 7 Austria    Europa     &lt;tibble [12 × 4]&gt;
+ 8 Baréin     Asia       &lt;tibble [12 × 4]&gt;
+ 9 Bangladesh Asia       &lt;tibble [12 × 4]&gt;
+10 Bélgica    Europa     &lt;tibble [12 × 4]&gt;
+# ℹ 132 more rows</code></pre>
+</div>
+</div>
+<p>También lo puedes usar en un <em>data frame</em> no agrupado, especificando cuáles columnas quieres anidar:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 142 × 3
+   pais       continente data             
+   &lt;fct&gt;      &lt;fct&gt;      &lt;list&gt;           
+ 1 Afganistán Asia       &lt;tibble [12 × 4]&gt;
+ 2 Albania    Europa     &lt;tibble [12 × 4]&gt;
+ 3 Argelia    África     &lt;tibble [12 × 4]&gt;
+ 4 Angola     África     &lt;tibble [12 × 4]&gt;
+ 5 Argentina  Américas   &lt;tibble [12 × 4]&gt;
+ 6 Australia  Oceanía    &lt;tibble [12 × 4]&gt;
+ 7 Austria    Europa     &lt;tibble [12 × 4]&gt;
+ 8 Baréin     Asia       &lt;tibble [12 × 4]&gt;
+ 9 Bangladesh Asia       &lt;tibble [12 × 4]&gt;
+10 Bélgica    Europa     &lt;tibble [12 × 4]&gt;
+# ℹ 132 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="a-partir-de-funciones-vectorizadas" class="level3" data-number="24.4.2">
+<h3 data-number="24.4.2" class="anchored" data-anchor-id="a-partir-de-funciones-vectorizadas"><span class="header-section-number">24.4.2</span> A partir de funciones vectorizadas</h3>
+<p>Algunas funciones útiles toman un vector atómico y retornan una lista. Por ejemplo, en [cadenas de caracteres] aprendiste sobre <code>stringr::str_split()</code>, que toma un vector de caracteres y retorna una lista de vectores de caracteres. Si lo usas dentro de <code>mutate</code>, obtendrás una columna-lista:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  x1      x2       
+  &lt;chr&gt;   &lt;list&gt;   
+1 a,b,c   &lt;chr [3]&gt;
+2 d,e,f,g &lt;chr [4]&gt;</code></pre>
+</div>
+</div>
+<p><code>unnest()</code> sabe cómo manejar estas listas de vectores:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 2
+  x1      x2   
+  &lt;chr&gt;   &lt;chr&gt;
+1 a,b,c   a    
+2 a,b,c   b    
+3 a,b,c   c    
+4 d,e,f,g d    
+5 d,e,f,g e    
+6 d,e,f,g f    
+7 d,e,f,g g    </code></pre>
+</div>
+</div>
+<p>(Si usas mucho este patrón, asegúrate de chequear <code>tidyr::separate_rows()</code>, que es un <em>wrapper</em> alrededor de este patrón común).</p>
+<p>Otro ejemplo de este patrón es usar <code>map()</code>, <code>map2()</code>, <code>pmap()</code> de <strong>purrr</strong>. Por ejemplo, podríamos tomar el ejemplo final de [Invocando distintas functions] y reescribirlo usando <code>mutate()</code>:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  f     params           sims      
+  &lt;chr&gt; &lt;list&gt;           &lt;list&gt;    
+1 runif &lt;named list [2]&gt; &lt;dbl [10]&gt;
+2 rnorm &lt;named list [1]&gt; &lt;dbl [10]&gt;
+3 rpois &lt;named list [1]&gt; &lt;int [10]&gt;</code></pre>
+</div>
+</div>
+<p>Nota que técnicamente <code>sim</code> no es homogéneo porque contiene tanto vectores de dobles como vectores de enteros. Sin embargo, es probable que esto no cause muchos problemas porque ambos vectores son numéricos.</p>
+</section>
+<section id="a-partir-de-medidas-de-resumen-con-más-de-un-valor" class="level3" data-number="24.4.3">
+<h3 data-number="24.4.3" class="anchored" data-anchor-id="a-partir-de-medidas-de-resumen-con-más-de-un-valor"><span class="header-section-number">24.4.3</span> A partir de medidas de resumen con más de un valor</h3>
+<p>Una restricción de <code>summarise()</code> es que solo funciona con funciones de resumen que retornan un único valor. Eso significa que no puedes usarlo con funciones como <code>quantile()</code>, que retorna un vector de largo arbitrario:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15 × 2
+# Groups:   cilindros [3]
+   cilindros     q
+       &lt;dbl&gt; &lt;dbl&gt;
+ 1         4  21.4
+ 2         4  22.8
+ 3         4  26  
+ 4         4  30.4
+ 5         4  33.9
+ 6         6  17.8
+ 7         6  18.6
+ 8         6  19.7
+ 9         6  21  
+10         6  21.4
+11         8  10.4
+12         8  14.4
+13         8  15.2
+14         8  16.2
+15         8  19.2</code></pre>
+</div>
+</div>
+<p>Sin embargo, ¡puedes envolver el resultado en una lista! Esto obedece el contrato de <code>summarise()</code>, porque cada resumen ahora es una lista (un vector) de largo 1.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  cilindros q        
+      &lt;dbl&gt; &lt;list&gt;   
+1         4 &lt;dbl [5]&gt;
+2         6 &lt;dbl [5]&gt;
+3         8 &lt;dbl [5]&gt;</code></pre>
+</div>
+</div>
+<p>Para producir resultados útiles con <code>unnest</code>, también necesitarás capturar las probabilidades:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15 × 3
+   cilindros     p     q
+       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1         4  0.01  21.4
+ 2         4  0.25  22.8
+ 3         4  0.5   26  
+ 4         4  0.75  30.4
+ 5         4  0.99  33.8
+ 6         6  0.01  17.8
+ 7         6  0.25  18.6
+ 8         6  0.5   19.7
+ 9         6  0.75  21  
+10         6  0.99  21.4
+11         8  0.01  10.4
+12         8  0.25  14.4
+13         8  0.5   15.2
+14         8  0.75  16.2
+15         8  0.99  19.1</code></pre>
+</div>
+</div>
+</section>
+<section id="a-partir-de-una-lista-nombrada" class="level3" data-number="24.4.4">
+<h3 data-number="24.4.4" class="anchored" data-anchor-id="a-partir-de-una-lista-nombrada"><span class="header-section-number">24.4.4</span> A partir de una lista nombrada</h3>
+<p>Los <em>data frames</em> con columnas-lista proveen una solución a un problema común: ¿qué haces si quieres iterar sobre el contenido de una lista y también sobre sus elementos? En lugar de tratar de juntar todo en un único objeto, usualmente es más fácil hacer un <em>data frame</em>: una columna puede contener los elementos y otra columna la lista. Una forma fácil de crear un <em>data frame</em> como este desde una lista es <code>tibble::enframe()</code>.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  value    
+  &lt;chr&gt; &lt;list&gt;   
+1 a     &lt;int [5]&gt;
+2 b     &lt;int [2]&gt;
+3 c     &lt;int [2]&gt;</code></pre>
+</div>
+</div>
+<p>La ventaja de esta estructura es que se generaliza de una forma relativamente sencilla - los nombres son útiles si tienes un vector de caracteres con los metadatos, pero no ayudan para otros tipos de datos o para múltiples vectores.</p>
+<p>Ahora, si quieres iterar sobre los nombres y valores en paralelo, puedes usar <code>map2()</code>:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name  value     smry 
+  &lt;chr&gt; &lt;list&gt;    &lt;chr&gt;
+1 a     &lt;int [5]&gt; a: 1 
+2 b     &lt;int [2]&gt; b: 3 
+3 c     &lt;int [2]&gt; c: 5 </code></pre>
+</div>
+</div>
+</section>
+<section id="ejercicios-1" class="level3" data-number="24.4.5">
+<h3 data-number="24.4.5" class="anchored" data-anchor-id="ejercicios-1"><span class="header-section-number">24.4.5</span> Ejercicios</h3>
+<ol type="1">
+<li><p>Lista todas las funciones en las que puedas pensar que tomen como <em>input</em> un vector atómico y retornen una lista.</p></li>
+<li><p>Piensa en funciones de resumen útiles que, como <code>quantile()</code>, retornen múltiples valores.</p></li>
+<li><p>¿Qué es lo que falta en el siguiente <em>data frame</em>? ¿Cómo <code>quantile()</code> retorna eso que falta? ¿Por qué eso no es tan útil aquí?</p></li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15 × 2
+   cilindros     q
+       &lt;dbl&gt; &lt;dbl&gt;
+ 1         4  21.4
+ 2         4  22.8
+ 3         4  26  
+ 4         4  30.4
+ 5         4  33.9
+ 6         6  17.8
+ 7         6  18.6
+ 8         6  19.7
+ 9         6  21  
+10         6  21.4
+11         8  10.4
+12         8  14.4
+13         8  15.2
+14         8  16.2
+15         8  19.2</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>¿Qué hace este código? ¿Por qué podría ser útil?</li>
+</ol>
+</section>
+</section>
+<section id="simplificando-columnas-lista" class="level2" data-number="24.5">
+<h2 data-number="24.5" class="anchored" data-anchor-id="simplificando-columnas-lista"><span class="header-section-number">24.5</span> Simplificando columnas-lista</h2>
+<p>Para aplicar las técnicas de manipulación de datos y visualización que has aprendido en este libro, necesitarás simplificar la columna-lista de vuelta a una columna regular (un vector atómico) o conjunto de columnas. La técnica que usarás para volver a una estructura más sencilla depende de si quieres un único valor por elemento, o múltiples valores.</p>
+<ol type="1">
+<li><p>Si quieres un único valor, usa <code>mutate()</code> con <code>map_lgl()</code>, <code>map_int()</code>, <code>map_dbl()</code>, y <code>map_chr()</code> para crear un vector atómico.</p></li>
+<li><p>Si quieres varios valores, usa <code>unnest()</code> para convertir columnas-lista de vuelta a columnas regulares, repitiendo las filas tantas veces como sea necesario.</p></li>
+</ol>
+<p>Estas técnicas están descritas con más detalle abajo.</p>
+<section id="lista-a-vector" class="level3" data-number="24.5.1">
+<h3 data-number="24.5.1" class="anchored" data-anchor-id="lista-a-vector"><span class="header-section-number">24.5.1</span> Lista a vector</h3>
+<p>Si puedes reducir tu columna lista a un vector atómico entonces será una columna regular. Por ejemplo, siempre puedes resumir un objeto con su tipo y largo, por lo que este código funcionará sin importar cuál tipo de columna-lista tengas:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  x         tipo      largo
+  &lt;list&gt;    &lt;chr&gt;     &lt;int&gt;
+1 &lt;chr [5]&gt; character     5
+2 &lt;int [3]&gt; integer       3
+3 &lt;dbl [5]&gt; double        5</code></pre>
+</div>
+</div>
+<p>Esta es la misma información básica que obtienes del método de impresión por defecto de <em>tbl</em> , solo que ahora lo puedes usar para filtrar. Es una técnica útil si tienes listas heterogéneas y quieres remover las partes que no te sirven.</p>
+<p>No te olvides de los atajos de <code>map_*()</code> - puedes usar <code>map_chr(x, "manzana")</code> para extraer la cadena de caracteres almacenada en <code>manzana</code> para cada elemento de <code>x</code>. Esto es útil para separar listas anidadas en columnas regulares. Usa el argumento <code>.null</code> para proveer un valor para usar si el elemento es un valor faltante (en lugar de retornar <code>NULL</code>):</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  x                    a     b
+  &lt;list&gt;           &lt;dbl&gt; &lt;dbl&gt;
+1 &lt;named list [2]&gt;     1     2
+2 &lt;named list [2]&gt;     2    NA</code></pre>
+</div>
+</div>
+</section>
+<section id="desanidando-1" class="level3" data-number="24.5.2">
+<h3 data-number="24.5.2" class="anchored" data-anchor-id="desanidando-1"><span class="header-section-number">24.5.2</span> Desanidando</h3>
+<p><code>unnest()</code> trabaja repitiendo la columna regular una vez para cada elemento de la columna-lista. Por ejemplo, en el siguiente ejemplo sencillo repetimos la primera fila 4 veces (porque el primer elemento de <code>y</code> tiene largo cuatro) y la segunda fila una vez:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+      x     y
+  &lt;int&gt; &lt;dbl&gt;
+1     1     1
+2     1     2
+3     1     3
+4     1     4
+5     2     1</code></pre>
+</div>
+</div>
+<p>Esto significa que no puedes simultáneamente desanidar dos columnas que contengan un número diferente de elementos:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+      x y         z        
+  &lt;dbl&gt; &lt;list&gt;    &lt;list&gt;   
+1     1 &lt;chr [2]&gt; &lt;int [2]&gt;
+2     2 &lt;chr [1]&gt; &lt;dbl [1]&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+      x y         z
+  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;
+1     1 a         1
+2     1 b         2
+3     2 c         3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+      x y         z        
+  &lt;dbl&gt; &lt;list&gt;    &lt;list&gt;   
+1     1 &lt;chr [1]&gt; &lt;int [2]&gt;
+2     2 &lt;chr [2]&gt; &lt;dbl [1]&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+      x y         z
+  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;
+1     1 a         1
+2     1 a         2
+3     2 b         3
+4     2 c         3</code></pre>
+</div>
+</div>
+<p>El mismo principio aplica al desanidar columnas-lista de <em>data frames</em>. Puedes desanidar múltiples columnas-lista siempre que todos los <em>data frames</em> de cada fila tengan la misma cantidad de filas.</p>
+</section>
+<section id="ejercicios-2" class="level3" data-number="24.5.3">
+<h3 data-number="24.5.3" class="anchored" data-anchor-id="ejercicios-2"><span class="header-section-number">24.5.3</span> Ejercicios</h3>
+<ol type="1">
+<li><p>¿Por qué podría ser útil la función <code>lengths()</code> para crear columnas de vectores atómicos a partir de columnas-lista?</p></li>
+<li><p>Lista los tipos de vectores más comúnes que se encuentran en un <em>data frame</em>. ¿Qué hace que las listas sean diferentes?</p></li>
+</ol>
+</section>
+</section>
+<section id="haciendo-datos-ordenados-con-broom" class="level2" data-number="24.6">
+<h2 data-number="24.6" class="anchored" data-anchor-id="haciendo-datos-ordenados-con-broom"><span class="header-section-number">24.6</span> Haciendo datos ordenados con broom</h2>
+<p>El paquete <strong>broom</strong> provee tres herramientas generales para transformar modelos en <em>data frames</em> ordenados:</p>
+<ol type="1">
+<li><p><code>broom::glance(modelo)</code> retorna una fila para cada modelo. Cada columna tiene una medida de resumen del modelo: o bien una medida de la calidad del modelo, o bien complejidad, o una combinación de ambos.</p></li>
+<li><p><code>broom::tidy(modelo)</code> retorna una fila por cada coeficiente en el modelo. Cada columna brinda información acerca de la estimación o su variabilidad.</p></li>
+<li><p><code>broom::augment(modelo, data)</code> retorna una fila por cada fila en <code>data</code>, agregando valores adicionales como residuos, y estadísticos de influencia.</p></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./24-model-building.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Construcción de modelos</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./26-communicate.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introducción</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
