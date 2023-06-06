@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -57,7 +91,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -76,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-wrangle.html">Manejar o domar datos</a></li><li class="breadcrumb-item"><a href="./13-relational-data.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datos relacionales</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -146,13 +181,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-workflow-scripts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Flujo de trabajo: <em>Scripts</em></span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Flujo de trabajo: Scripts</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-eda.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análisis exploratorio de datos (<em>EDA</em>)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análisis exploratorio de datos (EDA)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -234,31 +269,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-program.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">(PART) Programar</span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./18-pipes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Pipes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Pipes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./19-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Funciones</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Funciones</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./20-vectors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Vectores</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Vectores</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./21-iteration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Iteración</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Iteración</span></span></a>
   </div>
 </li>
       </ul>
@@ -275,25 +310,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./22-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./23-model-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Modelos: conceptos básicos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Modelos: conceptos básicos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./24-model-building.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Construcción de modelos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Construcción de modelos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./25-model-many.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Muchos modelos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Muchos modelos</span></span></a>
   </div>
 </li>
       </ul>
@@ -310,31 +345,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./26-communicate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./27-rmarkdown.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">R Markdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">R Markdown</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./28-communicate-plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Comunicar con gráficos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Comunicar con gráficos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./29-rmarkdown-formats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Formatos de R Markdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Formatos de R Markdown</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./30-rmarkdown-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Flujo de trabajo en R Markdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Flujo de trabajo en R Markdown</span></span></a>
   </div>
 </li>
       </ul>
@@ -414,6 +449,10 @@ ul.task-list li input[type="checkbox"] {
 <section id="prerrequisitos" class="level3" data-number="13.1.1">
 <h3 data-number="13.1.1" class="anchored" data-anchor-id="prerrequisitos"><span class="header-section-number">13.1.1</span> Prerrequisitos</h3>
 <p>Vamos a explorar datos relacionales contenidos en el paquete <strong>datos</strong> usando los verbos para dos tablas de <strong>dplyr</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 <section id="nycflights13-relational" class="level2" data-number="13.2">
@@ -422,19 +461,27 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><code>aerolineas</code> permite observar el nombre completo de la aerolínea a partir de su código abreviado:</li>
 </ul>
-<p>::: {.cell} ::: {.cell-output .cell-output-stdout} <code># A tibble: 16 × 2     aerolinea nombre                          &lt;chr&gt;     &lt;chr&gt;                         1 9E        Endeavor Air Inc.             2 AA        American Airlines Inc.        3 AS        Alaska Airlines Inc.          4 B6        JetBlue Airways               5 DL        Delta Air Lines Inc.          6 EV        ExpressJet Airlines Inc.      7 F9        Frontier Airlines Inc.        8 FL        AirTran Airways Corporation   9 HA        Hawaiian Airlines Inc.       10 MQ        Envoy Air                    11 OO        SkyWest Airlines Inc.        12 UA        United Air Lines Inc.        13 US        US Airways Inc.              14 VX        Virgin America               15 WN        Southwest Airlines Co.       16 YV        Mesa Airlines Inc.</code> ::: :::</p>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>aerolineas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 16 × 2     aerolinea nombre                          &lt;chr&gt;     &lt;chr&gt;                         1 9E        Endeavor Air Inc.             2 AA        American Airlines Inc.        3 AS        Alaska Airlines Inc.          4 B6        JetBlue Airways               5 DL        Delta Air Lines Inc.          6 EV        ExpressJet Airlines Inc.      7 F9        Frontier Airlines Inc.        8 FL        AirTran Airways Corporation   9 HA        Hawaiian Airlines Inc.       10 MQ        Envoy Air                    11 OO        SkyWest Airlines Inc.        12 UA        United Air Lines Inc.        13 US        US Airways Inc.              14 VX        Virgin America               15 WN        Southwest Airlines Co.       16 YV        Mesa Airlines Inc.</code> ::: :::</p>
 <ul>
 <li><code>aeropuertos</code> entrega información de cada aeropuerto, identificado por su <code>código</code>:</li>
 </ul>
-<p>::: {.cell} ::: {.cell-output .cell-output-stdout} <code># A tibble: 1,458 × 8     codigo_aeropuerto nombre  latitud longitud altura zona_horaria horario_verano     &lt;chr&gt;             &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;            1 04G               Lansdo…    41.1    -80.6   1044           -5 A                2 06A               Moton …    32.5    -85.7    264           -6 A                3 06C               Schaum…    42.0    -88.1    801           -6 A                4 06N               Randal…    41.4    -74.4    523           -5 A                5 09J               Jekyll…    31.1    -81.4     11           -5 A                6 0A9               Elizab…    36.4    -82.2   1593           -5 A                7 0G6               Willia…    41.5    -84.5    730           -5 A                8 0G7               Finger…    42.9    -76.8    492           -5 A                9 0P2               Shoest…    39.8    -76.6   1000           -5 U               10 0S9               Jeffer…    48.1   -123.     108           -8 A               # ℹ 1,448 more rows  # ℹ 1 more variable: zona_horaria_iana &lt;chr&gt;</code> ::: :::</p>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>aeropuertos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 1,458 × 8     codigo_aeropuerto nombre  latitud longitud altura zona_horaria horario_verano     &lt;chr&gt;             &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;            1 04G               Lansdo…    41.1    -80.6   1044           -5 A                2 06A               Moton …    32.5    -85.7    264           -6 A                3 06C               Schaum…    42.0    -88.1    801           -6 A                4 06N               Randal…    41.4    -74.4    523           -5 A                5 09J               Jekyll…    31.1    -81.4     11           -5 A                6 0A9               Elizab…    36.4    -82.2   1593           -5 A                7 0G6               Willia…    41.5    -84.5    730           -5 A                8 0G7               Finger…    42.9    -76.8    492           -5 A                9 0P2               Shoest…    39.8    -76.6   1000           -5 U               10 0S9               Jeffer…    48.1   -123.     108           -8 A               # ℹ 1,448 more rows  # ℹ 1 more variable: zona_horaria_iana &lt;chr&gt;</code> ::: :::</p>
 <ul>
 <li><code>aviones</code> entrega información de cada avión, identificado por su <code>codigo_cola</code>:</li>
 </ul>
-<p>::: {.cell} ::: {.cell-output .cell-output-stdout} <code># A tibble: 3,322 × 9     codigo_cola  anio tipo           fabricante modelo motores asientos velocidad     &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;      &lt;chr&gt;    &lt;int&gt;    &lt;int&gt;     &lt;int&gt;   1 N10156       2004 Ala fija mult… EMBRAER    EMB-1…       2       55        NA   2 N102UW       1998 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   3 N103US       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   4 N104UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   5 N10575       2002 Ala fija mult… EMBRAER    EMB-1…       2       55        NA   6 N105UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   7 N107US       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   8 N108UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   9 N109UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA  10 N110UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA  # ℹ 3,312 more rows  # ℹ 1 more variable: tipo_motor &lt;chr&gt;</code> ::: :::</p>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>aviones</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 3,322 × 9     codigo_cola  anio tipo           fabricante modelo motores asientos velocidad     &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;      &lt;chr&gt;    &lt;int&gt;    &lt;int&gt;     &lt;int&gt;   1 N10156       2004 Ala fija mult… EMBRAER    EMB-1…       2       55        NA   2 N102UW       1998 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   3 N103US       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   4 N104UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   5 N10575       2002 Ala fija mult… EMBRAER    EMB-1…       2       55        NA   6 N105UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   7 N107US       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   8 N108UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   9 N109UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA  10 N110UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA  # ℹ 3,312 more rows  # ℹ 1 more variable: tipo_motor &lt;chr&gt;</code> ::: :::</p>
 <ul>
 <li><code>clima</code> entrega información del clima en cada aeropuerto de Nueva York para cada hora:</li>
 </ul>
-<p>::: {.cell} ::: {.cell-output .cell-output-stdout} <code># A tibble: 26,115 × 15     origen  anio   mes   dia  hora temperatura punto_rocio humedad     &lt;chr&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;   1 EWR     2013     1     1     1        39.0        26.1    59.4   2 EWR     2013     1     1     2        39.0        27.0    61.6   3 EWR     2013     1     1     3        39.0        28.0    64.4   4 EWR     2013     1     1     4        39.9        28.0    62.2   5 EWR     2013     1     1     5        39.0        28.0    64.4   6 EWR     2013     1     1     6        37.9        28.0    67.2   7 EWR     2013     1     1     7        39.0        28.0    64.4   8 EWR     2013     1     1     8        39.9        28.0    62.2   9 EWR     2013     1     1     9        39.9        28.0    62.2  10 EWR     2013     1     1    10        41          28.0    59.6  # ℹ 26,105 more rows  # ℹ 7 more variables: direccion_viento &lt;dbl&gt;, velocidad_viento &lt;dbl&gt;,  #   velocidad_rafaga &lt;dbl&gt;, precipitacion &lt;dbl&gt;, presion &lt;dbl&gt;,  #   visibilidad &lt;dbl&gt;, fecha_hora &lt;dttm&gt;</code> ::: :::</p>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>clima</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 26,115 × 15     origen  anio   mes   dia  hora temperatura punto_rocio humedad     &lt;chr&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;   1 EWR     2013     1     1     1        39.0        26.1    59.4   2 EWR     2013     1     1     2        39.0        27.0    61.6   3 EWR     2013     1     1     3        39.0        28.0    64.4   4 EWR     2013     1     1     4        39.9        28.0    62.2   5 EWR     2013     1     1     5        39.0        28.0    64.4   6 EWR     2013     1     1     6        37.9        28.0    67.2   7 EWR     2013     1     1     7        39.0        28.0    64.4   8 EWR     2013     1     1     8        39.9        28.0    62.2   9 EWR     2013     1     1     9        39.9        28.0    62.2  10 EWR     2013     1     1    10        41          28.0    59.6  # ℹ 26,105 more rows  # ℹ 7 more variables: direccion_viento &lt;dbl&gt;, velocidad_viento &lt;dbl&gt;,  #   velocidad_rafaga &lt;dbl&gt;, precipitacion &lt;dbl&gt;, presion &lt;dbl&gt;,  #   visibilidad &lt;dbl&gt;, fecha_hora &lt;dttm&gt;</code> ::: :::</p>
 <p>Una forma de mostrar las relaciones entre las diferentes tablas es mediante un diagrama:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -470,10 +517,16 @@ ul.task-list li input[type="checkbox"] {
 <p>Una variable puede ser clave primaria <em>y</em> clave foránea a la vez. Por ejemplo, <code>origen</code> es parte de la clave primaria <code>clima</code> y también una clave foránea de <code>aeropuertos</code>.</p>
 <p>Una vez que identificas las claves primarias en tus tablas, es una buena práctica verificar que identifican de forma única cada observación. Una forma de hacerlo es usar <code>count()</code> con las claves primarias y buscar las entradas con <code>n</code> mayor a uno:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>aviones <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(codigo_cola) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 0 × 2
 # ℹ 2 variables: codigo_cola &lt;chr&gt;, n &lt;int&gt;</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>clima <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(anio, mes, dia, hora, origen) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 6
    anio   mes   dia  hora origen     n
@@ -485,6 +538,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>A veces una tabla puede no tener una clave primaria explícita: cada fila es una observación, pero no existe una combinación de variables que la identifique de forma confiable. Por ejemplo, ¿cuál es la clave primaria en la tabla <code>vuelos</code>? Quizás pienses que podría ser la fecha más el vuelo o el código de cola, pero ninguna de esas variables es única:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>vuelos <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(anio, mes, dia, vuelo) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 29,768 × 5
     anio   mes   dia vuelo     n
@@ -501,6 +557,9 @@ ul.task-list li input[type="checkbox"] {
 10  2013     1     1    35     2
 # ℹ 29,758 more rows</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>vuelos <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(anio, mes, dia, codigo_cola) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 64,928 × 5
     anio   mes   dia codigo_cola     n
@@ -543,6 +602,9 @@ ul.task-list li input[type="checkbox"] {
 <p>La primera herramienta que miraremos para combinar pares de variables es la <strong>unión de transformación</strong> (<em>mutating join</em>). Una unión de transformación te permite combinar variables a partir de dos tablas. Primero busca coincidencias de observaciones de acuerdo a sus claves y luego copia las variables de una tabla en la otra.</p>
 <p>Tal como <code>mutate()</code>, las funciones de unión agregan variables hacia la derecha, por lo que si tienes muchas variables inicialmente, las nuevas variables no se imprimirán. Para estos ejemplos, crearemos un conjunto de datos más angosto para que sea más fácil ver qué es lo que está ocurriendo:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>vuelos2 <span class="ot">&lt;-</span> vuelos <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(anio<span class="sc">:</span>dia, hora, origen, destino, codigo_cola, aerolinea)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>vuelos2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 8
     anio   mes   dia  hora origen destino codigo_cola aerolinea
@@ -563,6 +625,9 @@ ul.task-list li input[type="checkbox"] {
 <p>(Recuerda que en RStudio puedes también usar <code>View()</code> para evitar este problema.)</p>
 <p>Imagina que quieres incluir el nombre completo de la aerolínea en <code>vuelos2</code>. Puedes combinar los datos de <code>aerolinas</code> y <code>vuelos2</code> con <code>left_join()</code> (<em>union_izquierda</em>):</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>vuelos2 <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>origen, <span class="sc">-</span>destino) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(aerolineas, <span class="at">by =</span> <span class="st">"aerolinea"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 7
     anio   mes   dia  hora codigo_cola aerolinea nombre                  
@@ -582,6 +647,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>El resultado de unir <code>aerolineas</code> y <code>vuelos2</code> es la inclusión de una variable adicional: <code>nombre</code>. Esta es la razón de que llamemos unión de transformación a este tipo de unión. En este caso, podrías obtener el mismo resultado usando <code>mutate()</code> junto a las operaciones de filtro de R base:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>vuelos2 <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>origen, <span class="sc">-</span>destino) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">nombre =</span> aerolineas<span class="sc">$</span>nombre[<span class="fu">match</span>(aerolinea, aerolineas<span class="sc">$</span>aerolinea)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 7
     anio   mes   dia  hora codigo_cola aerolinea nombre                  
@@ -609,6 +677,20 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="diagrams_w_text_as_path/es/join-setup.svg" class="img-fluid"></p>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>key, <span class="sc">~</span>val_x,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="st">"x1"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>, <span class="st">"x2"</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">3</span>, <span class="st">"x3"</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>key, <span class="sc">~</span>val_y,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="st">"y1"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>, <span class="st">"y2"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4</span>, <span class="st">"y3"</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>La columna coloreada representa la variable “clave”: estas se usan para unir filas entre las tablas. La columa gris representa la columna “valor” que se usa en todo el proceso. En estos ejemplos te mostraremos una única clave, pero la idea es generalizable de manera directa a múltiples claves y múltiples valores.</p>
 <p>Una unión es una forma de conectar cada fila en <code>x</code> con cero, una o más filas en <code>y</code>. El siguiente diagrama muestra cada coincidencia potencial como una intersección de pares de líneas.</p>
 <div class="cell">
@@ -635,6 +717,8 @@ ul.task-list li input[type="checkbox"] {
 <p>(Para ser precisos, esto corresponde a una <em>unión de igualdad</em> (o <em>equijoin</em>) interior, debido a que las claves se unen usando el operador de igualdad. Dado que muchas uniones son uniones de igualdad, por lo general omitimos esa especificación.)</p>
 <p>El output de una unión interior es un nuevo data frame que contiene la clave, los valores de x y los valores de y. Usamos <code>by</code> (<em>según</em>) para indicar a dplyr qué variable es la clave:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(y, <span class="at">by =</span> <span class="st">"key"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
     key val_x val_y
@@ -677,12 +761,43 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <p>::: {.cell} ::: {.cell-output-display} <img src="diagrams_w_text_as_path/es/join-one-to-many.svg" class="img-fluid"> ::: :::</p>
 <p>Nota que hemos puesto la columna clave en una posición ligeramente distinta en el output. Esto refleja que la clave es una clave primaria en <code>y</code> y una clave foránea en <code>x</code>.</p>
-<p>::: {.cell} ::: {.cell-output .cell-output-stdout} <code># A tibble: 4 × 3      key val_x val_y    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  1     1 x1    y1     2     2 x2    y2     3     2 x3    y2     4     1 x4    y1</code> ::: :::</p>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a> <span class="sc">~</span>key, <span class="sc">~</span>val_x,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>, <span class="st">"x1"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>, <span class="st">"x2"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>, <span class="st">"x3"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>, <span class="st">"x4"</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a> <span class="sc">~</span>key, <span class="sc">~</span>val_y,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>, <span class="st">"y1"</span>,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>, <span class="st">"y2"</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(x, y, <span class="at">by =</span> <span class="st">"key"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 4 × 3      key val_x val_y    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  1     1 x1    y1     2     2 x2    y2     3     2 x3    y2     4     1 x4    y1</code> ::: :::</p>
 <ol type="1">
 <li>Ambas tablas tienen claves duplicadas. Esto es usualmente un error debido a que en ninguna de las tablas las claves identifican de manera única una observación. Cuando unes claves duplicadas, se obtienen todas las posibles combinaciones, es decir, el producto cartesiano:</li>
 </ol>
 <p>::: {.cell} ::: {.cell-output-display} <img src="diagrams_w_text_as_path/es/join-many-to-many.svg" class="img-fluid"> ::: :::</p>
-<p>::: {.cell} ::: {.cell-output .cell-output-stdout} <code># A tibble: 6 × 3        key val_x val_y      &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    1     1 x1    y1       2     2 x2    y2       3     2 x2    y3       4     2 x3    y2       5     2 x3    y3       6     3 x4    y4</code> ::: :::</p>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a> <span class="sc">~</span>key, <span class="sc">~</span>val_x,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>, <span class="st">"x1"</span>,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>, <span class="st">"x2"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>, <span class="st">"x3"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>, <span class="st">"x4"</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a> <span class="sc">~</span>key, <span class="sc">~</span>val_y,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>, <span class="st">"y1"</span>,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>, <span class="st">"y2"</span>,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>, <span class="st">"y3"</span>,</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>, <span class="st">"y4"</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(x, y, <span class="at">by =</span> <span class="st">"key"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stderr} <code>Warning in left_join(x, y, by = "key"): Detected an unexpected many-to-many relationship between `x` and `y`.    ℹ Row 2 of `x` matches multiple rows in `y`.    ℹ Row 2 of `y` matches multiple rows in `x`.    ℹ If a many-to-many relationship is expected, set `relationship =      "many-to-many"` to silence this warning.</code> :::</p>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 6 × 3        key val_x val_y      &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    1     1 x1    y1       2     2 x2    y2       3     2 x2    y3       4     2 x3    y2       5     2 x3    y3       6     3 x4    y4</code> ::: :::</p>
 </section>
 <section id="join-by" class="level3" data-number="13.4.5">
 <h3 data-number="13.4.5" class="anchored" data-anchor-id="join-by"><span class="header-section-number">13.4.5</span> Definiendo las columnas clave</h3>
@@ -690,23 +805,43 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Por defecto, <code>by = NULL</code>, usa todas las variables que aparecen en ambas tablas, lo que se conoce como unión <strong>natural</strong>. Por ejemplo, las tablas vuelos y clima coinciden en sus variables comunes: <code>anio</code>, <code>mes</code>, <code>dia</code>, <code>hora</code> y <code>origen</code>.</li>
 </ul>
-<p>::: {.cell} ::: {.cell-output .cell-output-stdout} <code># A tibble: 336,776 × 18      anio   mes   dia  hora origen destino codigo_cola aerolinea temperatura     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;           &lt;dbl&gt;   1  2013     1     1     5 EWR    IAH     N14228      UA               39.0   2  2013     1     1     5 LGA    IAH     N24211      UA               39.9   3  2013     1     1     5 JFK    MIA     N619AA      AA               39.0   4  2013     1     1     5 JFK    BQN     N804JB      B6               39.0   5  2013     1     1     6 LGA    ATL     N668DN      DL               39.9   6  2013     1     1     5 EWR    ORD     N39463      UA               39.0   7  2013     1     1     6 EWR    FLL     N516JB      B6               37.9   8  2013     1     1     6 LGA    IAD     N829AS      EV               39.9   9  2013     1     1     6 JFK    MCO     N593JB      B6               37.9  10  2013     1     1     6 LGA    ORD     N3ALAA      AA               39.9  # ℹ 336,766 more rows  # ℹ 9 more variables: punto_rocio &lt;dbl&gt;, humedad &lt;dbl&gt;, direccion_viento &lt;dbl&gt;,  #   velocidad_viento &lt;dbl&gt;, velocidad_rafaga &lt;dbl&gt;, precipitacion &lt;dbl&gt;,  #   presion &lt;dbl&gt;, visibilidad &lt;dbl&gt;, fecha_hora &lt;dttm&gt;</code> ::: :::</p>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>vuelos2 <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">left_join</span>(clima)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stderr} <code>Joining with `by = join_by(anio, mes, dia, hora, origen)`</code> :::</p>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 336,776 × 18      anio   mes   dia  hora origen destino codigo_cola aerolinea temperatura     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;           &lt;dbl&gt;   1  2013     1     1     5 EWR    IAH     N14228      UA               39.0   2  2013     1     1     5 LGA    IAH     N24211      UA               39.9   3  2013     1     1     5 JFK    MIA     N619AA      AA               39.0   4  2013     1     1     5 JFK    BQN     N804JB      B6               39.0   5  2013     1     1     6 LGA    ATL     N668DN      DL               39.9   6  2013     1     1     5 EWR    ORD     N39463      UA               39.0   7  2013     1     1     6 EWR    FLL     N516JB      B6               37.9   8  2013     1     1     6 LGA    IAD     N829AS      EV               39.9   9  2013     1     1     6 JFK    MCO     N593JB      B6               37.9  10  2013     1     1     6 LGA    ORD     N3ALAA      AA               39.9  # ℹ 336,766 more rows  # ℹ 9 more variables: punto_rocio &lt;dbl&gt;, humedad &lt;dbl&gt;, direccion_viento &lt;dbl&gt;,  #   velocidad_viento &lt;dbl&gt;, velocidad_rafaga &lt;dbl&gt;, precipitacion &lt;dbl&gt;,  #   presion &lt;dbl&gt;, visibilidad &lt;dbl&gt;, fecha_hora &lt;dttm&gt;</code> ::: :::</p>
 <ul>
 <li>Un vector de caracteres, <code>by = "x"</code>. Esto es similar a una unión natural, pero usa algunas de las variables comunes. Por ejemplo, <code>vuelos</code> y <code>aviones</code> tienen la variable <code>anio</code>, pero esta significa cosas distintas en cada tabla por lo que queremos unir por <code>codigo_cola</code>.</li>
 </ul>
-<p>::: {.cell} ::: {.cell-output .cell-output-stdout} <code># A tibble: 336,776 × 16     anio.x   mes   dia  hora origen destino codigo_cola aerolinea anio.y tipo          &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;      1   2013     1     1     5 EWR    IAH     N14228      UA          1999 Ala fij…   2   2013     1     1     5 LGA    IAH     N24211      UA          1998 Ala fij…   3   2013     1     1     5 JFK    MIA     N619AA      AA          1990 Ala fij…   4   2013     1     1     5 JFK    BQN     N804JB      B6          2012 Ala fij…   5   2013     1     1     6 LGA    ATL     N668DN      DL          1991 Ala fij…   6   2013     1     1     5 EWR    ORD     N39463      UA          2012 Ala fij…   7   2013     1     1     6 EWR    FLL     N516JB      B6          2000 Ala fij…   8   2013     1     1     6 LGA    IAD     N829AS      EV          1998 Ala fij…   9   2013     1     1     6 JFK    MCO     N593JB      B6          2004 Ala fij…  10   2013     1     1     6 LGA    ORD     N3ALAA      AA            NA &lt;NA&gt;      # ℹ 336,766 more rows  # ℹ 6 more variables: fabricante &lt;chr&gt;, modelo &lt;chr&gt;, motores &lt;int&gt;,  #   asientos &lt;int&gt;, velocidad &lt;int&gt;, tipo_motor &lt;chr&gt;</code> ::: :::</p>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>vuelos2 <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">left_join</span>(aviones, <span class="at">by =</span> <span class="st">"codigo_cola"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 336,776 × 16     anio.x   mes   dia  hora origen destino codigo_cola aerolinea anio.y tipo          &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;      1   2013     1     1     5 EWR    IAH     N14228      UA          1999 Ala fij…   2   2013     1     1     5 LGA    IAH     N24211      UA          1998 Ala fij…   3   2013     1     1     5 JFK    MIA     N619AA      AA          1990 Ala fij…   4   2013     1     1     5 JFK    BQN     N804JB      B6          2012 Ala fij…   5   2013     1     1     6 LGA    ATL     N668DN      DL          1991 Ala fij…   6   2013     1     1     5 EWR    ORD     N39463      UA          2012 Ala fij…   7   2013     1     1     6 EWR    FLL     N516JB      B6          2000 Ala fij…   8   2013     1     1     6 LGA    IAD     N829AS      EV          1998 Ala fij…   9   2013     1     1     6 JFK    MCO     N593JB      B6          2004 Ala fij…  10   2013     1     1     6 LGA    ORD     N3ALAA      AA            NA &lt;NA&gt;      # ℹ 336,766 more rows  # ℹ 6 more variables: fabricante &lt;chr&gt;, modelo &lt;chr&gt;, motores &lt;int&gt;,  #   asientos &lt;int&gt;, velocidad &lt;int&gt;, tipo_motor &lt;chr&gt;</code> ::: :::</p>
 <p>Nota que la variable <code>anio</code> (que aparece en los dos data frames de entrada, pero que no es igual en ambos casos) se desambigua con un sufijo en el output.</p>
 <ul>
 <li>Un vector de caracteres con nombres: <code>by = c("a" = "b")</code>. Esto va a unir la variable <code>a</code> en la tabla <code>x</code> con la variabla <code>b</code> en la tabla <code>y</code>. Las variables de <code>x</code> se usarán en el output.</li>
 </ul>
 <p>Por ejemplo, si queremos dibujar un mapa necesitamos combinar los datos de vuelos con los datos de aeropuertos, que contienen la ubicación de cada uno (<code>latitud</code> y <code>longitud</code>). Cada vuelo tiene un <code>aeropuerto</code> de origen y destino, por lo que necesitamos especficar cuál queremos unir:</p>
-<p>::: {.cell} ::: {.cell-output .cell-output-stdout} <code># A tibble: 336,776 × 15      anio   mes   dia  hora origen destino codigo_cola aerolinea nombre   latitud     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt;   1  2013     1     1     5 EWR    IAH     N14228      UA        Newark …    40.7   2  2013     1     1     5 LGA    IAH     N24211      UA        La Guar…    40.8   3  2013     1     1     5 JFK    MIA     N619AA      AA        John F …    40.6   4  2013     1     1     5 JFK    BQN     N804JB      B6        John F …    40.6   5  2013     1     1     6 LGA    ATL     N668DN      DL        La Guar…    40.8   6  2013     1     1     5 EWR    ORD     N39463      UA        Newark …    40.7   7  2013     1     1     6 EWR    FLL     N516JB      B6        Newark …    40.7   8  2013     1     1     6 LGA    IAD     N829AS      EV        La Guar…    40.8   9  2013     1     1     6 JFK    MCO     N593JB      B6        John F …    40.6  10  2013     1     1     6 LGA    ORD     N3ALAA      AA        La Guar…    40.8  # ℹ 336,766 more rows  # ℹ 5 more variables: longitud &lt;dbl&gt;, altura &lt;dbl&gt;, zona_horaria &lt;dbl&gt;,  #   horario_verano &lt;chr&gt;, zona_horaria_iana &lt;chr&gt;</code> :::</p>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>vuelos2 <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">left_join</span>(aeropuertos, <span class="fu">c</span>(<span class="st">"origen"</span> <span class="ot">=</span> <span class="st">"codigo_aeropuerto"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 336,776 × 15      anio   mes   dia  hora origen destino codigo_cola aerolinea nombre   latitud     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt;   1  2013     1     1     5 EWR    IAH     N14228      UA        Newark …    40.7   2  2013     1     1     5 LGA    IAH     N24211      UA        La Guar…    40.8   3  2013     1     1     5 JFK    MIA     N619AA      AA        John F …    40.6   4  2013     1     1     5 JFK    BQN     N804JB      B6        John F …    40.6   5  2013     1     1     6 LGA    ATL     N668DN      DL        La Guar…    40.8   6  2013     1     1     5 EWR    ORD     N39463      UA        Newark …    40.7   7  2013     1     1     6 EWR    FLL     N516JB      B6        Newark …    40.7   8  2013     1     1     6 LGA    IAD     N829AS      EV        La Guar…    40.8   9  2013     1     1     6 JFK    MCO     N593JB      B6        John F …    40.6  10  2013     1     1     6 LGA    ORD     N3ALAA      AA        La Guar…    40.8  # ℹ 336,766 more rows  # ℹ 5 more variables: longitud &lt;dbl&gt;, altura &lt;dbl&gt;, zona_horaria &lt;dbl&gt;,  #   horario_verano &lt;chr&gt;, zona_horaria_iana &lt;chr&gt;</code> :::</p>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>vuelos2 <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">left_join</span>(aeropuertos, <span class="fu">c</span>(<span class="st">"destino"</span> <span class="ot">=</span> <span class="st">"codigo_aeropuerto"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>::: {.cell-output .cell-output-stdout} <code># A tibble: 336,776 × 15      anio   mes   dia  hora origen destino codigo_cola aerolinea nombre   latitud     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt;   1  2013     1     1     5 EWR    IAH     N14228      UA        George …    30.0   2  2013     1     1     5 LGA    IAH     N24211      UA        George …    30.0   3  2013     1     1     5 JFK    MIA     N619AA      AA        Miami I…    25.8   4  2013     1     1     5 JFK    BQN     N804JB      B6        &lt;NA&gt;        NA     5  2013     1     1     6 LGA    ATL     N668DN      DL        Hartsfi…    33.6   6  2013     1     1     5 EWR    ORD     N39463      UA        Chicago…    42.0   7  2013     1     1     6 EWR    FLL     N516JB      B6        Fort La…    26.1   8  2013     1     1     6 LGA    IAD     N829AS      EV        Washing…    38.9   9  2013     1     1     6 JFK    MCO     N593JB      B6        Orlando…    28.4  10  2013     1     1     6 LGA    ORD     N3ALAA      AA        Chicago…    42.0  # ℹ 336,766 more rows  # ℹ 5 more variables: longitud &lt;dbl&gt;, altura &lt;dbl&gt;, zona_horaria &lt;dbl&gt;,  #   horario_verano &lt;chr&gt;, zona_horaria_iana &lt;chr&gt;</code> ::: :::</p>
 </section>
 <section id="ejercicios-2" class="level3" data-number="13.4.6">
 <h3 data-number="13.4.6" class="anchored" data-anchor-id="ejercicios-2"><span class="header-section-number">13.4.6</span> Ejercicios</h3>
 <ol type="1">
-<li><p>Calcula el atraso promedio por destino y luego une los datos en <code>aeropuertos</code> para que puedas mostrar la distribución espacial de los atrasos. Esta es una forma fácil de dibujar un mapa de los Estados Unidos:</p></li>
+<li><p>Calcula el atraso promedio por destino y luego une los datos en <code>aeropuertos</code> para que puedas mostrar la distribución espacial de los atrasos. Esta es una forma fácil de dibujar un mapa de los Estados Unidos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>aeropuertos <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">semi_join</span>(vuelos, <span class="fu">c</span>(<span class="st">"codigo_aeropuerto"</span> <span class="ot">=</span> <span class="st">"destino"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(longitud, latitud)) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">borders</span>(<span class="st">"state"</span>) <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">coord_quickmap</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
 </ol>
 <p>(No te preocupes si no entiendes quá hace <code>semi_join()</code>; lo aprenderás a continuación.)</p>
 <p>Quizás quieras usar <code>size</code> o <code>colour</code> para editar los puntos y mostrar el atraso promedio de cada aeropuerto.</p>
@@ -791,6 +926,10 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Las semi uniones son útiles para unir tablas resumen previamente filtradas con las filas originales. Por ejemplo, imagina que encontraste los diez destinos más populares:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>destinos_populares <span class="ot">&lt;-</span> vuelos <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(destino, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>destinos_populares</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 2
    destino     n
@@ -809,6 +948,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>Ahora quieres encontrar cada vuelo que fue a alguno de esos destinos. Puedes construir un filtro:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>vuelos <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(destino <span class="sc">%in%</span> destinos_populares<span class="sc">$</span>destino)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 141,145 × 19
     anio   mes   dia horario_salida salida_programada atraso_salida
@@ -833,6 +974,11 @@ ul.task-list li input[type="checkbox"] {
 <p>Pero es difícil extender este enfoque a varias variables. Por ejemplo, imagina que encontraste los diez días con los atrasos promedio más altos. ¿Cómo construirías un filtro que use <code>anio</code>, <code>mes</code> y <code>dia</code> para buscar coincidencias con <code>vuelos</code>?</p>
 <p>Puedes, en cambio, usar <code>semi_join()</code>, que conecta dos tablas de manera similar a una unión de transformación, pero en lugar de agregar nuevas columnas, mantiene las filas en <code>x</code> que tienen coincidencias en <code>y</code>:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>vuelos <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">semi_join</span>(destinos_populares)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(destino)`</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 141,145 × 19
     anio   mes   dia horario_salida salida_programada atraso_salida
@@ -874,6 +1020,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>Las anti uniones son útiles para encontrar desajustes. Por ejemplo, al conectar <code>aviones</code> y <code>vuelos</code>, podría interesarte saber que existen muchos <code>vuelos</code> que no tienen coincidencias en <code>aviones</code>:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>vuelos <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(aviones, <span class="at">by =</span> <span class="st">"codigo_cola"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(codigo_cola, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 722 × 2
    codigo_cola     n
@@ -910,6 +1059,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Comienza identificando las variables que forman las claves primarias en cada tabla. Usualmente debieras hacerlo considerando tus conocimientos de los datos, no observando empíricamente las combinaciones de variables que resultan en un identificador único. Si te centras en las variables sin pensar en sus significados, puedes tener la (mala) suerte de encontrar una combinación única en tus datos pero que no sea válida en general.</p>
 <p>Por ejemplo, la altura y la longitud identifican de manera única cada aeropuerto, ¡pero no son buenos identificadores!</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>  aeropuertos <span class="sc">%&gt;%</span> <span class="fu">count</span>(altura, longitud) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 0 × 3
 # ℹ 3 variables: altura &lt;dbl&gt;, longitud &lt;dbl&gt;, n &lt;int&gt;</code></pre>
@@ -930,14 +1080,29 @@ ul.task-list li input[type="checkbox"] {
 <li><code>setdiff(x, y)</code>: devuelve las observaciones en <code>x</code> pero no en <code>y</code>.</li>
 </ul>
 <p>Dados los siguientes datos simples:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>x, <span class="sc">~</span>y,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="dv">1</span>,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>, <span class="dv">1</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>x, <span class="sc">~</span>y,</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="dv">1</span>,</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="dv">2</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Las cuatro posibilidades son:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">intersect</span>(df1, df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
       x     y
   &lt;dbl&gt; &lt;dbl&gt;
 1     1     1</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nota que obtenemos 3 filas, no 4</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">union</span>(df1, df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
       x     y
@@ -946,12 +1111,14 @@ ul.task-list li input[type="checkbox"] {
 2     2     1
 3     1     2</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setdiff</span>(df1, df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
       x     y
   &lt;dbl&gt; &lt;dbl&gt;
 1     2     1</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setdiff</span>(df2, df1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
       x     y

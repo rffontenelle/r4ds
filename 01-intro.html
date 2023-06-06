@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -57,7 +91,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -76,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -146,13 +181,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-workflow-scripts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Flujo de trabajo: <em>Scripts</em></span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Flujo de trabajo: Scripts</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-eda.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análisis exploratorio de datos (<em>EDA</em>)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análisis exploratorio de datos (EDA)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -234,31 +269,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-program.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">(PART) Programar</span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./18-pipes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Pipes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Pipes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./19-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Funciones</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Funciones</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./20-vectors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Vectores</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Vectores</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./21-iteration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Iteración</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Iteración</span></span></a>
   </div>
 </li>
       </ul>
@@ -275,25 +310,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./22-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./23-model-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Modelos: conceptos básicos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Modelos: conceptos básicos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./24-model-building.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Construcción de modelos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Construcción de modelos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./25-model-many.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Muchos modelos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Muchos modelos</span></span></a>
   </div>
 </li>
       </ul>
@@ -310,31 +345,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./26-communicate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./27-rmarkdown.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">R Markdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">R Markdown</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./28-communicate-plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Comunicar con gráficos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Comunicar con gráficos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./29-rmarkdown-formats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Formatos de R Markdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Formatos de R Markdown</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./30-rmarkdown-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Flujo de trabajo en R Markdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Flujo de trabajo en R Markdown</span></span></a>
   </div>
 </li>
       </ul>
@@ -475,8 +510,26 @@ ul.task-list li input[type="checkbox"] {
 <h3 data-number="1.4.3" class="anchored" data-anchor-id="el-tidyverse"><span class="header-section-number">1.4.3</span> El Tidyverse</h3>
 <p>Es necesario que instales también algunos paquetes de R. Un <strong>paquete</strong> es una colección de funciones, datos y documentación que permite extender las capacidades de R base. Los paquetes son clave para usar R de manera exitosa. La mayoría de los paquetes que aprenderás a usar en este libro son parte del llamado “Tidyverse”. Los paquetes del Tidyverse comparten una filosofía acerca de los datos y la programación en R, y están diseñados para trabajar juntos con naturalidad. Su nombre viene de la palabra en inglés “tidy”, que quiere decir “ordenado”.</p>
 <p>Puedes instalar el <strong>tidyverse</strong> completo con una sola línea de código:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Escribe en tu computadora esa línea de código en la consola y luego presiona Enter para ejecutarla. R descargará los paquetes de CRAN y los instalará en tu computadora. Si tienes problemas durante la instalación, asegúrate que tienes conexión a Internet y que <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a> no está bloqueado por tu firewall o proxy.</p>
 <p>No podrás usar las funciones, objetos y archivos de ayuda de un paquete hasta que lo hayas cargado con <code>library()</code>. Una vez que has instalado un paquete, puedes cargarlo con la función <code>library()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
 <p>Este mensaje te indica que el tidyverse está cargando los paquetes <strong>ggplot2</strong>, <strong>tibble</strong>, <strong>tidyr</strong>, <strong>readr</strong>, <strong>purrr</strong>, <strong>dplyr</strong>, <strong>stringr</strong> y <strong>forcats</strong>. Estos son considerados el <strong>corazón</strong> del Tidyverse porque los usarás prácticamente en cualquier análisis.</p>
 <p>Los paquetes del Tidyverse cambian con bastante frecuencia. Puedes ver si existen actualizaciones disponibles y opcionalmente instalarlas ejecutando <code>tidyverse_update()</code>.</p>
 </section>
@@ -484,6 +537,9 @@ ul.task-list li input[type="checkbox"] {
 <h3 data-number="1.4.4" class="anchored" data-anchor-id="el-paquete-datos"><span class="header-section-number">1.4.4</span> El paquete <code>datos</code></h3>
 <p>Con el fin de que este libro sea más accesible para el público hispanoparlante, además de la traducción del texto se han traducido los datos que se utilizan en los ejemplos y ejercicios.</p>
 <p>El paquete <code>datos</code> se encuentra disponible en CRAN y puedes instalarlo ejecutando el siguiente código:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"datos"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="otros-paquetes" class="level3" data-number="1.4.5">
 <h3 data-number="1.4.5" class="anchored" data-anchor-id="otros-paquetes"><span class="header-section-number">1.4.5</span> Otros paquetes</h3>
@@ -494,9 +550,11 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="1.5" class="anchored" data-anchor-id="ejecutar-código-en-r"><span class="header-section-number">1.5</span> Ejecutar código en R</h2>
 <p>En la sección anterior te mostramos algunos ejemplos de cómo ejecutar código en R. En el libro, el código se ve así:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Si ejecutas el mismo código en tu consola local, se verá así:</p>
 <pre><code>&gt; 1 + 2
@@ -556,134 +614,133 @@ ul.task-list li input[type="checkbox"] {
 <p>La versión <em>online</em> de este libro está disponible en <a href="http://es.r4ds.hadley.nz" class="uri">http://es.r4ds.hadley.nz</a>. El original en inglés puedes encontrarlo en <a href="http://r4ds.had.co.nz" class="uri">http://r4ds.had.co.nz</a>. Las versiones <em>online</em> seguirán evolucionando entre reimpresiones del libro físico. La fuente del libro en español está disponible en <a href="https://github.com/cienciadedatos/r4ds" class="uri">https://github.com/cienciadedatos/r4ds</a> y la del libro en inglés en <a href="https://github.com/hadley/r4ds" class="uri">https://github.com/hadley/r4ds</a>. El libro funciona con <a href="https://bookdown.org" class="uri">https://bookdown.org</a>, que hace fácil convertir archivos de R Markdown a HTML, PDF e EPUB.</p>
 <p>Este libro fue construido con:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
  setting  value
  version  R version 4.3.0 (2023-04-21)
- os       Linux Mint 21.1
+ os       Ubuntu 22.04.2 LTS
  system   x86_64, linux-gnu
  ui       X11
- language en_CA:en
- collate  en_CA.UTF-8
- ctype    en_CA.UTF-8
- tz       America/Toronto
+ language (EN)
+ collate  C.UTF-8
+ ctype    C.UTF-8
+ tz       UTC
  date     2023-06-06
- pandoc   2.9.2.1 @ /usr/bin/ (via rmarkdown)
+ pandoc   2.19.2 @ /usr/bin/ (via rmarkdown)
 
 ─ Packages ───────────────────────────────────────────────────────────────────
- package       * version    date (UTC) lib source
- askpass         1.1        2019-01-13 [3] CRAN (R 4.0.2)
- backports       1.4.1      2021-12-13 [3] CRAN (R 4.2.0)
- base64enc       0.1-3      2015-07-28 [3] CRAN (R 4.0.2)
- bit             4.0.5      2022-11-15 [1] CRAN (R 4.3.0)
- bit64           4.0.5      2020-08-30 [3] CRAN (R 4.2.0)
- blob            1.2.4      2023-03-17 [3] CRAN (R 4.2.3)
- broom           1.0.4      2023-03-11 [3] CRAN (R 4.2.2)
- bslib           0.4.2      2022-12-16 [1] CRAN (R 4.3.0)
- cachem          1.0.8      2023-05-01 [3] CRAN (R 4.3.0)
- callr           3.7.3      2022-11-02 [3] CRAN (R 4.2.2)
- cellranger      1.1.0      2016-07-27 [3] CRAN (R 4.0.1)
- cli             3.6.1      2023-03-23 [3] CRAN (R 4.2.3)
- clipr           0.8.0      2022-02-22 [3] CRAN (R 4.2.0)
- colorspace      2.1-0      2023-01-23 [3] CRAN (R 4.2.2)
- conflicted      1.2.0      2023-02-01 [3] CRAN (R 4.2.2)
- cpp11         * 0.4.3.9000 2023-05-31 [1] local
- crayon          1.5.2      2022-09-29 [3] CRAN (R 4.2.1)
- curl            5.0.0      2023-01-12 [3] CRAN (R 4.2.2)
- data.table      1.14.8     2023-02-17 [3] CRAN (R 4.2.2)
- DBI             1.1.3      2022-06-18 [3] CRAN (R 4.2.1)
- dbplyr          2.3.2      2023-03-21 [3] CRAN (R 4.2.3)
- digest          0.6.31     2022-12-11 [1] CRAN (R 4.3.0)
- dplyr         * 1.1.2      2023-04-20 [3] CRAN (R 4.3.0)
- dtplyr          1.3.1      2023-03-22 [3] CRAN (R 4.2.3)
- ellipsis        0.3.2      2021-04-29 [3] CRAN (R 4.1.1)
- evaluate        0.21       2023-05-05 [3] CRAN (R 4.3.0)
- fansi           1.0.4      2023-01-22 [3] CRAN (R 4.2.2)
- farver          2.1.1      2022-07-06 [3] CRAN (R 4.2.1)
- fastmap         1.1.1      2023-02-24 [3] CRAN (R 4.2.2)
- fontawesome     0.5.1      2023-04-18 [3] CRAN (R 4.3.0)
- forcats       * 1.0.0      2023-01-29 [3] CRAN (R 4.2.2)
- fs              1.6.2      2023-04-25 [3] CRAN (R 4.3.0)
- gargle          1.4.0      2023-04-15 [3] CRAN (R 4.3.0)
- generics        0.1.3      2022-07-05 [3] CRAN (R 4.2.1)
- ggplot2       * 3.4.2      2023-04-03 [3] CRAN (R 4.3.0)
- glue            1.6.2      2022-02-24 [3] CRAN (R 4.2.0)
- googledrive     2.1.0      2023-03-22 [3] CRAN (R 4.2.3)
- googlesheets4   1.1.0      2023-03-23 [3] CRAN (R 4.2.3)
- gtable          0.3.3      2023-03-21 [3] CRAN (R 4.2.3)
- haven           2.5.2      2023-02-28 [3] CRAN (R 4.2.2)
- highr           0.10       2022-12-22 [1] CRAN (R 4.3.0)
- hms             1.1.3      2023-03-21 [3] CRAN (R 4.2.3)
- htmltools       0.5.5      2023-03-23 [3] CRAN (R 4.2.3)
- httr            1.4.6      2023-05-08 [3] CRAN (R 4.3.0)
- ids             1.0.1      2017-05-31 [3] CRAN (R 4.1.1)
- isoband         0.2.7      2022-12-20 [1] CRAN (R 4.3.0)
- jquerylib       0.1.4      2021-04-26 [3] CRAN (R 4.1.2)
- jsonlite        1.8.4      2022-12-06 [1] CRAN (R 4.3.0)
- knitr           1.43       2023-05-25 [1] CRAN (R 4.3.0)
- labeling        0.4.2      2020-10-20 [3] CRAN (R 4.2.0)
- lattice         0.21-8     2023-04-05 [4] CRAN (R 4.3.0)
- lifecycle       1.0.3      2022-10-07 [3] CRAN (R 4.2.1)
- lubridate     * 1.9.2      2023-02-10 [3] CRAN (R 4.2.2)
- magrittr        2.0.3      2022-03-30 [3] CRAN (R 4.2.0)
- MASS            7.3-60     2023-05-04 [4] CRAN (R 4.3.0)
- Matrix          1.5-4.1    2023-05-18 [1] CRAN (R 4.3.0)
- memoise         2.0.1      2021-11-26 [3] CRAN (R 4.2.0)
- mgcv            1.8-42     2023-03-02 [4] CRAN (R 4.2.3)
- mime            0.12       2021-09-28 [3] CRAN (R 4.2.0)
- modelr          0.1.11     2023-03-22 [3] CRAN (R 4.2.3)
- munsell         0.5.0      2018-06-12 [3] CRAN (R 4.0.1)
- nlme            3.1-162    2023-01-31 [4] CRAN (R 4.2.2)
- openssl         2.0.6      2023-03-09 [3] CRAN (R 4.2.2)
- pillar          1.9.0      2023-03-22 [3] CRAN (R 4.2.3)
- pkgconfig       2.0.3      2019-09-22 [3] CRAN (R 4.0.1)
- prettyunits     1.1.1      2020-01-24 [3] CRAN (R 4.0.1)
- processx        3.8.1      2023-04-18 [3] CRAN (R 4.3.0)
- progress        1.2.2      2019-05-16 [3] CRAN (R 4.0.1)
- ps              1.7.5      2023-04-18 [3] CRAN (R 4.3.0)
- purrr         * 1.0.1      2023-01-10 [3] CRAN (R 4.2.2)
- R6              2.5.1      2021-08-19 [3] CRAN (R 4.2.0)
- ragg            1.2.5      2023-01-12 [1] CRAN (R 4.3.0)
- rappdirs        0.3.3      2021-01-31 [3] CRAN (R 4.2.0)
- RColorBrewer    1.1-3      2022-04-03 [3] CRAN (R 4.2.0)
- readr         * 2.1.4      2023-02-10 [3] CRAN (R 4.2.2)
- readxl          1.4.2      2023-02-09 [3] CRAN (R 4.2.2)
- rematch         1.0.1      2016-04-21 [3] CRAN (R 4.0.1)
- rematch2        2.1.2      2020-05-01 [3] CRAN (R 4.0.1)
- reprex          2.0.2      2022-08-17 [3] CRAN (R 4.2.1)
- rlang           1.1.1      2023-04-28 [3] CRAN (R 4.3.0)
- rmarkdown       2.21       2023-03-26 [3] CRAN (R 4.3.0)
- rstudioapi      0.14       2022-08-22 [3] CRAN (R 4.2.1)
- rvest           1.0.3      2022-08-19 [3] CRAN (R 4.2.1)
- sass            0.4.6      2023-05-03 [3] CRAN (R 4.3.0)
- scales          1.2.1      2022-08-20 [3] CRAN (R 4.2.1)
- selectr         0.4-2      2019-11-20 [3] CRAN (R 4.0.1)
- stringi         1.7.12     2023-01-11 [3] CRAN (R 4.2.2)
- stringr       * 1.5.0      2022-12-02 [3] CRAN (R 4.3.0)
- sys             3.4.2      2023-05-23 [1] CRAN (R 4.3.0)
- systemfonts     1.0.4      2022-02-11 [3] CRAN (R 4.2.0)
- textshaping     0.3.6      2021-10-13 [3] CRAN (R 4.1.1)
- tibble        * 3.2.1      2023-03-20 [3] CRAN (R 4.2.3)
- tidyr         * 1.3.0      2023-01-24 [3] CRAN (R 4.2.2)
- tidyselect      1.2.0      2022-10-10 [3] CRAN (R 4.2.1)
- tidyverse     * 2.0.0      2023-02-22 [3] CRAN (R 4.2.2)
- timechange      0.2.0      2023-01-11 [3] CRAN (R 4.2.2)
- tinytex         0.45       2023-04-18 [3] CRAN (R 4.3.0)
- tzdb            0.4.0      2023-05-12 [3] CRAN (R 4.3.0)
- utf8            1.2.3      2023-01-31 [3] CRAN (R 4.2.2)
- uuid            1.1-0      2022-04-19 [3] CRAN (R 4.2.0)
- vctrs           0.6.2      2023-04-19 [3] CRAN (R 4.3.0)
- viridisLite     0.4.2      2023-05-02 [3] CRAN (R 4.3.0)
- vroom           1.6.3      2023-04-28 [3] CRAN (R 4.3.0)
- withr           2.5.0      2022-03-03 [3] CRAN (R 4.2.0)
- xfun            0.39       2023-04-20 [3] CRAN (R 4.3.0)
- xml2            1.3.4      2023-04-27 [3] CRAN (R 4.3.0)
- yaml            2.3.7      2023-01-23 [3] CRAN (R 4.2.2)
+ package       * version date (UTC) lib source
+ askpass         1.1     2019-01-13 [1] CRAN (R 4.3.0)
+ backports       1.4.1   2021-12-13 [1] CRAN (R 4.3.0)
+ base64enc       0.1-3   2015-07-28 [1] CRAN (R 4.3.0)
+ bit             4.0.5   2022-11-15 [1] CRAN (R 4.3.0)
+ bit64           4.0.5   2020-08-30 [1] CRAN (R 4.3.0)
+ blob            1.2.4   2023-03-17 [1] CRAN (R 4.3.0)
+ broom           1.0.4   2023-03-11 [1] CRAN (R 4.3.0)
+ bslib           0.4.2   2022-12-16 [1] CRAN (R 4.3.0)
+ cachem          1.0.8   2023-05-01 [1] CRAN (R 4.3.0)
+ callr           3.7.3   2022-11-02 [1] CRAN (R 4.3.0)
+ cellranger      1.1.0   2016-07-27 [1] CRAN (R 4.3.0)
+ cli             3.6.1   2023-03-23 [1] CRAN (R 4.3.0)
+ clipr           0.8.0   2022-02-22 [1] CRAN (R 4.3.0)
+ colorspace      2.1-0   2023-01-23 [1] CRAN (R 4.3.0)
+ conflicted      1.2.0   2023-02-01 [1] CRAN (R 4.3.0)
+ cpp11           0.4.3   2022-10-12 [1] CRAN (R 4.3.0)
+ crayon          1.5.2   2022-09-29 [1] CRAN (R 4.3.0)
+ curl            5.0.0   2023-01-12 [1] CRAN (R 4.3.0)
+ data.table      1.14.8  2023-02-17 [1] CRAN (R 4.3.0)
+ DBI             1.1.3   2022-06-18 [1] CRAN (R 4.3.0)
+ dbplyr          2.3.2   2023-03-21 [1] CRAN (R 4.3.0)
+ digest          0.6.31  2022-12-11 [1] CRAN (R 4.3.0)
+ dplyr         * 1.1.2   2023-04-20 [1] CRAN (R 4.3.0)
+ dtplyr          1.3.1   2023-03-22 [1] CRAN (R 4.3.0)
+ ellipsis        0.3.2   2021-04-29 [1] CRAN (R 4.3.0)
+ evaluate        0.21    2023-05-05 [1] CRAN (R 4.3.0)
+ fansi           1.0.4   2023-01-22 [1] CRAN (R 4.3.0)
+ farver          2.1.1   2022-07-06 [1] CRAN (R 4.3.0)
+ fastmap         1.1.1   2023-02-24 [1] CRAN (R 4.3.0)
+ fontawesome     0.5.1   2023-04-18 [1] CRAN (R 4.3.0)
+ forcats       * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
+ fs              1.6.2   2023-04-25 [1] CRAN (R 4.3.0)
+ gargle          1.4.0   2023-04-15 [1] CRAN (R 4.3.0)
+ generics        0.1.3   2022-07-05 [1] CRAN (R 4.3.0)
+ ggplot2       * 3.4.2   2023-04-03 [1] CRAN (R 4.3.0)
+ glue            1.6.2   2022-02-24 [1] CRAN (R 4.3.0)
+ googledrive     2.1.0   2023-03-22 [1] CRAN (R 4.3.0)
+ googlesheets4   1.1.0   2023-03-23 [1] CRAN (R 4.3.0)
+ gtable          0.3.3   2023-03-21 [1] CRAN (R 4.3.0)
+ haven           2.5.2   2023-02-28 [1] CRAN (R 4.3.0)
+ highr           0.10    2022-12-22 [1] CRAN (R 4.3.0)
+ hms             1.1.3   2023-03-21 [1] CRAN (R 4.3.0)
+ htmltools       0.5.5   2023-03-23 [1] CRAN (R 4.3.0)
+ httr            1.4.6   2023-05-08 [1] CRAN (R 4.3.0)
+ ids             1.0.1   2017-05-31 [1] CRAN (R 4.3.0)
+ isoband         0.2.7   2022-12-20 [1] CRAN (R 4.3.0)
+ jquerylib       0.1.4   2021-04-26 [1] CRAN (R 4.3.0)
+ jsonlite        1.8.5   2023-06-05 [1] CRAN (R 4.3.0)
+ knitr           1.42    2023-01-25 [1] CRAN (R 4.3.0)
+ labeling        0.4.2   2020-10-20 [1] CRAN (R 4.3.0)
+ lattice         0.21-8  2023-04-05 [2] CRAN (R 4.3.0)
+ lifecycle       1.0.3   2022-10-07 [1] CRAN (R 4.3.0)
+ lubridate     * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)
+ magrittr        2.0.3   2022-03-30 [1] CRAN (R 4.3.0)
+ MASS            7.3-60  2023-05-04 [1] CRAN (R 4.3.0)
+ Matrix          1.5-4.1 2023-05-18 [1] CRAN (R 4.3.0)
+ memoise         2.0.1   2021-11-26 [1] CRAN (R 4.3.0)
+ mgcv            1.8-42  2023-03-02 [2] CRAN (R 4.3.0)
+ mime            0.12    2021-09-28 [1] CRAN (R 4.3.0)
+ modelr          0.1.11  2023-03-22 [1] CRAN (R 4.3.0)
+ munsell         0.5.0   2018-06-12 [1] CRAN (R 4.3.0)
+ nlme            3.1-162 2023-01-31 [2] CRAN (R 4.3.0)
+ openssl         2.0.6   2023-03-09 [1] CRAN (R 4.3.0)
+ pillar          1.9.0   2023-03-22 [1] CRAN (R 4.3.0)
+ pkgconfig       2.0.3   2019-09-22 [1] CRAN (R 4.3.0)
+ prettyunits     1.1.1   2020-01-24 [1] CRAN (R 4.3.0)
+ processx        3.8.1   2023-04-18 [1] CRAN (R 4.3.0)
+ progress        1.2.2   2019-05-16 [1] CRAN (R 4.3.0)
+ ps              1.7.5   2023-04-18 [1] CRAN (R 4.3.0)
+ purrr         * 1.0.1   2023-01-10 [1] CRAN (R 4.3.0)
+ R6              2.5.1   2021-08-19 [1] CRAN (R 4.3.0)
+ ragg            1.2.5   2023-01-12 [1] CRAN (R 4.3.0)
+ rappdirs        0.3.3   2021-01-31 [1] CRAN (R 4.3.0)
+ RColorBrewer    1.1-3   2022-04-03 [1] CRAN (R 4.3.0)
+ readr         * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)
+ readxl          1.4.2   2023-02-09 [1] CRAN (R 4.3.0)
+ rematch         1.0.1   2016-04-21 [1] CRAN (R 4.3.0)
+ rematch2        2.1.2   2020-05-01 [1] CRAN (R 4.3.0)
+ reprex          2.0.2   2022-08-17 [1] CRAN (R 4.3.0)
+ rlang           1.1.1   2023-04-28 [1] CRAN (R 4.3.0)
+ rmarkdown       2.22    2023-06-01 [1] CRAN (R 4.3.0)
+ rstudioapi      0.14    2022-08-22 [1] CRAN (R 4.3.0)
+ rvest           1.0.3   2022-08-19 [1] CRAN (R 4.3.0)
+ sass            0.4.6   2023-05-03 [1] CRAN (R 4.3.0)
+ scales          1.2.1   2022-08-20 [1] CRAN (R 4.3.0)
+ selectr         0.4-2   2019-11-20 [1] CRAN (R 4.3.0)
+ stringi         1.7.12  2023-01-11 [1] CRAN (R 4.3.0)
+ stringr       * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)
+ sys             3.4.2   2023-05-23 [1] CRAN (R 4.3.0)
+ systemfonts     1.0.4   2022-02-11 [1] CRAN (R 4.3.0)
+ textshaping     0.3.6   2021-10-13 [1] CRAN (R 4.3.0)
+ tibble        * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)
+ tidyr         * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)
+ tidyselect      1.2.0   2022-10-10 [1] CRAN (R 4.3.0)
+ tidyverse     * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)
+ timechange      0.2.0   2023-01-11 [1] CRAN (R 4.3.0)
+ tinytex         0.45    2023-04-18 [1] CRAN (R 4.3.0)
+ tzdb            0.4.0   2023-05-12 [1] CRAN (R 4.3.0)
+ utf8            1.2.3   2023-01-31 [1] CRAN (R 4.3.0)
+ uuid            1.1-0   2022-04-19 [1] CRAN (R 4.3.0)
+ vctrs           0.6.2   2023-04-19 [1] CRAN (R 4.3.0)
+ viridisLite     0.4.2   2023-05-02 [1] CRAN (R 4.3.0)
+ vroom           1.6.3   2023-04-28 [1] CRAN (R 4.3.0)
+ withr           2.5.0   2022-03-03 [1] CRAN (R 4.3.0)
+ xfun            0.39    2023-04-20 [1] CRAN (R 4.3.0)
+ xml2            1.3.4   2023-04-27 [1] CRAN (R 4.3.0)
+ yaml            2.3.7   2023-01-23 [1] CRAN (R 4.3.0)
 
- [1] /home/pacha/R/x86_64-pc-linux-gnu-library/4.3
- [2] /usr/local/lib/R/site-library
- [3] /usr/lib/R/site-library
- [4] /usr/lib/R/library
+ [1] /home/runner/work/_temp/Library
+ [2] /opt/R/4.3.0/lib/R/library
 
 ──────────────────────────────────────────────────────────────────────────────</code></pre>
 </div>

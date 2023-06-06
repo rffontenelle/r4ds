@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R Para Ciencia de Datos - 19&nbsp; Vectores</title>
+<title>R Para Ciencia de Datos - 20&nbsp; Vectores</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -57,7 +91,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -73,10 +108,10 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./17-program.html">Programar</a></li><li class="breadcrumb-item"><a href="./20-vectors.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Vectores</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./17-program.html">Programar</a></li><li class="breadcrumb-item"><a href="./20-vectors.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Vectores</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -146,13 +181,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-workflow-scripts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Flujo de trabajo: <em>Scripts</em></span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Flujo de trabajo: Scripts</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-eda.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análisis exploratorio de datos (<em>EDA</em>)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análisis exploratorio de datos (EDA)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -234,31 +269,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-program.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">(PART) Programar</span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./18-pipes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Pipes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Pipes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./19-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Funciones</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Funciones</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./20-vectors.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Vectores</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Vectores</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./21-iteration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Iteración</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Iteración</span></span></a>
   </div>
 </li>
       </ul>
@@ -275,25 +310,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./22-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./23-model-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Modelos: conceptos básicos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Modelos: conceptos básicos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./24-model-building.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Construcción de modelos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Construcción de modelos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./25-model-many.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Muchos modelos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Muchos modelos</span></span></a>
   </div>
 </li>
       </ul>
@@ -310,31 +345,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./26-communicate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./27-rmarkdown.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">R Markdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">R Markdown</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./28-communicate-plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Comunicar con gráficos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Comunicar con gráficos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./29-rmarkdown-formats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Formatos de R Markdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Formatos de R Markdown</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./30-rmarkdown-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Flujo de trabajo en R Markdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Flujo de trabajo en R Markdown</span></span></a>
   </div>
 </li>
       </ul>
@@ -349,42 +384,42 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">19.1</span> Introducción</a>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">20.1</span> Introducción</a>
   <ul class="collapse">
-  <li><a href="#prerrequisitos" id="toc-prerrequisitos" class="nav-link" data-scroll-target="#prerrequisitos"><span class="header-section-number">19.1.1</span> Prerrequisitos</a></li>
+  <li><a href="#prerrequisitos" id="toc-prerrequisitos" class="nav-link" data-scroll-target="#prerrequisitos"><span class="header-section-number">20.1.1</span> Prerrequisitos</a></li>
   </ul></li>
-  <li><a href="#vectores-básicos" id="toc-vectores-básicos" class="nav-link" data-scroll-target="#vectores-básicos"><span class="header-section-number">19.2</span> Vectores básicos</a></li>
-  <li><a href="#tipos-importantes-de-vectores-atómicos" id="toc-tipos-importantes-de-vectores-atómicos" class="nav-link" data-scroll-target="#tipos-importantes-de-vectores-atómicos"><span class="header-section-number">19.3</span> Tipos importantes de vectores atómicos</a>
+  <li><a href="#vectores-básicos" id="toc-vectores-básicos" class="nav-link" data-scroll-target="#vectores-básicos"><span class="header-section-number">20.2</span> Vectores básicos</a></li>
+  <li><a href="#tipos-importantes-de-vectores-atómicos" id="toc-tipos-importantes-de-vectores-atómicos" class="nav-link" data-scroll-target="#tipos-importantes-de-vectores-atómicos"><span class="header-section-number">20.3</span> Tipos importantes de vectores atómicos</a>
   <ul class="collapse">
-  <li><a href="#lógico" id="toc-lógico" class="nav-link" data-scroll-target="#lógico"><span class="header-section-number">19.3.1</span> Lógico</a></li>
-  <li><a href="#numérico" id="toc-numérico" class="nav-link" data-scroll-target="#numérico"><span class="header-section-number">19.3.2</span> Numérico</a></li>
-  <li><a href="#caracter" id="toc-caracter" class="nav-link" data-scroll-target="#caracter"><span class="header-section-number">19.3.3</span> Caracter</a></li>
-  <li><a href="#valores-faltantes" id="toc-valores-faltantes" class="nav-link" data-scroll-target="#valores-faltantes"><span class="header-section-number">19.3.4</span> Valores faltantes</a></li>
-  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">19.3.5</span> Ejercicios</a></li>
+  <li><a href="#lógico" id="toc-lógico" class="nav-link" data-scroll-target="#lógico"><span class="header-section-number">20.3.1</span> Lógico</a></li>
+  <li><a href="#numérico" id="toc-numérico" class="nav-link" data-scroll-target="#numérico"><span class="header-section-number">20.3.2</span> Numérico</a></li>
+  <li><a href="#caracter" id="toc-caracter" class="nav-link" data-scroll-target="#caracter"><span class="header-section-number">20.3.3</span> Caracter</a></li>
+  <li><a href="#valores-faltantes" id="toc-valores-faltantes" class="nav-link" data-scroll-target="#valores-faltantes"><span class="header-section-number">20.3.4</span> Valores faltantes</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">20.3.5</span> Ejercicios</a></li>
   </ul></li>
-  <li><a href="#usando-vectores-atómicos" id="toc-usando-vectores-atómicos" class="nav-link" data-scroll-target="#usando-vectores-atómicos"><span class="header-section-number">19.4</span> Usando vectores atómicos</a>
+  <li><a href="#usando-vectores-atómicos" id="toc-usando-vectores-atómicos" class="nav-link" data-scroll-target="#usando-vectores-atómicos"><span class="header-section-number">20.4</span> Usando vectores atómicos</a>
   <ul class="collapse">
-  <li><a href="#coerción" id="toc-coerción" class="nav-link" data-scroll-target="#coerción"><span class="header-section-number">19.4.1</span> Coerción</a></li>
-  <li><a href="#funciones-de-prueba" id="toc-funciones-de-prueba" class="nav-link" data-scroll-target="#funciones-de-prueba"><span class="header-section-number">19.4.2</span> Funciones de prueba</a></li>
-  <li><a href="#escalares-y-reglas-de-reciclado" id="toc-escalares-y-reglas-de-reciclado" class="nav-link" data-scroll-target="#escalares-y-reglas-de-reciclado"><span class="header-section-number">19.4.3</span> Escalares y reglas de reciclado</a></li>
-  <li><a href="#nombrar-vectores" id="toc-nombrar-vectores" class="nav-link" data-scroll-target="#nombrar-vectores"><span class="header-section-number">19.4.4</span> Nombrar vectores</a></li>
-  <li><a href="#vector-subsetting" id="toc-vector-subsetting" class="nav-link" data-scroll-target="#vector-subsetting"><span class="header-section-number">19.4.5</span> Creación de subconjuntos (<em>subsetting</em>)</a></li>
-  <li><a href="#ejercicios-1" id="toc-ejercicios-1" class="nav-link" data-scroll-target="#ejercicios-1"><span class="header-section-number">19.4.6</span> Ejercicios</a></li>
+  <li><a href="#coerción" id="toc-coerción" class="nav-link" data-scroll-target="#coerción"><span class="header-section-number">20.4.1</span> Coerción</a></li>
+  <li><a href="#funciones-de-prueba" id="toc-funciones-de-prueba" class="nav-link" data-scroll-target="#funciones-de-prueba"><span class="header-section-number">20.4.2</span> Funciones de prueba</a></li>
+  <li><a href="#escalares-y-reglas-de-reciclado" id="toc-escalares-y-reglas-de-reciclado" class="nav-link" data-scroll-target="#escalares-y-reglas-de-reciclado"><span class="header-section-number">20.4.3</span> Escalares y reglas de reciclado</a></li>
+  <li><a href="#nombrar-vectores" id="toc-nombrar-vectores" class="nav-link" data-scroll-target="#nombrar-vectores"><span class="header-section-number">20.4.4</span> Nombrar vectores</a></li>
+  <li><a href="#vector-subsetting" id="toc-vector-subsetting" class="nav-link" data-scroll-target="#vector-subsetting"><span class="header-section-number">20.4.5</span> Creación de subconjuntos (<em>subsetting</em>)</a></li>
+  <li><a href="#ejercicios-1" id="toc-ejercicios-1" class="nav-link" data-scroll-target="#ejercicios-1"><span class="header-section-number">20.4.6</span> Ejercicios</a></li>
   </ul></li>
-  <li><a href="#vectores-recursivos-listas" id="toc-vectores-recursivos-listas" class="nav-link" data-scroll-target="#vectores-recursivos-listas"><span class="header-section-number">19.5</span> Vectores Recursivos (listas)</a>
+  <li><a href="#vectores-recursivos-listas" id="toc-vectores-recursivos-listas" class="nav-link" data-scroll-target="#vectores-recursivos-listas"><span class="header-section-number">20.5</span> Vectores Recursivos (listas)</a>
   <ul class="collapse">
-  <li><a href="#visualizando-listas" id="toc-visualizando-listas" class="nav-link" data-scroll-target="#visualizando-listas"><span class="header-section-number">19.5.1</span> Visualizando listas</a></li>
-  <li><a href="#subconjuntos-subsetting" id="toc-subconjuntos-subsetting" class="nav-link" data-scroll-target="#subconjuntos-subsetting"><span class="header-section-number">19.5.2</span> Subconjuntos (<em>Subsetting</em>)</a></li>
-  <li><a href="#listas-de-condimentos" id="toc-listas-de-condimentos" class="nav-link" data-scroll-target="#listas-de-condimentos"><span class="header-section-number">19.5.3</span> Listas de Condimentos</a></li>
-  <li><a href="#ejercicios-2" id="toc-ejercicios-2" class="nav-link" data-scroll-target="#ejercicios-2"><span class="header-section-number">19.5.4</span> Ejercicios</a></li>
+  <li><a href="#visualizando-listas" id="toc-visualizando-listas" class="nav-link" data-scroll-target="#visualizando-listas"><span class="header-section-number">20.5.1</span> Visualizando listas</a></li>
+  <li><a href="#subconjuntos-subsetting" id="toc-subconjuntos-subsetting" class="nav-link" data-scroll-target="#subconjuntos-subsetting"><span class="header-section-number">20.5.2</span> Subconjuntos (<em>Subsetting</em>)</a></li>
+  <li><a href="#listas-de-condimentos" id="toc-listas-de-condimentos" class="nav-link" data-scroll-target="#listas-de-condimentos"><span class="header-section-number">20.5.3</span> Listas de Condimentos</a></li>
+  <li><a href="#ejercicios-2" id="toc-ejercicios-2" class="nav-link" data-scroll-target="#ejercicios-2"><span class="header-section-number">20.5.4</span> Ejercicios</a></li>
   </ul></li>
-  <li><a href="#atributos" id="toc-atributos" class="nav-link" data-scroll-target="#atributos"><span class="header-section-number">19.6</span> Atributos</a></li>
-  <li><a href="#vectores-aumentados" id="toc-vectores-aumentados" class="nav-link" data-scroll-target="#vectores-aumentados"><span class="header-section-number">19.7</span> Vectores aumentados</a>
+  <li><a href="#atributos" id="toc-atributos" class="nav-link" data-scroll-target="#atributos"><span class="header-section-number">20.6</span> Atributos</a></li>
+  <li><a href="#vectores-aumentados" id="toc-vectores-aumentados" class="nav-link" data-scroll-target="#vectores-aumentados"><span class="header-section-number">20.7</span> Vectores aumentados</a>
   <ul class="collapse">
-  <li><a href="#factores" id="toc-factores" class="nav-link" data-scroll-target="#factores"><span class="header-section-number">19.7.1</span> Factores</a></li>
-  <li><a href="#fechas-y-fechas-hora" id="toc-fechas-y-fechas-hora" class="nav-link" data-scroll-target="#fechas-y-fechas-hora"><span class="header-section-number">19.7.2</span> Fechas y fechas-hora</a></li>
-  <li><a href="#tibbles" id="toc-tibbles" class="nav-link" data-scroll-target="#tibbles"><span class="header-section-number">19.7.3</span> Tibbles</a></li>
-  <li><a href="#ejercicios-3" id="toc-ejercicios-3" class="nav-link" data-scroll-target="#ejercicios-3"><span class="header-section-number">19.7.4</span> Ejercicios:</a></li>
+  <li><a href="#factores" id="toc-factores" class="nav-link" data-scroll-target="#factores"><span class="header-section-number">20.7.1</span> Factores</a></li>
+  <li><a href="#fechas-y-fechas-hora" id="toc-fechas-y-fechas-hora" class="nav-link" data-scroll-target="#fechas-y-fechas-hora"><span class="header-section-number">20.7.2</span> Fechas y fechas-hora</a></li>
+  <li><a href="#tibbles" id="toc-tibbles" class="nav-link" data-scroll-target="#tibbles"><span class="header-section-number">20.7.3</span> Tibbles</a></li>
+  <li><a href="#ejercicios-3" id="toc-ejercicios-3" class="nav-link" data-scroll-target="#ejercicios-3"><span class="header-section-number">20.7.4</span> Ejercicios:</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -394,7 +429,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Vectores</span></h1>
+<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Vectores</span></h1>
 </div>
 
 
@@ -409,16 +444,19 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="introducción" class="level2" data-number="19.1">
-<h2 data-number="19.1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">19.1</span> Introducción</h2>
+<section id="introducción" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">20.1</span> Introducción</h2>
 <p>Hasta ahora este libro se ha enfocado en los tibbles y los paquetes que trabajan con ellos. Pero a medida que empieces a escribir tus propias funciones y a profundizar en R, es necesario que aprendas sobre vectores, esto es, sobre los objetos que están a la base de los tibbles. Si aprendiste R de una manera más tradicional, probablemente ya te hayas familiarizado con los vectores, ya que la mayoría de los recursos sobre R parten con vectores y luego abordan los tibbles. Creemos que es mejor empezar con los tibbles porque resultan útiles de inmediato y luego explorar los componentes que están a la base. Los vectores son particularmente importantes, ya que la mayoría de las funciones que escribirás trabajan con ellos. Es posible escribir funciones que trabajen con tibbles (como <strong>ggplot2</strong>, <strong>dplyr</strong> y <strong>tidyr</strong>); sin embargo, las herramientas que necesitas para hacerlo aún son idiosincráticas y no están lo suficientemente maduras. Estamos trabajando en una mejor aproximación (https://github.com/hadley/lazyeval), pero no estará lista a tiempo para la publicación del libro. Incluso aún cuando esté completa, será necesaro que entiendas los vectores: hará que sea más fácil escribir una capa amigable con el usuario encima de ellos.</p>
-<section id="prerrequisitos" class="level3" data-number="19.1.1">
-<h3 data-number="19.1.1" class="anchored" data-anchor-id="prerrequisitos"><span class="header-section-number">19.1.1</span> Prerrequisitos</h3>
+<section id="prerrequisitos" class="level3" data-number="20.1.1">
+<h3 data-number="20.1.1" class="anchored" data-anchor-id="prerrequisitos"><span class="header-section-number">20.1.1</span> Prerrequisitos</h3>
 <p>Este capítulo se enfoca en las estructuras de datos de R base, por lo que no es esencial cargar ningún paquete. Sin embargo, usaremos un conjunto de funciones del paquete <strong>purrr</strong> para evitar algunas inconsistencias de R base.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
-<section id="vectores-básicos" class="level2" data-number="19.2">
-<h2 data-number="19.2" class="anchored" data-anchor-id="vectores-básicos"><span class="header-section-number">19.2</span> Vectores básicos</h2>
+<section id="vectores-básicos" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="vectores-básicos"><span class="header-section-number">20.2</span> Vectores básicos</h2>
 <p>Hay dos tipos de vectores:</p>
 <ol type="1">
 <li>Vectores <strong>atómicos</strong>, de los cuales existen seis tipos: <strong>lógico</strong>, <strong>entero</strong>, <strong>doble</strong>, <strong>caracter</strong>, <strong>complejo</strong> y <strong>sin procesar</strong> (<em>raw</em>). Los vectores de tipo entero y doble son conocidos de manera colectiva como vectores numéricos.</li>
@@ -440,9 +478,11 @@ ul.task-list li input[type="checkbox"] {
 <li>Su <strong>tipo</strong> (<em>type</em>), que puedes determinar con <code>typeof()</code> (<em>tipo de</em>).</li>
 </ol>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">typeof</span>(letters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">typeof</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "integer"</code></pre>
 </div>
@@ -451,6 +491,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Su <strong>longitud</strong> (<em>length</em>), que puede determinar con <code>length()</code>.</li>
 </ol>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a> x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">length</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
@@ -458,31 +500,36 @@ ul.task-list li input[type="checkbox"] {
 <p>Los vectores pueden contener también metadata adicional arbitraria en forma de atributos. Estos atributos son usados para crear <strong>vectores aumentados</strong>, los que se basan en un comportamiento distinto. Existen tres tipos de vectores aumentados: * Los factores (<em>factors</em>), construidos sobre la base de vectores de enteros. * Las fechas y fechas-hora (<em>date-times</em>), construidas a partir de vectores numéricos. * Los dataframes y tibbles, construidos a partir de listas.</p>
 <p>Este capítulo te introducirá en estos importantes vectores, desde los más simples a los más complicados. Comenzarás con vectores atómicos, luego seguirás con listas y finalizarás con vectores aumentados.</p>
 </section>
-<section id="tipos-importantes-de-vectores-atómicos" class="level2" data-number="19.3">
-<h2 data-number="19.3" class="anchored" data-anchor-id="tipos-importantes-de-vectores-atómicos"><span class="header-section-number">19.3</span> Tipos importantes de vectores atómicos</h2>
+<section id="tipos-importantes-de-vectores-atómicos" class="level2" data-number="20.3">
+<h2 data-number="20.3" class="anchored" data-anchor-id="tipos-importantes-de-vectores-atómicos"><span class="header-section-number">20.3</span> Tipos importantes de vectores atómicos</h2>
 <p>Los cuatro tipos más importantes de vectores atómicos son lógico, entero, doble y carácter. Los de tipo <em>raw</em> y complejo son raramente usados durante el análisis de datos, por lo tanto, no discutiremos sobre ellos aquí.</p>
-<section id="lógico" class="level3" data-number="19.3.1">
-<h3 data-number="19.3.1" class="anchored" data-anchor-id="lógico"><span class="header-section-number">19.3.1</span> Lógico</h3>
+<section id="lógico" class="level3" data-number="20.3.1">
+<h3 data-number="20.3.1" class="anchored" data-anchor-id="lógico"><span class="header-section-number">20.3.1</span> Lógico</h3>
 <p>Los vectores de tipo lógico son el tipo más sencillo de vectores atómicos, ya que solo pueden tomar tres valores posibles: <code>FALSE</code>, <code>TRUE</code> y <code>NA</code>. Los vectores lógicos son construidos usualmente con operadores de comparación, tal como se describe en la sección [comparaciones]. También puedes crearlos manualmente con la función <code>c()</code>:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE  TRUE FALSE    NA</code></pre>
 </div>
 </div>
 </section>
-<section id="numérico" class="level3" data-number="19.3.2">
-<h3 data-number="19.3.2" class="anchored" data-anchor-id="numérico"><span class="header-section-number">19.3.2</span> Numérico</h3>
+<section id="numérico" class="level3" data-number="20.3.2">
+<h3 data-number="20.3.2" class="anchored" data-anchor-id="numérico"><span class="header-section-number">20.3.2</span> Numérico</h3>
 <p>Los vectores de tipo entero y doble se conocen de manera colectiva como vectores numéricos. En R, los números por defecto son representados como <em>double</em>. Para generar un entero, coloca una L después del número:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "double"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(1L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "integer"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1.5</span>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.5</code></pre>
 </div>
@@ -491,13 +538,18 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li>Los números dobles son aproximaciones. Representan números de punto flotante que no siempre pueden ser representados de manera precisa con un cantidad fija de memoria. Esto significa que debes considerar a todos los dobles como aproximaciones. Por ejemplo, ¿cuál es el cuadrado de la raíz cuadrada de dos?</li>
 </ol>
-<p>::: {.cell} ::: {.cell-output .cell-output-stdout} <code>[1] 2</code> :::</p>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code>[1] 2</code> :::</p>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">-</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>::: {.cell-output .cell-output-stdout} <code>[1] 4.440892e-16</code> ::: :::</p>
 <p>Este comportamiento es común cuando trabajas con números de punto flotante: la mayoría de los cálculos incluyen algunos errores de aproximación. En lugar de comparar números de punto flotante usando <code>==</code>, debes usar ´dplyr::near()`, que provee tolerancia numérica.</p>
 <ol start="2" type="1">
 <li>Los números enteros tienen un valor especial, <code>NA</code>, mientras que los dobles tienen cuatro tipos: <code>NA</code>, <code>NaN</code>, <code>Inf</code> y <code>–Inf</code>. Los tres valores especiales <code>NaN</code>, <code>Inf</code> y <code>-Inf</code> pueden surgir durante una división:</li>
 </ol>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">/</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -Inf  NaN  Inf</code></pre>
 </div>
@@ -545,40 +597,48 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 </section>
-<section id="caracter" class="level3" data-number="19.3.3">
-<h3 data-number="19.3.3" class="anchored" data-anchor-id="caracter"><span class="header-section-number">19.3.3</span> Caracter</h3>
+<section id="caracter" class="level3" data-number="20.3.3">
+<h3 data-number="20.3.3" class="anchored" data-anchor-id="caracter"><span class="header-section-number">20.3.3</span> Caracter</h3>
 <p>Los vectores de caracteres son los tipos de vectores atómicos más complejos, ya que cada elemento del mismo es un <em>string</em> (una cadena de caracteres) y un <em>string</em> puede contener una cantidad arbitraria de datos. Ya has aprendido un montón acerca de cómo trabajar con <em>strings</em> en el capítulo sobre [Cadenas de caracteres]. Pero queremos mencionar una característica importante de la implementación que subyace a los <em>strings</em>: R usa una reserva global de <em>strings</em>. Esto significa que cada string único solo es almacenado en la memoria una vez y cada uso de un <em>string</em> apunta a esa representación. Esto reduce la cantidad de memoria necesaria para <em>strings</em> duplicados. Puedes ver este comportamiento en práctica con <code>pryr::object_size()</code>:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"Esta es una cadena de caracteres razonablemente larga."</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>pryr<span class="sc">::</span><span class="fu">object_size</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>168 B</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rep</span>(x, <span class="dv">1000</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>pryr<span class="sc">::</span><span class="fu">object_size</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>8.16 kB</code></pre>
 </div>
 </div>
 <p><code>y</code> no utiliza 1000 veces más memoria que <code>x</code>, ya que cada elemento de <code>y</code> solo apunta al mismo <em>string</em>. Cada uno de estos <em>punteros</em> utiliza 8 bytes, por lo que 1000 punteros hacia un <em>string</em> de 168 B es igual a 8 * 1000 + 168 = 8.16 kB.</p>
 </section>
-<section id="valores-faltantes" class="level3" data-number="19.3.4">
-<h3 data-number="19.3.4" class="anchored" data-anchor-id="valores-faltantes"><span class="header-section-number">19.3.4</span> Valores faltantes</h3>
+<section id="valores-faltantes" class="level3" data-number="20.3.4">
+<h3 data-number="20.3.4" class="anchored" data-anchor-id="valores-faltantes"><span class="header-section-number">20.3.4</span> Valores faltantes</h3>
 <p>Cada tipo de vector atómico tiene su propio valor faltante (<em>missing value</em>):</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="co"># lógico</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA_integer_</span> <span class="co"># entero</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA_real_</span> <span class="co"># doble o real</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA_character_</span> <span class="co"># caracter</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
 </div>
 <p>Normalmente no necesitas saber sobre los diferentes tipos porque siempre puedes usar <code>NA</code> (del inglés <em>Not Available</em>, <em>no disponible</em>), el que se convertirá al tipo correcto usando las reglas implícitas de coerción. Sin embargo, existen algunas funciones que son estrictas acerca de sus inputs, por lo que es útil tener presente este conocimiento, así tu código puede ser lo suficientemente específico cuando lo necesites.</p>
 </section>
-<section id="ejercicios" class="level3" data-number="19.3.5">
-<h3 data-number="19.3.5" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">19.3.5</span> Ejercicios</h3>
+<section id="ejercicios" class="level3" data-number="20.3.5">
+<h3 data-number="20.3.5" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">20.3.5</span> Ejercicios</h3>
 <ol type="1">
 <li>Describe la diferencia entre <code>is.finite(x)</code> y <code>!is.infinite(x)</code>.</li>
 <li>Lee el código fuente de <code>dplyr:: near()</code> (Pista: para ver el código fuente, escribe el nombre de la función sin <code>()</code>). ¿Funcionó?</li>
@@ -588,8 +648,8 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 </section>
 </section>
-<section id="usando-vectores-atómicos" class="level2" data-number="19.4">
-<h2 data-number="19.4" class="anchored" data-anchor-id="usando-vectores-atómicos"><span class="header-section-number">19.4</span> Usando vectores atómicos</h2>
+<section id="usando-vectores-atómicos" class="level2" data-number="20.4">
+<h2 data-number="20.4" class="anchored" data-anchor-id="usando-vectores-atómicos"><span class="header-section-number">20.4</span> Usando vectores atómicos</h2>
 <p>Ahora que conoces los diferentes tipos de vectores atómicos, es útil repasar algunas herramientas importantes para trabajar con ellos. Estas incluyen:</p>
 <ol type="1">
 <li>Cómo realizar una conversión de un determinado tipo a otro y en qué casos esto sucede automáticamente.</li>
@@ -598,39 +658,51 @@ ul.task-list li input[type="checkbox"] {
 <li>Cómo nombrar los elementos de un vector</li>
 <li>Cómo extraer los elementos de interés de un vector.</li>
 </ol>
-<section id="coerción" class="level3" data-number="19.4.1">
-<h3 data-number="19.4.1" class="anchored" data-anchor-id="coerción"><span class="header-section-number">19.4.1</span> Coerción</h3>
+<section id="coerción" class="level3" data-number="20.4.1">
+<h3 data-number="20.4.1" class="anchored" data-anchor-id="coerción"><span class="header-section-number">20.4.1</span> Coerción</h3>
 <p>Existen dos maneras de convertir, o coercionar, un tipo de vector a otro:</p>
 <ol type="1">
 <li><p>La coerción explícita ocurre cuando llamas una función como <code>as.logical()</code>, <code>as.integer()</code>, <code>as.double()</code>, o <code>as.character()</code>. Cuando te encuentres usando coerción expíicita, comprueba si es posible hacer algún tipo de arreglo antes que permita que al vector nunca se le llegue a asignar el tipo incorrecto. Por ejemplo, podrías necesitar ajustar la especificación de <code>col_types</code> (<em>tipos de columna</em>) del paquete <strong>readr</strong> cuando importas los datos.</p></li>
 <li><p>La coerción implícita ocurre cuando usas un vector en un contexto específico en el que se espera que sea de cierto tipo. Por ejemplo, cuando usas un vector de tipo lógico con la función numérica <code>summary</code> (<em>resumen</em>), o cuando usas un vector de tipo doble donde se espera que sea de tipo entero. Debido a que la coerción explícita se usa raramente y es mucho más fácil de entender, nos enfocaremos acá en la coerción implícita. Ya viste el tipo más importante de coerción implícita: cuando se usa un vector de tipo lógico en un contexto numérico. En ese caso, el valor <code>TRUE</code> es convertido a <code>1</code> y <code>FALSE</code> a <code>0</code>. Esto significa que la suma de un vector de tipo lógico es el número de valores verdaderos, y que la media es de un vector lógico es la proporción de valores verdaderos:</p></li>
 </ol>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">20</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x <span class="sc">&gt;</span> <span class="dv">10</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(y) <span class="co"># ¿Cuántos valores son más grandes que 10?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 44</code></pre>
+<pre><code>[1] 47</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y) <span class="co"># ¿Qué proporción es mayor que 10?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.44</code></pre>
+<pre><code>[1] 0.47</code></pre>
 </div>
 </div>
 <p>Quizás veas código (usualmente más antiguo) que se basa en la coerción implícita en la dirección opuesta, es decir, de un valor entero a uno lógico:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(x)) {</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a> <span class="co"># hacer algo</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>En este caso, <code>0</code> es convertido a <code>FALSE</code> y todo lo demás es convertido a <code>TRUE</code>. Creemos que esto hace que tu código sea más difícil de entender, por lo que no lo recomendamos. En su lugar, utiliza explícitamente: <code>length(x) &gt; 0</code>.</p>
 <p>Es también importante entender qué ocurre cuando creas un vector que contiene múltiples tipos usando <code>c()</code>: los tipos más complejos siempre ganan.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, 1L))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "integer"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fu">c</span>(1L, <span class="fl">1.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "double"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fu">c</span>(<span class="fl">1.5</span>, <span class="st">"a"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
 <p>Un vector atómico no puede contener una mezcla de diferentes tipos, ya que el tipo es una propiedad del vector completo, no de los elementos individuales. Si necesitas mezclar diferentes tipos en el mismo vector, entonces deberías utilizar una lista, sobre la que aprenderás en breve.</p>
 </section>
-<section id="funciones-de-prueba" class="level3" data-number="19.4.2">
-<h3 data-number="19.4.2" class="anchored" data-anchor-id="funciones-de-prueba"><span class="header-section-number">19.4.2</span> Funciones de prueba</h3>
+<section id="funciones-de-prueba" class="level3" data-number="20.4.2">
+<h3 data-number="20.4.2" class="anchored" data-anchor-id="funciones-de-prueba"><span class="header-section-number">20.4.2</span> Funciones de prueba</h3>
 <p>Algunas veces quieres diferentes cosas dependiendo del tipo de vector. Una opción es utilizar <code>typeof()</code>; otra es usar una función de prueba que devuelva <code>TRUE</code> o <code>FALSE</code>. Si bien R base provee muchas funciones como <code>is.vector()</code> e <code>is.atomic()</code>, estas a menudo devuelven resultados inesperados. En su lugar, es más seguro utilizar las funciones <code>is_*</code> provistas por el paquete <strong>purrr</strong>, que se resumen en la tabla de más abajo.</p>
 <table class="table">
 <thead>
@@ -711,31 +783,40 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 </section>
-<section id="escalares-y-reglas-de-reciclado" class="level3" data-number="19.4.3">
-<h3 data-number="19.4.3" class="anchored" data-anchor-id="escalares-y-reglas-de-reciclado"><span class="header-section-number">19.4.3</span> Escalares y reglas de reciclado</h3>
+<section id="escalares-y-reglas-de-reciclado" class="level3" data-number="20.4.3">
+<h3 data-number="20.4.3" class="anchored" data-anchor-id="escalares-y-reglas-de-reciclado"><span class="header-section-number">20.4.3</span> Escalares y reglas de reciclado</h3>
 <p>Así como se coercionan implícitamente los tipos de vectores para que sean compatibles, R también implicitamente coerciona la longitud de los vectores. Esto se denomina <strong>reciclado</strong> de vectores (<em>vector recicling</em>), debido a que el vector de menor longitud se repite, o recicla, hasta igualar la longitud del vector más largo. Generalmente, esto es más útil cuando estás trabajando con vectores y “escalares”. Hemos puesto “escalares” entre comillas porque R en realidad no tiene escalares: en su lugar, un solo número es un vector de longitud 1. Debido a que no existen los escalares, la mayoría de las funciones pre-definidas están vectorizadas, lo que implica que operarán en un vector de números. Esa es la razón de por qué, por ejemplo, el siguiente código funciona:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">10</span>) <span class="sc">+</span> <span class="dv">100</span> <span class="co"># (sample = muestreo)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 108 104 109 110 106 101 103 102 107 105</code></pre>
+<pre><code> [1] 109 102 110 105 101 107 104 106 108 103</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">10</span>) <span class="sc">&gt;</span> <span class="fl">0.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE</code></pre>
+<pre><code> [1]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE</code></pre>
 </div>
 </div>
 <p>En R, las operaciones matemáticas básicas funcionan con vectores. Esto significa que nunca necesitarás la ejecución de una interacción explícita cuando realices cálculos matemáticos sencillos. Es intuitivo lo que debería pasar si agregas dos vectores de la misma longitud, o un vector y un “escalar”. Pero ¿qué sucede si agregas dos vectores de diferentes longitudes?</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  2  4  4  6  6  8  8 10 10 12</code></pre>
 </div>
 </div>
 <p>Aquí, R expandirá el vector más corto a la misma longitud del vector más largo, que es lo que denominamos <em>reciclaje</em>. Esto se realiza de manera silenciosa, excepto cuando la longitud del vector más largo no es un múltiplo entero de la longitud del vector más corto:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in 1:10 + 1:3: longer object length is not a multiple of shorter object
+length</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  2  4  6  5  7  9  8 10 12 11</code></pre>
 </div>
 </div>
 <p>Si bien el vector reciclado puede ser usado para crear código sucinto e ingenioso, también puede ocultar problemas de manera silenciosa. Por esta razón, las funciones vectorizadas en el tidyverse mostrarán errores cuando reciclas cualquier otra cosa que no sea un escalar. Si realmente quieres reutilizar, necesitarás hacerlo de manera explícita con <code>rep()</code>:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">y =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `tibble()`:
 ! Tibble columns must have compatible sizes.
@@ -743,6 +824,7 @@ ul.task-list li input[type="checkbox"] {
 • Size 2: Column `y`.
 ℹ Only values of size one are recycled.</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">y =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
       x     y
@@ -752,6 +834,7 @@ ul.task-list li input[type="checkbox"] {
 3     3     1
 4     4     2</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">y =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">each =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
       x     y
@@ -763,10 +846,11 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="nombrar-vectores" class="level3" data-number="19.4.4">
-<h3 data-number="19.4.4" class="anchored" data-anchor-id="nombrar-vectores"><span class="header-section-number">19.4.4</span> Nombrar vectores</h3>
+<section id="nombrar-vectores" class="level3" data-number="20.4.4">
+<h3 data-number="20.4.4" class="anchored" data-anchor-id="nombrar-vectores"><span class="header-section-number">20.4.4</span> Nombrar vectores</h3>
 <p>Todos los tipos de vectores pueden ser nombrados. Puedes asignarles un nombre al momento de crearlos con <code>c()</code>:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">2</span>, <span class="at">z =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x y z 
 1 2 4 </code></pre>
@@ -774,6 +858,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>O después de haberlos creado con <code>purrr::set_names()</code>:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set_names</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>a b c 
 1 2 3 </code></pre>
@@ -781,14 +866,16 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>Los vectores con nombres son particularmente útiles para la creación de subconjuntos, como se describe a continuación.</p>
 </section>
-<section id="vector-subsetting" class="level3" data-number="19.4.5">
-<h3 data-number="19.4.5" class="anchored" data-anchor-id="vector-subsetting"><span class="header-section-number">19.4.5</span> Creación de subconjuntos (<em>subsetting</em>)</h3>
+<section id="vector-subsetting" class="level3" data-number="20.4.5">
+<h3 data-number="20.4.5" class="anchored" data-anchor-id="vector-subsetting"><span class="header-section-number">20.4.5</span> Creación de subconjuntos (<em>subsetting</em>)</h3>
 <p>Hasta ahora hemos utilizado <code>dplyr::filter()</code> para filtrar filas en un tibble. <code>filter()</code> solo funciona con tibbles, por lo que necesitaremos una nueva herramienta para trabajar con vectores: <code>[</code>. <code>[</code> es la función para crear subconjuntos (<em>subsetting</em>) y podemos llamarla como <code>x[a]</code>. Existen cuatro tipos de cosas con las que puedes un crear un <em>subset</em> de un vector:</p>
 <ol type="1">
 <li><p>Un vector numérico que contenga solo enteros. Los enteros deben ser todos positivos, todos negativos, o cero.</p>
 <pre><code> Crear subconjuntos con enteros positivos mantiene los elementos en aquellas posiciones:</code></pre></li>
 </ol>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"uno"</span>, <span class="st">"dos"</span>, <span class="st">"tres"</span>, <span class="st">"cuatro"</span>, <span class="st">"cinco"</span>)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">5</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "tres"  "dos"   "cinco"</code></pre>
 </div>
@@ -796,6 +883,7 @@ ul.task-list li input[type="checkbox"] {
 <pre><code>    Repitiendo una posición, puedes en realidad generar un output de mayor longitud que el input:
     </code></pre>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">2</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "uno"   "uno"   "cinco" "cinco" "cinco" "dos"  </code></pre>
 </div>
@@ -803,6 +891,7 @@ ul.task-list li input[type="checkbox"] {
 <pre><code>    Los valores negativos eliminan elementos en las posiciones especificadas:
     </code></pre>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">5</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "dos"    "cuatro"</code></pre>
 </div>
@@ -811,6 +900,7 @@ ul.task-list li input[type="checkbox"] {
     
     </code></pre>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in x[c(1, -1)]: only 0's may be mixed with negative subscripts</code></pre>
 </div>
@@ -818,6 +908,7 @@ ul.task-list li input[type="checkbox"] {
 <pre><code>    El mensaje menciona crear subsets utilizando cero, lo que no retorna valores.
     </code></pre>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>character(0)</code></pre>
 </div>
@@ -828,9 +919,15 @@ ul.task-list li input[type="checkbox"] {
 <li>Crear subsets con un vector lógico mantiene todos los valores que correspondan al valor <code>TRUE</code>. Esto es usualmente útil en conjunto con las funciones de comparación.</li>
 </ol>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">1</span>, <span class="cn">NA</span>)</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Todos los valores no faltantes de x</span></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>x[<span class="sc">!</span><span class="fu">is.na</span>(x)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10  3  5  8  1</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Todos los valores pares (o faltantes!) de x</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10 NA  8 NA</code></pre>
 </div>
@@ -839,6 +936,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Si tienes un vector con nombre, puedes subdivirlo en un vector de tipo caracter.</li>
 </ol>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">abc =</span> <span class="dv">1</span>, <span class="at">def =</span> <span class="dv">2</span>, <span class="at">xyz =</span> <span class="dv">5</span>)</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="st">"xyz"</span>, <span class="st">"def"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>xyz def 
   5   2 </code></pre>
@@ -851,8 +950,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Para aprender más acerca de las aplicaciones de la creación de subconjuntos, puedes leer el capítulo “Subsetting” de <em>Advanced R</em>: <a href="http://adv-r.hadley.nz/Subsetting.html#applications" class="uri">http://adv-r.hadley.nz/Subsetting.html#applications</a>.</p>
 <p>Existe una importante variación de <code>[</code> llamada <code>[[</code>. <code>[[</code> solo extrae un único elemento y siempre descarta nombres. Es una buena idea usarla cada vez que quieras dejar en claro que estás extrayendo un único item, como en un bucle <em>for</em> (<em>for loop</em>). La diferencia entre <code>[</code> y<code>[[</code> es más importante para el caso de las listas, como veremos en breve.</p>
 </section>
-<section id="ejercicios-1" class="level3" data-number="19.4.6">
-<h3 data-number="19.4.6" class="anchored" data-anchor-id="ejercicios-1"><span class="header-section-number">19.4.6</span> Ejercicios</h3>
+<section id="ejercicios-1" class="level3" data-number="20.4.6">
+<h3 data-number="20.4.6" class="anchored" data-anchor-id="ejercicios-1"><span class="header-section-number">20.4.6</span> Ejercicios</h3>
 <ol type="1">
 <li><p>¿Qué es lo que <code>mean(is.na(x))</code> te dice acerca del vector ‘x’? ¿Y qué es lo que te dice <code>sum(!is.finite(x))</code>?</p></li>
 <li><p>Lee detenidamente la documentación de <code>is.vector()</code>. ¿Qué es lo que esta función realmente testea? ¿Por qué la función <code>is.atomic()</code> no concuerda con la definición de vectores atómicos vista anteriormente?</p></li>
@@ -869,10 +968,12 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 </section>
 </section>
-<section id="vectores-recursivos-listas" class="level2" data-number="19.5">
-<h2 data-number="19.5" class="anchored" data-anchor-id="vectores-recursivos-listas"><span class="header-section-number">19.5</span> Vectores Recursivos (listas)</h2>
+<section id="vectores-recursivos-listas" class="level2" data-number="20.5">
+<h2 data-number="20.5" class="anchored" data-anchor-id="vectores-recursivos-listas"><span class="header-section-number">20.5</span> Vectores Recursivos (listas)</h2>
 <p>Las listas son un escalón más en complejidad respecto de los vectores atómicos, ya que pueden contener otras listas en su interior. Esto las hace adecuadas para representar estructuras jerárquicas o de tipo árbol. Puedes crear una lista con ´list()´:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) </span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] 1
@@ -886,12 +987,15 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>Un herramienta muy útil para trabajar con listas es <code>str()</code> ya que se enfoca en la e<strong>str</strong>uctura, no en los contenidos.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 3
  $ : num 1
  $ : num 2
  $ : num 3</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>x_nombrada <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">2</span>, <span class="at">c =</span> <span class="dv">3</span>)</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(x_nombrada)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 3
  $ a: num 1
@@ -901,6 +1005,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>A diferencia de los vectores atómicos, ´list()´ puede contener una mezcla de objetos:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"a"</span>, 1L, <span class="fl">1.5</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 4
  $ : chr "a"
@@ -911,6 +1017,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>¡Las listas incluso pueden contener otras listas!</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="fu">list</span>(<span class="dv">3</span>, <span class="dv">4</span>))</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 2
  $ :List of 2
@@ -921,9 +1029,14 @@ ul.task-list li input[type="checkbox"] {
   ..$ : num 4</code></pre>
 </div>
 </div>
-<section id="visualizando-listas" class="level3" data-number="19.5.1">
-<h3 data-number="19.5.1" class="anchored" data-anchor-id="visualizando-listas"><span class="header-section-number">19.5.1</span> Visualizando listas</h3>
+<section id="visualizando-listas" class="level3" data-number="20.5.1">
+<h3 data-number="20.5.1" class="anchored" data-anchor-id="visualizando-listas"><span class="header-section-number">20.5.1</span> Visualizando listas</h3>
 <p>Para explicar funciones de manipulación de listas más complejas, es útil tener una representacion visual de las listas. Por ejemplo, considera estas tres listas:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>))</span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="fu">list</span>(<span class="dv">3</span>, <span class="dv">4</span>))</span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="fu">list</span>(<span class="dv">2</span>, <span class="fu">list</span>(<span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Así es como las representaremos visualmente:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -937,18 +1050,23 @@ ul.task-list li input[type="checkbox"] {
 <li>No es importante la orientación de los elementos hijos (esto es, las filas o columnas), por lo que si elegimos determinada orientación será para ahorrar espacio o para ilustrar una propiedad importante en el ejemplo.</li>
 </ol>
 </section>
-<section id="subconjuntos-subsetting" class="level3" data-number="19.5.2">
-<h3 data-number="19.5.2" class="anchored" data-anchor-id="subconjuntos-subsetting"><span class="header-section-number">19.5.2</span> Subconjuntos (<em>Subsetting</em>)</h3>
+<section id="subconjuntos-subsetting" class="level3" data-number="20.5.2">
+<h3 data-number="20.5.2" class="anchored" data-anchor-id="subconjuntos-subsetting"><span class="header-section-number">20.5.2</span> Subconjuntos (<em>Subsetting</em>)</h3>
 <p>Existen tres maneras de extraer subconjuntos de una lista, los que ilustraremos con una lista denominada <code>a</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">b =</span> <span class="st">"una cadena"</span>, <span class="at">c =</span> pi, <span class="at">d =</span> <span class="fu">list</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>El corchete simple <code>[</code> extrae una sub-lista. El resultado siempre será una lista.</li>
 </ul>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(a[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 2
  $ a: int [1:3] 1 2 3
  $ b: chr "una cadena"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(a[<span class="dv">4</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 1
  $ d:List of 2
@@ -961,9 +1079,11 @@ ul.task-list li input[type="checkbox"] {
 <li>El doble corchete <code>[[</code> extrae un solo componente de una lista. Elimina un nivel de la jerarquía de la lista.</li>
 </ul>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(a[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> int [1:3] 1 2 3</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(a[[<span class="dv">4</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 2
  $ : num -1
@@ -974,9 +1094,11 @@ ul.task-list li input[type="checkbox"] {
 <li><code>$</code> es un atajo para extraer elementos con nombre de una lista. Funciona de modo similar al doble corchete <code>[[</code>, excepto que no necesitas utilizar comillas.</li>
 </ul>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>a<span class="sc">$</span>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2 3</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>a[[<span class="st">"a"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2 3</code></pre>
 </div>
@@ -993,8 +1115,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="listas-de-condimentos" class="level3" data-number="19.5.3">
-<h3 data-number="19.5.3" class="anchored" data-anchor-id="listas-de-condimentos"><span class="header-section-number">19.5.3</span> Listas de Condimentos</h3>
+<section id="listas-de-condimentos" class="level3" data-number="20.5.3">
+<h3 data-number="20.5.3" class="anchored" data-anchor-id="listas-de-condimentos"><span class="header-section-number">20.5.3</span> Listas de Condimentos</h3>
 <p>La diferencia entre <code>[</code> y <code>[[</code> es muy importante, pero es muy fácil confundirse. Para ayudarte a recordar, te mostraremos un pimentero inusual.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -1021,21 +1143,26 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="ejercicios-2" class="level3" data-number="19.5.4">
-<h3 data-number="19.5.4" class="anchored" data-anchor-id="ejercicios-2"><span class="header-section-number">19.5.4</span> Ejercicios</h3>
+<section id="ejercicios-2" class="level3" data-number="20.5.4">
+<h3 data-number="20.5.4" class="anchored" data-anchor-id="ejercicios-2"><span class="header-section-number">20.5.4</span> Ejercicios</h3>
 <p>1.Dibuja las siguientes listas como sets anidados:</p>
 <pre><code>    1. `list(a, b, list(c, d), list(e, f))`
     1. `list(list(list(list(list(list(a))))))`</code></pre>
 <p>2.¿Qué pasaría si hicieras <em>subsetting</em> a un tibble como si fuera una lista? ¿Cuáles son las principales diferencias entre una lista y un tibble?</p>
 </section>
 </section>
-<section id="atributos" class="level2" data-number="19.6">
-<h2 data-number="19.6" class="anchored" data-anchor-id="atributos"><span class="header-section-number">19.6</span> Atributos</h2>
+<section id="atributos" class="level2" data-number="20.6">
+<h2 data-number="20.6" class="anchored" data-anchor-id="atributos"><span class="header-section-number">20.6</span> Atributos</h2>
 <p>Cualquier vector puede contener metadatos arbitrarios adicionales mediante sus <strong>atributos</strong>. Puedes pensar en los atributos como una lista de vectores con nombre que pueden ser adjuntadas a cualquier otro objeto. Puedes obtener y definir valores de atributos individuales con <code>attr()</code> o verlos todos al mismo tiempo con <code>attributes()</code>.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(x, <span class="st">"saludo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>NULL</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(x, <span class="st">"saludo"</span>) <span class="ot">&lt;-</span> <span class="st">"¡Hola!"</span></span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(x, <span class="st">" despedida"</span>) <span class="ot">&lt;-</span> <span class="st">"¡Adiós!"</span></span>
+<span id="cb115-3"><a href="#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$saludo
 [1] "¡Hola!"
@@ -1053,15 +1180,17 @@ $` despedida`
 <p>Ya revisamos los nombres más arriba y no abordaremos las dimensiones porque en este libro no utilizamos matrices. Nos queda describir el atributo <em>clase</em>, que controla cómo trabajan las <strong>funciones genéricas</strong>. Las funciones genéricas son clave para la programación orientada a objetos en R, ya que hacen que las funciones se comporten de manera diferente para diferentes clases de inputs. Está fuera del alcance de este libro tener una discusión más profunda sobre la programacion orientada a objetos, pero puedes leer más al respecto en el libro <em>Advanced R</em>: <a href="https://adv-r.hadley.nz/s3.html" class="uri">https://adv-r.hadley.nz/s3.html</a>.</p>
 <p>Así es como luce una función genérica típica:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>as.Date</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x, ...) 
 UseMethod("as.Date")
-&lt;bytecode: 0x55b475babc88&gt;
+&lt;bytecode: 0x560fc3574650&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
 <p>La llamada a “UseMethod” significa que esta es una función genérica y que llamará a un <strong>método</strong> específico, esto es, una función basada en la clase del primer argumento. (Todos los métodos son funciones; no todas las funciones son métodos). Puedes listar todos los métodos existentes para una función genérica con <code>methods()</code>:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">methods</span>(<span class="st">"as.Date"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] as.Date.character*  as.Date.default*    as.Date.factor*    
 [4] as.Date.numeric*    as.Date.POSIXct*    as.Date.POSIXlt*   
@@ -1072,6 +1201,7 @@ see '?methods' for accessing help and source code</code></pre>
 <p>Por ejemplo, si <code>x</code> es un vector de caracteres, <code>as.Date()</code> llamará a <code>as.Date.character()</code>; si es un factor, llamará a <code>as.Date.factor()</code>.</p>
 <p>Puedes ver la implementación específica de un método con: <code>getS3method()</code>:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getS3method</span>(<span class="st">"as.Date"</span>, <span class="st">"default"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x, ...) 
 {
@@ -1084,20 +1214,21 @@ see '?methods' for accessing help and source code</code></pre>
     else stop(gettextf("do not know how to convert '%s' to class %s", 
         deparse1(substitute(x)), dQuote("Date")), domain = NA)
 }
-&lt;bytecode: 0x55b478b03450&gt;
+&lt;bytecode: 0x560fc13fc000&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getS3method</span>(<span class="st">"as.Date"</span>, <span class="st">"numeric"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x, origin, ...) 
 if (missing(origin)) .Date(x) else as.Date(origin, ...) + x
-&lt;bytecode: 0x55b478a8f628&gt;
+&lt;bytecode: 0x560fc1378980&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
 <p>La S3 genérica más importante es <code>print()</code>: controla cómo el objeto es impreso cuando tipeas su nombre en la consola. Otras funciones genéricas importantes son las funciones de subconjuntos <code>[</code>, <code>[[</code> y <code>$</code>.</p>
 </section>
-<section id="vectores-aumentados" class="level2" data-number="19.7">
-<h2 data-number="19.7" class="anchored" data-anchor-id="vectores-aumentados"><span class="header-section-number">19.7</span> Vectores aumentados</h2>
+<section id="vectores-aumentados" class="level2" data-number="20.7">
+<h2 data-number="20.7" class="anchored" data-anchor-id="vectores-aumentados"><span class="header-section-number">20.7</span> Vectores aumentados</h2>
 <p>Los vectores atómicos y las listas son los bloques sobre los que se construyen otros tipos importantes de vectores, como factores y fechas. A estos vectores le llamamos <strong>vectores aumentados</strong>, ya que son vectores con <strong>atributos</strong> adicionales, incluyendo la clase. Debido a que los vectores aumentados tienen una clase, se comportan de manera diferente a los vectores atómicos sobre los que están construidos. En este libro, hacemos uso de cuatro importantes vectores aumentados:</p>
 <ul>
 <li>Factores</li>
@@ -1106,13 +1237,16 @@ if (missing(origin)) .Date(x) else as.Date(origin, ...) + x
 <li>Tibbles</li>
 </ul>
 <p>A continuación encontrarás una descripción de cada uno de ellos.</p>
-<section id="factores" class="level3" data-number="19.7.1">
-<h3 data-number="19.7.1" class="anchored" data-anchor-id="factores"><span class="header-section-number">19.7.1</span> Factores</h3>
+<section id="factores" class="level3" data-number="20.7.1">
+<h3 data-number="20.7.1" class="anchored" data-anchor-id="factores"><span class="header-section-number">20.7.1</span> Factores</h3>
 <p>Los factores están diseñados para representar datos categóricos que pueden tomar un set fijo de valores posibles. Están construidos sobre la base de enteros y tienen un atributo de <em>niveles</em> (<em>levels</em>):</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"ab"</span>, <span class="st">"cd"</span>, <span class="st">"ab"</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ab"</span>, <span class="st">"cd"</span>, <span class="st">"ef"</span>))</span>
+<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "integer"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$levels
 [1] "ab" "cd" "ef"
@@ -1122,16 +1256,20 @@ $class
 </div>
 </div>
 </section>
-<section id="fechas-y-fechas-hora" class="level3" data-number="19.7.2">
-<h3 data-number="19.7.2" class="anchored" data-anchor-id="fechas-y-fechas-hora"><span class="header-section-number">19.7.2</span> Fechas y fechas-hora</h3>
+<section id="fechas-y-fechas-hora" class="level3" data-number="20.7.2">
+<h3 data-number="20.7.2" class="anchored" data-anchor-id="fechas-y-fechas-hora"><span class="header-section-number">20.7.2</span> Fechas y fechas-hora</h3>
 <p>Las fechas en R son vectores numéricos que representan el número de días desde el 1° de enero de 1970.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"1971-01-01"</span>)</span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unclass</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 365</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "double"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$class
 [1] "Date"</code></pre>
@@ -1139,14 +1277,18 @@ $class
 </div>
 <p>Los vectores fecha-hora son vectores numéricos de clase <code>POSIXct</code>, que representan el número de segundos desde el 1° de enero de 1970. (En caso de que te lo preguntes, “POSIXct” es el acrónimo de <em>“Portable Operating System Interface” calendar time</em>, es decir, tiempo calendario de la interfaz portable del sistema operativo”)</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">ymd_hm</span>(<span class="st">"1970-01-01 01:00"</span>)</span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unclass</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3600
 attr(,"tzone")
 [1] "UTC"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "double"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$class
 [1] "POSIXct" "POSIXt" 
@@ -1157,18 +1299,25 @@ $tzone
 </div>
 <p>El atributo <code>tzone</code> es opcional. Controla cómo se imprime la hora, no a qué tiempo absoluto hace referencia.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(x, <span class="st">"tzone"</span>) <span class="ot">&lt;-</span> <span class="st">"US/Pacific"</span></span>
+<span id="cb141-2"><a href="#cb141-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "1969-12-31 17:00:00 PST"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(x, <span class="st">"tzone"</span>) <span class="ot">&lt;-</span> <span class="st">"US/Eastern"</span></span>
+<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "1969-12-31 20:00:00 EST"</code></pre>
 </div>
 </div>
 <p>Existe otro tipo de fechas-hora llamado POSIXlt. Estos se construyen sobre la base de listas nombradas (<em>named lists</em>).</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">as.POSIXlt</span>(x)</span>
+<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "list"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$names
  [1] "sec"    "min"    "hour"   "mday"   "mon"    "year"   "wday"   "yday"  
@@ -1186,13 +1335,16 @@ $balanced
 </div>
 <p>Los POSIXlts son pocos comunes dentro del tidyverse. Sí lo son en R base, ya que son necesarios para extraer components específicos de una fecha, como el año o el mes. Debido a que el paquete <strong>lubridate</strong> provee funciones de ayuda para efectuar dicha extracción, ya no los necesitarás. Siempre es más sencillo trabajar con POSIXct, por lo que si te encuentras con un POSIXlt, deberías convertirlo a un vector de fecha-hora con <code>lubridate::as_date_time()</code>.</p>
 </section>
-<section id="tibbles" class="level3" data-number="19.7.3">
-<h3 data-number="19.7.3" class="anchored" data-anchor-id="tibbles"><span class="header-section-number">19.7.3</span> Tibbles</h3>
+<section id="tibbles" class="level3" data-number="20.7.3">
+<h3 data-number="20.7.3" class="anchored" data-anchor-id="tibbles"><span class="header-section-number">20.7.3</span> Tibbles</h3>
 <p>Los tibbles son listas aumentadas: tienen las clases “tbl_df”, “tbl” y “data.frame”, y atributos <code>names</code> (para columna) y <code>row.names</code> (para fila):</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a>tb <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">y =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>)</span>
+<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "list"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$class
 [1] "tbl_df"     "tbl"        "data.frame"
@@ -1207,9 +1359,12 @@ $names
 <p>La diferencia entre un tibble y una lista, consiste en que todos los elementos de un data frame deben ser vectores de la misma longitud. Todas las funciones que utilizan tibbles imponen esta condición.</p>
 <p>Los data.frames tradicionales tienen una estructura muy similar a los tibbles:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">y =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>)</span>
+<span id="cb153-2"><a href="#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "list"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$names
 [1] "x" "y"
@@ -1223,8 +1378,8 @@ $row.names
 </div>
 <p>La diferencia principal entre ambos es la clase. La clase tibble incluye “data.frame”, lo que significa que los tibbles heredan el comportamiento regular de un data frame por defecto.</p>
 </section>
-<section id="ejercicios-3" class="level3" data-number="19.7.4">
-<h3 data-number="19.7.4" class="anchored" data-anchor-id="ejercicios-3"><span class="header-section-number">19.7.4</span> Ejercicios:</h3>
+<section id="ejercicios-3" class="level3" data-number="20.7.4">
+<h3 data-number="20.7.4" class="anchored" data-anchor-id="ejercicios-3"><span class="header-section-number">20.7.4</span> Ejercicios:</h3>
 <ol type="1">
 <li><p>¿Qué valor retorna <code>hms::hms(3600)</code>? ¿Cómo se imprime? ¿Cuál es la tipo primario sobre en el que se basa el vector aumentado? ¿Qué atributos utiliza?</p></li>
 <li><p>Intenta crear un tibble que tenga columnas con diferentes longitudes. ¿Qué es lo que ocurre?</p></li>
@@ -1472,12 +1627,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./19-functions.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Funciones</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Funciones</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./21-iteration.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Iteración</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Iteración</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
