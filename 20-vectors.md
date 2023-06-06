@@ -611,7 +611,7 @@ Así es como luce una función genérica típica:
 as.Date
 #> function (x, ...) 
 #> UseMethod("as.Date")
-#> <bytecode: 0x55f01e1fc940>
+#> <bytecode: 0x5589a88a2690>
 #> <environment: namespace:base>
 ```
 
@@ -644,12 +644,12 @@ getS3method("as.Date", "default")
 #>     else stop(gettextf("do not know how to convert '%s' to class %s", 
 #>         deparse1(substitute(x)), dQuote("Date")), domain = NA)
 #> }
-#> <bytecode: 0x55f021429cb0>
+#> <bytecode: 0x5589ab903540>
 #> <environment: namespace:base>
 getS3method("as.Date", "numeric")
 #> function (x, origin, ...) 
 #> if (missing(origin)) .Date(x) else as.Date(origin, ...) + x
-#> <bytecode: 0x55f02149f040>
+#> <bytecode: 0x5589ab96ebe8>
 #> <environment: namespace:base>
 ```
 La S3 genérica más importante es `print()`: controla cómo el objeto es impreso cuando tipeas su nombre en la consola. Otras funciones genéricas importantes son las funciones de subconjuntos `[`, `[[` y `$`.

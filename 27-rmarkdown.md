@@ -278,6 +278,8 @@ Table: (\#tab:kable)Un kable de knitr.
 |Hornet 4 Drive    | 21.4|   6|  258| 110| 3.08| 3.215| 19.44|  1|  0|    3|    1|
 |Hornet Sportabout | 18.7|   8|  360| 175| 3.15| 3.440| 17.02|  0|  0|    3|    2|
 
+
+
 Lee la documentación para `?knitr::kable` para ver los otros modos en los que puedes personalizar la tabla. Para una mayor personalización, considera los paquetes __xtable__, __stargazer__, __pander__, __tables__ y __ascii__. Cada uno provee un set de herramientas para generar tablas con formato a partir código de R.
 
 Hay también una gran cantidad de opciones para controlar cómo las figuras están embebidas o incrustadas. Aprenderás sobre esto en la sección [guardando tus gráficos].

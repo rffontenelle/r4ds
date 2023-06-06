@@ -298,7 +298,7 @@ devtools::session_info(c("tidyverse"))
 #>  collate  C.UTF-8
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2023-05-19
+#>  date     2023-06-06
 #>  pandoc   2.19.2 @ /usr/bin/ (via rmarkdown)
 #> 
 #> ─ Packages ───────────────────────────────────────────────────────────────────
@@ -350,8 +350,8 @@ devtools::session_info(c("tidyverse"))
 #>  ids             1.0.1   2017-05-31 [1] CRAN (R 4.3.0)
 #>  isoband         0.2.7   2022-12-20 [1] CRAN (R 4.3.0)
 #>  jquerylib       0.1.4   2021-04-26 [1] CRAN (R 4.3.0)
-#>  jsonlite        1.8.4   2022-12-06 [1] CRAN (R 4.3.0)
-#>  knitr           1.42    2023-01-25 [1] CRAN (R 4.3.0)
+#>  jsonlite        1.8.5   2023-06-05 [1] CRAN (R 4.3.0)
+#>  knitr           1.43    2023-05-25 [1] CRAN (R 4.3.0)
 #>  labeling        0.4.2   2020-10-20 [1] CRAN (R 4.3.0)
 #>  lattice         0.21-8  2023-04-05 [2] CRAN (R 4.3.0)
 #>  lifecycle       1.0.3   2022-10-07 [1] CRAN (R 4.3.0)
@@ -383,7 +383,7 @@ devtools::session_info(c("tidyverse"))
 #>  rematch2        2.1.2   2020-05-01 [1] CRAN (R 4.3.0)
 #>  reprex          2.0.2   2022-08-17 [1] CRAN (R 4.3.0)
 #>  rlang           1.1.1   2023-04-28 [1] CRAN (R 4.3.0)
-#>  rmarkdown       2.21    2023-03-26 [1] CRAN (R 4.3.0)
+#>  rmarkdown       2.22    2023-06-01 [1] CRAN (R 4.3.0)
 #>  rstudioapi      0.14    2022-08-22 [1] CRAN (R 4.3.0)
 #>  rvest           1.0.3   2022-08-19 [1] CRAN (R 4.3.0)
 #>  sass            0.4.6   2023-05-03 [1] CRAN (R 4.3.0)
@@ -391,7 +391,7 @@ devtools::session_info(c("tidyverse"))
 #>  selectr         0.4-2   2019-11-20 [1] CRAN (R 4.3.0)
 #>  stringi         1.7.12  2023-01-11 [1] CRAN (R 4.3.0)
 #>  stringr       * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)
-#>  sys             3.4.1   2022-10-18 [1] CRAN (R 4.3.0)
+#>  sys             3.4.2   2023-05-23 [1] CRAN (R 4.3.0)
 #>  systemfonts     1.0.4   2022-02-11 [1] CRAN (R 4.3.0)
 #>  textshaping     0.3.6   2021-10-13 [1] CRAN (R 4.3.0)
 #>  tibble        * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)

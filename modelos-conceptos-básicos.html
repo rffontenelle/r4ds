@@ -1334,7 +1334,7 @@ tienen una distribución con una cola larga y te quieres enfocar en generar valo
 <span id="cb655-3"><a href="modelos-conceptos-básicos.html#cb655-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   `(Intercept)` `poly(x, 2)1` `poly(x, 2)2`</span></span>
 <span id="cb655-4"><a href="modelos-conceptos-básicos.html#cb655-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;</span></span>
 <span id="cb655-5"><a href="modelos-conceptos-básicos.html#cb655-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1             1     -7.07e- 1         0.408</span></span>
-<span id="cb655-6"><a href="modelos-conceptos-básicos.html#cb655-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2             1     -9.07e-17        -0.816</span></span>
+<span id="cb655-6"><a href="modelos-conceptos-básicos.html#cb655-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2             1     -7.85e-17        -0.816</span></span>
 <span id="cb655-7"><a href="modelos-conceptos-básicos.html#cb655-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3             1      7.07e- 1         0.408</span></span></code></pre></div>
 <p>Sin embargo, existe un problema mayor al usar <code>poly()</code>: fuera del rango de los datos, los polinomios rápidamente se disparan a infinito positivo o negativo. Una alternativa más segura es usar spline natural, <code>splines::ns()</code>.</p>
 <div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="modelos-conceptos-básicos.html#cb656-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(splines)</span>
