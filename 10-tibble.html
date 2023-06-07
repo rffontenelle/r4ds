@@ -523,18 +523,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,000 × 5
-   a                   b              c       d e    
-   &lt;dttm&gt;              &lt;date&gt;     &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;
- 1 2023-06-07 04:13:52 2023-06-16     1 0.484   r    
- 2 2023-06-07 02:53:54 2023-06-16     2 0.939   a    
- 3 2023-06-06 23:21:39 2023-07-05     3 0.875   n    
- 4 2023-06-06 23:31:42 2023-06-27     4 0.371   x    
- 5 2023-06-07 04:25:02 2023-07-02     5 0.971   n    
- 6 2023-06-06 21:36:08 2023-06-18     6 0.708   v    
- 7 2023-06-07 15:31:49 2023-06-25     7 0.793   q    
- 8 2023-06-07 09:43:43 2023-06-24     8 0.624   z    
- 9 2023-06-07 05:26:41 2023-06-14     9 0.00348 t    
-10 2023-06-07 03:57:59 2023-06-09    10 0.632   d    
+   a                   b              c     d e    
+   &lt;dttm&gt;              &lt;date&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;
+ 1 2023-06-08 11:16:35 2023-06-09     1 0.561 i    
+ 2 2023-06-08 02:41:10 2023-06-12     2 0.621 n    
+ 3 2023-06-07 21:19:18 2023-06-25     3 0.611 o    
+ 4 2023-06-07 16:49:54 2023-06-09     4 0.281 y    
+ 5 2023-06-08 01:39:11 2023-06-28     5 0.962 h    
+ 6 2023-06-07 16:16:30 2023-06-14     6 0.510 o    
+ 7 2023-06-08 10:54:29 2023-06-26     7 0.374 q    
+ 8 2023-06-08 10:51:54 2023-06-21     8 0.227 m    
+ 9 2023-06-08 13:28:47 2023-06-09     9 0.811 s    
+10 2023-06-07 18:21:10 2023-06-15    10 0.127 d    
 # ℹ 990 more rows</code></pre>
 </div>
 </div>
@@ -569,27 +569,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraer usando el nombre</span></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1726775 0.6031719 0.7128718 0.6694276 0.9035481</code></pre>
+<pre><code>[1] 0.52932067 0.72932169 0.08128633 0.05076306 0.96921357</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"x"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1726775 0.6031719 0.7128718 0.6694276 0.9035481</code></pre>
+<pre><code>[1] 0.52932067 0.72932169 0.08128633 0.05076306 0.96921357</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraer indicando la posición</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1726775 0.6031719 0.7128718 0.6694276 0.9035481</code></pre>
+<pre><code>[1] 0.52932067 0.72932169 0.08128633 0.05076306 0.96921357</code></pre>
 </div>
 </div>
 <p>Para usar estas herramientas dentro de un pipe, necesitarás usar el marcador de posición <code>.</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> .<span class="sc">$</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1726775 0.6031719 0.7128718 0.6694276 0.9035481</code></pre>
+<pre><code>[1] 0.52932067 0.72932169 0.08128633 0.05076306 0.96921357</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> .[[<span class="st">"x"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1726775 0.6031719 0.7128718 0.6694276 0.9035481</code></pre>
+<pre><code>[1] 0.52932067 0.72932169 0.08128633 0.05076306 0.96921357</code></pre>
 </div>
 </div>
 <p>En comparación a un <code>data.frame</code>, los tibbles son más estrictos: nunca funcionan con coincidencias parciales y generan una advertencia si la columna a la que intentas de acceder no existe.</p>
