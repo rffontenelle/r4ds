@@ -29,6 +29,12 @@ devtools::install_github("cienciadedatos/r4ds")
 devtools::install_github("cienciadedatos/datos")
 ```
 
-Además debes instalar [Quarto](https://quarto.org/docs/get-started/).
+Además debes instalar [Quarto](https://quarto.org/docs/get-started/) y hacer un downgrade de `knitr` a la versión 1.42 (e.g., `devtools::install_version("knitr", version = "1.42")`). Si no hacer el downgrade el libro da el siguiente error en las partes que contienen `htmlwidgets`
+
+```r
+Quitting from lines 15-16 [DT htmlwidget] (Reprex.Rmd)
+Error in `add_html_caption()`:
+! unused argument (xfun::grep_sub("^[^<]*<[^>]+aria-labelledby[ ]*=[ ]*\"([^\"]+)\".*$", "\\1", x))
+```
 
 Revisa el código de conducta en el siguiente enlace: https://github.com/cienciadedatos/descripcion-y-orientaciones/issues/1
