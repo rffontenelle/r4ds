@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R Para Ciencia de Datos - 13&nbsp; Datos relacionales</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./14-strings.html" rel="next">
+<link href="./12-tidy.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-wrangle.html">Manejar o domar datos</a></li><li class="breadcrumb-item"><a href="./13-relational-data.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datos relacionales</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R Para Ciencia de Datos</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Explorar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-explore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-visualize.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualización de datos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-workflow-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Flujo de trabajo: conocimientos básicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-transform.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transformación de datos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-workflow-scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Flujo de trabajo: Scripts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análisis exploratorio de datos (EDA)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-workflow-projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Flujo de trabajo: proyectos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Manejar o domar datos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-wrangle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-tibble.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tibbles</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-import.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Importación de datos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Datos ordenados</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-relational-data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datos relacionales</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Cadenas de caracteres</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Factores</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-datetimes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Fechas y horas</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Programar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-program.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-pipes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Pipes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Funciones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-vectors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Vectores</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21-iteration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Iteración</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Modelar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./22-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./23-model-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Modelos: conceptos básicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./24-model-building.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Construcción de modelos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./25-model-many.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Muchos modelos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Comunicar</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./26-communicate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./27-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">R Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./28-communicate-plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Comunicar con gráficos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./29-rmarkdown-formats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Formatos de R Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30-rmarkdown-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Flujo de trabajo en R Markdown</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">13.1</span> Introducción</a>
+  <ul class="collapse">
+  <li><a href="#prerrequisitos" id="toc-prerrequisitos" class="nav-link" data-scroll-target="#prerrequisitos"><span class="header-section-number">13.1.1</span> Prerrequisitos</a></li>
+  </ul></li>
+  <li><a href="#nycflights13-relational" id="toc-nycflights13-relational" class="nav-link" data-scroll-target="#nycflights13-relational"><span class="header-section-number">13.2</span> Datos sobre vuelos</a>
+  <ul class="collapse">
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">13.2.1</span> Ejercicios</a></li>
+  </ul></li>
+  <li><a href="#claves" id="toc-claves" class="nav-link" data-scroll-target="#claves"><span class="header-section-number">13.3</span> Claves</a>
+  <ul class="collapse">
+  <li><a href="#ejercicios-1" id="toc-ejercicios-1" class="nav-link" data-scroll-target="#ejercicios-1"><span class="header-section-number">13.3.1</span> Ejercicios</a></li>
+  </ul></li>
+  <li><a href="#mutating-joins" id="toc-mutating-joins" class="nav-link" data-scroll-target="#mutating-joins"><span class="header-section-number">13.4</span> Uniones de transformación</a>
+  <ul class="collapse">
+  <li><a href="#entendiendo-las-uniones" id="toc-entendiendo-las-uniones" class="nav-link" data-scroll-target="#entendiendo-las-uniones"><span class="header-section-number">13.4.1</span> Entendiendo las uniones</a></li>
+  <li><a href="#inner-join" id="toc-inner-join" class="nav-link" data-scroll-target="#inner-join"><span class="header-section-number">13.4.2</span> Unión interior</a></li>
+  <li><a href="#outer-join" id="toc-outer-join" class="nav-link" data-scroll-target="#outer-join"><span class="header-section-number">13.4.3</span> Uniones exteriores</a></li>
+  <li><a href="#join-matches" id="toc-join-matches" class="nav-link" data-scroll-target="#join-matches"><span class="header-section-number">13.4.4</span> Claves duplicadas</a></li>
+  <li><a href="#join-by" id="toc-join-by" class="nav-link" data-scroll-target="#join-by"><span class="header-section-number">13.4.5</span> Definiendo las columnas clave</a></li>
+  <li><a href="#ejercicios-2" id="toc-ejercicios-2" class="nav-link" data-scroll-target="#ejercicios-2"><span class="header-section-number">13.4.6</span> Ejercicios</a></li>
+  <li><a href="#otras-implementaciones" id="toc-otras-implementaciones" class="nav-link" data-scroll-target="#otras-implementaciones"><span class="header-section-number">13.4.7</span> Otras implementaciones</a></li>
+  </ul></li>
+  <li><a href="#filtering-joins" id="toc-filtering-joins" class="nav-link" data-scroll-target="#filtering-joins"><span class="header-section-number">13.5</span> Uniones de filtro</a>
+  <ul class="collapse">
+  <li><a href="#ejercicios-3" id="toc-ejercicios-3" class="nav-link" data-scroll-target="#ejercicios-3"><span class="header-section-number">13.5.1</span> Ejercicios</a></li>
+  </ul></li>
+  <li><a href="#problemas-con-las-uniones" id="toc-problemas-con-las-uniones" class="nav-link" data-scroll-target="#problemas-con-las-uniones"><span class="header-section-number">13.6</span> Problemas con las uniones</a></li>
+  <li><a href="#set-operations" id="toc-set-operations" class="nav-link" data-scroll-target="#set-operations"><span class="header-section-number">13.7</span> Operaciones de conjuntos</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datos relacionales</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introducción" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">13.1</span> Introducción</h2>
+<p>Es raro que un análisis de datos involucre una única tabla de datos. Lo típico es que tengas muchas tablas que debes combinar para responder a tus preguntas de interés. De manera colectiva, se le llama <em>datos relacionales</em> a esas múltiples tablas de datos, ya que sus relaciones, y no solo los conjuntos de datos individuales, son importantes.</p>
+<p>Las relaciones siempre se definen sobre un par de tablas. Todas las otras relaciones se construyen sobre esta idea simple: las relaciones entre tres o más tablas son siempre una propiedad de las relaciones entre cada par. ¡A veces ambos elementos de un par pueden ser la misma tabla! Esto se necesita si, por ejemplo, tienes una tabla de personas y cada persona tiene una referencia a sus padres.</p>
+<p>Para trabajar con datos relacionales necesitas verbos que funcionen con pares de tablas. Existen tres familias de verbos diseñadas para trabajar con datos relacionales:</p>
+<ul>
+<li><p><strong>Uniones de transformación</strong> (del inglés <em>mutating joins</em>), que agregan nuevas variables a un <em>data frame</em> a partir de las observaciones coincidentes en otra tabla.</p></li>
+<li><p><strong>Uniones de filtro</strong> (del inglés <em>filtering joins</em>), que filtran observaciones en un <em>data frame</em> con base en si coinciden o no con una observación de otra tabla.</p></li>
+<li><p><strong>Operaciones de conjuntos</strong> (del inglés <em>set operations</em>), que tratan las observaciones como elementos de un conjunto.</p></li>
+</ul>
+<p>El lugar más común para encontrar datos relacionales es en un sistema <em>relacional</em> de administración de bases de datos (<em>Relational Data Base Management System</em> en inglés), un concepto que abarca casi todas las bases de datos modernas. Si has usado una base de datos con anterioridad, casi seguramente fue SQL. Si es así, los conceptos de este capítulo debiesen ser familiares, aunque su expresión en <strong>dplyr</strong> es un poco distinta. En términos generales, <strong>dplyr</strong> es un poco más fácil de usar que SQLes, ya que dplyr se especializa en el análisis de datos: facilita las operaciones habituales, a expensas de dificultar otras que no se requieren a menudo para el análisis de datos.</p>
+<section id="prerrequisitos" class="level3" data-number="13.1.1">
+<h3 data-number="13.1.1" class="anchored" data-anchor-id="prerrequisitos"><span class="header-section-number">13.1.1</span> Prerrequisitos</h3>
+<p>Vamos a explorar datos relacionales contenidos en el paquete <strong>datos</strong> usando los verbos para dos tablas de <strong>dplyr</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="nycflights13-relational" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="nycflights13-relational"><span class="header-section-number">13.2</span> Datos sobre vuelos</h2>
+<p>Usaremos datos sobre vuelos desde y hacia Nueva York para aprender sobre datos relacionales<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. El paquete <strong>datos</strong> contiene cinco <em>tibbles</em> que utilizaremos para este propósito: <code>aerolineas</code>, <code>aeropuertos</code>, <code>aviones</code> y <code>clima</code>, que se relacionan con la tabla <code>vuelos</code> (que se usó en el capítulo sobre [transformación de datos]):</p>
+<ul>
+<li><code>aerolineas</code> permite observar el nombre completo de la aerolínea a partir de su código abreviado:</li>
+</ul>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>aerolineas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 16 × 2     aerolinea nombre                          &lt;chr&gt;     &lt;chr&gt;                         1 9E        Endeavor Air Inc.             2 AA        American Airlines Inc.        3 AS        Alaska Airlines Inc.          4 B6        JetBlue Airways               5 DL        Delta Air Lines Inc.          6 EV        ExpressJet Airlines Inc.      7 F9        Frontier Airlines Inc.        8 FL        AirTran Airways Corporation   9 HA        Hawaiian Airlines Inc.       10 MQ        Envoy Air                    11 OO        SkyWest Airlines Inc.        12 UA        United Air Lines Inc.        13 US        US Airways Inc.              14 VX        Virgin America               15 WN        Southwest Airlines Co.       16 YV        Mesa Airlines Inc.</code> ::: :::</p>
+<ul>
+<li><code>aeropuertos</code> entrega información de cada aeropuerto, identificado por su <code>código</code>:</li>
+</ul>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>aeropuertos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 1,458 × 8     codigo_aeropuerto nombre  latitud longitud altura zona_horaria horario_verano     &lt;chr&gt;             &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;            1 04G               Lansdo…    41.1    -80.6   1044           -5 A                2 06A               Moton …    32.5    -85.7    264           -6 A                3 06C               Schaum…    42.0    -88.1    801           -6 A                4 06N               Randal…    41.4    -74.4    523           -5 A                5 09J               Jekyll…    31.1    -81.4     11           -5 A                6 0A9               Elizab…    36.4    -82.2   1593           -5 A                7 0G6               Willia…    41.5    -84.5    730           -5 A                8 0G7               Finger…    42.9    -76.8    492           -5 A                9 0P2               Shoest…    39.8    -76.6   1000           -5 U               10 0S9               Jeffer…    48.1   -123.     108           -8 A               # ℹ 1,448 more rows  # ℹ 1 more variable: zona_horaria_iana &lt;chr&gt;</code> ::: :::</p>
+<ul>
+<li><code>aviones</code> entrega información de cada avión, identificado por su <code>codigo_cola</code>:</li>
+</ul>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>aviones</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 3,322 × 9     codigo_cola  anio tipo           fabricante modelo motores asientos velocidad     &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;      &lt;chr&gt;    &lt;int&gt;    &lt;int&gt;     &lt;int&gt;   1 N10156       2004 Ala fija mult… EMBRAER    EMB-1…       2       55        NA   2 N102UW       1998 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   3 N103US       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   4 N104UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   5 N10575       2002 Ala fija mult… EMBRAER    EMB-1…       2       55        NA   6 N105UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   7 N107US       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   8 N108UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA   9 N109UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA  10 N110UW       1999 Ala fija mult… AIRBUS IN… A320-…       2      182        NA  # ℹ 3,312 more rows  # ℹ 1 more variable: tipo_motor &lt;chr&gt;</code> ::: :::</p>
+<ul>
+<li><code>clima</code> entrega información del clima en cada aeropuerto de Nueva York para cada hora:</li>
+</ul>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>clima</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 26,115 × 15     origen  anio   mes   dia  hora temperatura punto_rocio humedad     &lt;chr&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;   1 EWR     2013     1     1     1        39.0        26.1    59.4   2 EWR     2013     1     1     2        39.0        27.0    61.6   3 EWR     2013     1     1     3        39.0        28.0    64.4   4 EWR     2013     1     1     4        39.9        28.0    62.2   5 EWR     2013     1     1     5        39.0        28.0    64.4   6 EWR     2013     1     1     6        37.9        28.0    67.2   7 EWR     2013     1     1     7        39.0        28.0    64.4   8 EWR     2013     1     1     8        39.9        28.0    62.2   9 EWR     2013     1     1     9        39.9        28.0    62.2  10 EWR     2013     1     1    10        41          28.0    59.6  # ℹ 26,105 more rows  # ℹ 7 more variables: direccion_viento &lt;dbl&gt;, velocidad_viento &lt;dbl&gt;,  #   velocidad_rafaga &lt;dbl&gt;, precipitacion &lt;dbl&gt;, presion &lt;dbl&gt;,  #   visibilidad &lt;dbl&gt;, fecha_hora &lt;dttm&gt;</code> ::: :::</p>
+<p>Una forma de mostrar las relaciones entre las diferentes tablas es mediante un diagrama:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="diagrams_w_text_as_path/es/relational-nycflights.svg" class="img-fluid"></p>
+</div>
+</div>
+<p>Este diagrama es un poco abrumador, ¡pero es simple comparado con algunos que verás en el exterior! La clave para entender estos diagramas es recordar que cada relación siempre involucra un par de tablas. No necesitas entender todo el diagrama, necesitas entender la cadena de relaciones entre las tablas que te interesan.</p>
+<p>En estos datos:</p>
+<ul>
+<li><p><code>vuelos</code> se connecta con <code>aviones</code> a través de la variable <code>codigo_cola</code>.</p></li>
+<li><p><code>vuelos</code> se conecta con <code>aerolineas</code> a través de la variable <code>codigo_carrier</code>.</p></li>
+<li><p><code>vuelos</code> se conecta con <code>aeropuertos</code> de dos formas: a través de las variables <code>origen</code> y <code>destino</code>.</p></li>
+<li><p><code>vuelos</code> se conecta con <code>clima</code> a través de las variables <code>origen</code> (la ubicación), <code>anio</code>, <code>mes</code>, <code>dia</code> y <code>hora</code> (el horario).</p></li>
+</ul>
+<section id="ejercicios" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">13.2.1</span> Ejercicios</h3>
+<ol type="1">
+<li><p>Imagina que necesitas dibujar (aproximadamente) la ruta que cada avión vuela desde su origen hasta el destino. ¿Qué variables necesitarías? ¿Qué tablas necesitarías combinar?</p></li>
+<li><p>Olvidamos dibujar la relación entre <code>clima</code> y <code>aeropuertos</code>. ¿Cuál es la relación y cómo debería aparecer en el diagrama?</p></li>
+<li><p><code>clima</code> únicamente contiene información de los aeropuertos de origen (Nueva York). Si incluyera registros para todos los aeropuertos de EEUU, ¿qué relación tendría con <code>vuelos</code>?</p></li>
+<li><p>Sabemos que hay días “especiales” en el año y pocas personas suelen volar en ellos. ¿Cómo se representarían en un data frame? ¿Cuáles serían las claves primarias de esa tabla? ¿Cómo se conectaría con las tablas existentes?</p></li>
+</ol>
+</section>
+</section>
+<section id="claves" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="claves"><span class="header-section-number">13.3</span> Claves</h2>
+<p>Las variables usadas para conectar cada par de variables se llaman <em>claves</em> (del inglés <em>key</em>). Una clave es una variable (o un conjunto de variables) que identifican de manera única una observación. En casos simples, una sola variable es suficiente para identificar una observación. Por ejemplo, cada avión está identificado de forma única por su <code>codigo_cola</code>. En otros casos, se pueden necesitar múltiples variables. Por ejemplo, para identificar una observación en <code>clima</code> se necesitan cinco variables: <code>anio</code>, <code>mes</code>, <code>dia</code>, <code>hora</code> y <code>origen</code>.</p>
+<p>Existen dos tipos de claves:</p>
+<ul>
+<li><p>Una <em>clave primaria</em> identifica únicamente una observación en su propia tabla. Por ejemplo, <code>aviones$codigo_cola</code> es una clave primaria, ya que identifica de manera única cada avión en la tabla <code>aviones</code>.</p></li>
+<li><p>Una <em>clave foránea</em> únicamente identifica una observación en otra tabla. Por ejemplo, <code>vuelos$codigo_cola</code> es una clave foránea, ya que aparece en la tabla <code>vuelos</code>, en la que une cada vuelo con un único avión.</p></li>
+</ul>
+<p>Una variable puede ser clave primaria <em>y</em> clave foránea a la vez. Por ejemplo, <code>origen</code> es parte de la clave primaria <code>clima</code> y también una clave foránea de <code>aeropuertos</code>.</p>
+<p>Una vez que identificas las claves primarias en tus tablas, es una buena práctica verificar que identifican de forma única cada observación. Una forma de hacerlo es usar <code>count()</code> con las claves primarias y buscar las entradas con <code>n</code> mayor a uno:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>aviones <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(codigo_cola) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 2
+# ℹ 2 variables: codigo_cola &lt;chr&gt;, n &lt;int&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>clima <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(anio, mes, dia, hora, origen) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 6
+   anio   mes   dia  hora origen     n
+  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;int&gt;
+1  2013    11     3     1 EWR        2
+2  2013    11     3     1 JFK        2
+3  2013    11     3     1 LGA        2</code></pre>
+</div>
+</div>
+<p>A veces una tabla puede no tener una clave primaria explícita: cada fila es una observación, pero no existe una combinación de variables que la identifique de forma confiable. Por ejemplo, ¿cuál es la clave primaria en la tabla <code>vuelos</code>? Quizás pienses que podría ser la fecha más el vuelo o el código de cola, pero ninguna de esas variables es única:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>vuelos <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(anio, mes, dia, vuelo) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 29,768 × 5
+    anio   mes   dia vuelo     n
+   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+ 1  2013     1     1     1     2
+ 2  2013     1     1     3     2
+ 3  2013     1     1     4     2
+ 4  2013     1     1    11     3
+ 5  2013     1     1    15     2
+ 6  2013     1     1    21     2
+ 7  2013     1     1    27     4
+ 8  2013     1     1    31     2
+ 9  2013     1     1    32     2
+10  2013     1     1    35     2
+# ℹ 29,758 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>vuelos <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(anio, mes, dia, codigo_cola) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 64,928 × 5
+    anio   mes   dia codigo_cola     n
+   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;       &lt;int&gt;
+ 1  2013     1     1 N0EGMQ          2
+ 2  2013     1     1 N11189          2
+ 3  2013     1     1 N11536          2
+ 4  2013     1     1 N11544          3
+ 5  2013     1     1 N11551          2
+ 6  2013     1     1 N12540          2
+ 7  2013     1     1 N12567          2
+ 8  2013     1     1 N13123          2
+ 9  2013     1     1 N13538          3
+10  2013     1     1 N13566          3
+# ℹ 64,918 more rows</code></pre>
+</div>
+</div>
+<p>Al comenzar a trabajar con estos datos, ingenuamente asumimos que cada número de vuelo sería usado solo una vez al día: eso haría mucho más simple comunicar problemas con un vuelo específico. ¡Desafortunadamente este no es el caso! Si una tabla no tiene una clave primaria, a veces es útil incluir una con <code>mutate()</code> y <code>row_number()</code> (<em>número de fila</em>). Eso simplifica hacer coincidir observaciones una vez que haz hecho algunos filtros y quieres volver a verificar con los datos originales. Esto se llama <strong>clave subrogada</strong>.</p>
+<p>Una clave primaria y su correspondiente clave foránea en otra tabla forman una <strong>relación</strong>. Las relaciones son típicamente uno-a-muchos. Por ejemplo, cada vuelo tiene un avión, pero cada avión tiene muchos vuelos. En otros datos, ocasionalmente verás relaciones uno-a-uno. Puedes pensar esto como un caso especial de uno-a-muchos. Puedes modelar relaciones muchos-a-muchos como relaciones de la forma muchos-a-uno y uno-a-muchos. Por ejemplo, en estos datos existe una relación muchos-a-muchos entre aerolíneas y aeropuertos: cada aerolínea vuela a muchos aeropuertos, cada aeropuerto recibe a muchas aerolíneas.</p>
+<section id="ejercicios-1" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1" class="anchored" data-anchor-id="ejercicios-1"><span class="header-section-number">13.3.1</span> Ejercicios</h3>
+<ol type="1">
+<li><p>Agrega una clave subrogada a <code>vuelos</code>.</p></li>
+<li><p>Identifica las claves en los siguientes conjuntos de datos</p></li>
+<li><p><code>datos::bateadores</code></p></li>
+<li><p><code>datos::nombres</code></p></li>
+<li><p><code>datos::atmosfera</code></p></li>
+<li><p><code>datos::vehiculos</code></p></li>
+<li><p><code>datos::diamantes</code></p></li>
+</ol>
+<p>(Puede que necesites leer un poco de documentación.)</p>
+<ol type="1">
+<li><p>Dibuja un diagrama que ilustre las conexiones entre las tablas <code>bateadores</code>, <code>personas</code> y <code>salarios</code> incluidas en el paquete <strong>datos</strong>. Dibuja otro diagrama que muestre la relación entre <code>personas</code>, <code>dirigentes</code> y <code>premios_dirigentes</code>.</p>
+<p>¿Cómo caracterizarías las relación entre <code>bateadores</code>, <code>lanzadores</code> y <code>jardineros</code>?</p></li>
+</ol>
+</section>
+</section>
+<section id="mutating-joins" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="mutating-joins"><span class="header-section-number">13.4</span> Uniones de transformación</h2>
+<p>La primera herramienta que miraremos para combinar pares de variables es la <strong>unión de transformación</strong> (<em>mutating join</em>). Una unión de transformación te permite combinar variables a partir de dos tablas. Primero busca coincidencias de observaciones de acuerdo a sus claves y luego copia las variables de una tabla en la otra.</p>
+<p>Tal como <code>mutate()</code>, las funciones de unión agregan variables hacia la derecha, por lo que si tienes muchas variables inicialmente, las nuevas variables no se imprimirán. Para estos ejemplos, crearemos un conjunto de datos más angosto para que sea más fácil ver qué es lo que está ocurriendo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>vuelos2 <span class="ot">&lt;-</span> vuelos <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(anio<span class="sc">:</span>dia, hora, origen, destino, codigo_cola, aerolinea)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>vuelos2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 8
+    anio   mes   dia  hora origen destino codigo_cola aerolinea
+   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;    
+ 1  2013     1     1     5 EWR    IAH     N14228      UA       
+ 2  2013     1     1     5 LGA    IAH     N24211      UA       
+ 3  2013     1     1     5 JFK    MIA     N619AA      AA       
+ 4  2013     1     1     5 JFK    BQN     N804JB      B6       
+ 5  2013     1     1     6 LGA    ATL     N668DN      DL       
+ 6  2013     1     1     5 EWR    ORD     N39463      UA       
+ 7  2013     1     1     6 EWR    FLL     N516JB      B6       
+ 8  2013     1     1     6 LGA    IAD     N829AS      EV       
+ 9  2013     1     1     6 JFK    MCO     N593JB      B6       
+10  2013     1     1     6 LGA    ORD     N3ALAA      AA       
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+<p>(Recuerda que en RStudio puedes también usar <code>View()</code> para evitar este problema.)</p>
+<p>Imagina que quieres incluir el nombre completo de la aerolínea en <code>vuelos2</code>. Puedes combinar los datos de <code>aerolinas</code> y <code>vuelos2</code> con <code>left_join()</code> (<em>union_izquierda</em>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>vuelos2 <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>origen, <span class="sc">-</span>destino) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(aerolineas, <span class="at">by =</span> <span class="st">"aerolinea"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 7
+    anio   mes   dia  hora codigo_cola aerolinea nombre                  
+   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;                   
+ 1  2013     1     1     5 N14228      UA        United Air Lines Inc.   
+ 2  2013     1     1     5 N24211      UA        United Air Lines Inc.   
+ 3  2013     1     1     5 N619AA      AA        American Airlines Inc.  
+ 4  2013     1     1     5 N804JB      B6        JetBlue Airways         
+ 5  2013     1     1     6 N668DN      DL        Delta Air Lines Inc.    
+ 6  2013     1     1     5 N39463      UA        United Air Lines Inc.   
+ 7  2013     1     1     6 N516JB      B6        JetBlue Airways         
+ 8  2013     1     1     6 N829AS      EV        ExpressJet Airlines Inc.
+ 9  2013     1     1     6 N593JB      B6        JetBlue Airways         
+10  2013     1     1     6 N3ALAA      AA        American Airlines Inc.  
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+<p>El resultado de unir <code>aerolineas</code> y <code>vuelos2</code> es la inclusión de una variable adicional: <code>nombre</code>. Esta es la razón de que llamemos unión de transformación a este tipo de unión. En este caso, podrías obtener el mismo resultado usando <code>mutate()</code> junto a las operaciones de filtro de R base:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>vuelos2 <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>origen, <span class="sc">-</span>destino) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">nombre =</span> aerolineas<span class="sc">$</span>nombre[<span class="fu">match</span>(aerolinea, aerolineas<span class="sc">$</span>aerolinea)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 7
+    anio   mes   dia  hora codigo_cola aerolinea nombre                  
+   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;                   
+ 1  2013     1     1     5 N14228      UA        United Air Lines Inc.   
+ 2  2013     1     1     5 N24211      UA        United Air Lines Inc.   
+ 3  2013     1     1     5 N619AA      AA        American Airlines Inc.  
+ 4  2013     1     1     5 N804JB      B6        JetBlue Airways         
+ 5  2013     1     1     6 N668DN      DL        Delta Air Lines Inc.    
+ 6  2013     1     1     5 N39463      UA        United Air Lines Inc.   
+ 7  2013     1     1     6 N516JB      B6        JetBlue Airways         
+ 8  2013     1     1     6 N829AS      EV        ExpressJet Airlines Inc.
+ 9  2013     1     1     6 N593JB      B6        JetBlue Airways         
+10  2013     1     1     6 N3ALAA      AA        American Airlines Inc.  
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+<p>Sin embargo, esto último es difícil de generalizar cuando necesitas hacer coincidir múltiples variables y requiere hacer una lectura detenida para entender lo que se quiere hacer.</p>
+<p>En las siguientes secciones explicaremos en detalle cómo funcionan las uniones de transformación. Comenzarás aprendiendo una representación visual útil de las uniones. Luego usaremos eso para explicar las cuatro uniones de transformación: la unión interior y las tres uniones exteriores. Cuando trabajas con datos reales, las claves no siempre identifican a las observaciones de forma única. Es por eso que a continuación hablaremos de lo que ocurre cuando no existe una coincidencia única. Finalmente, aprenderás cómo decirle a <strong>dplyr</strong> qué variables son las claves para una unión determinada.</p>
+<section id="entendiendo-las-uniones" class="level3" data-number="13.4.1">
+<h3 data-number="13.4.1" class="anchored" data-anchor-id="entendiendo-las-uniones"><span class="header-section-number">13.4.1</span> Entendiendo las uniones</h3>
+<p>Para ayudarte a entender las uniones, usaremos una representación gráfica:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="diagrams_w_text_as_path/es/join-setup.svg" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>key, <span class="sc">~</span>val_x,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="st">"x1"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>, <span class="st">"x2"</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">3</span>, <span class="st">"x3"</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>key, <span class="sc">~</span>val_y,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="st">"y1"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>, <span class="st">"y2"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4</span>, <span class="st">"y3"</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La columna coloreada representa la variable “clave”: estas se usan para unir filas entre las tablas. La columa gris representa la columna “valor” que se usa en todo el proceso. En estos ejemplos te mostraremos una única clave, pero la idea es generalizable de manera directa a múltiples claves y múltiples valores.</p>
+<p>Una unión es una forma de conectar cada fila en <code>x</code> con cero, una o más filas en <code>y</code>. El siguiente diagrama muestra cada coincidencia potencial como una intersección de pares de líneas.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="diagrams_w_text_as_path/es/join-setup2.svg" class="img-fluid"></p>
+</div>
+</div>
+<p>(Si observas detenidamente, te darás cuenta de que hemos cambiado el orden de las columnas clave y valor en <code>x</code>. Esto es para enfatizar que las uniones encuentran coincidencias basadas en las claves; el valor simplemente se traslada durante el proceso.)</p>
+<p>En la unión que mostramos, las coincidencias se indican con puntos. El número de puntos es igual al número de coincidencias y al número de filas en la salida.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="diagrams_w_text_as_path/es/join-inner.svg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="inner-join" class="level3" data-number="13.4.2">
+<h3 data-number="13.4.2" class="anchored" data-anchor-id="inner-join"><span class="header-section-number">13.4.2</span> Unión interior</h3>
+<p>La forma más simple de unión es la <em>unión interior</em> (del inglés <em>inner join</em>). Una unión interior une pares de observaciones siempre que sus claves sean iguales:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="diagrams_w_text_as_path/es/join-inner.svg" class="img-fluid"></p>
+</div>
+</div>
+<p>(Para ser precisos, esto corresponde a una <em>unión de igualdad</em> (o <em>equijoin</em>) interior, debido a que las claves se unen usando el operador de igualdad. Dado que muchas uniones son uniones de igualdad, por lo general omitimos esa especificación.)</p>
+<p>El output de una unión interior es un nuevo data frame que contiene la clave, los valores de x y los valores de y. Usamos <code>by</code> (<em>según</em>) para indicar a dplyr qué variable es la clave:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(y, <span class="at">by =</span> <span class="st">"key"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+    key val_x val_y
+  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+1     1 x1    y1   
+2     2 x2    y2   </code></pre>
+</div>
+</div>
+<p>La propiedad más importante de una unión interior es que las filas no coincidentes no se incluyen en el resultado. Esto significa que generalmente las uniones interiores no son apropiadas para su uso en el análisis de datos dado que es muy fácil perder observaciones.</p>
+</section>
+<section id="outer-join" class="level3" data-number="13.4.3">
+<h3 data-number="13.4.3" class="anchored" data-anchor-id="outer-join"><span class="header-section-number">13.4.3</span> Uniones exteriores</h3>
+<p>Una unión interior mantiene las observaciones que aparecen en ambas tablas. Una <strong>unión exterior</strong> mantiene las observaciones que aparecen en al menos una de las tablas. Existen tres tipos de uniones exteriores:</p>
+<ul>
+<li>Una <strong>unión izquierda</strong> (<em>left join</em>) mantiene todas las observaciones en <code>x</code>.</li>
+<li>Una <strong>unión derecha</strong> (<em>right join</em>) mantiene todas las observaciones en <code>y</code>.</li>
+<li>Una <strong>unión completa</strong> (<em>full join</em>) mantiene todas las observaciones en <code>x</code> e <code>y</code>.</li>
+</ul>
+<p>Estas uniones funcionan agregando una observación “virtual” adicional a cada tabla. Esta observación tiene una clave que siempre coincide (de no haber otras claves coincidentes) y un valor que se llena con <code>NA</code>.</p>
+<p>Gráficamente corresponde a lo siguiente:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="diagrams_w_text_as_path/es/join-outer.svg" class="img-fluid"></p>
+</div>
+</div>
+<p>La unión que más frecuentemente se usa es la unión izquierda: úsala cuando necesites buscar datos adicionales en otra tabla, dado que preserva las observaciones originales incluso cuando no hay coincidencias. La unión izquierda debiera ser tu unión por defecto, a menos que tengas un motivo importante para preferir una de las otras.</p>
+<p>Otra forma de ilustrar diferentes tipos de uniones es mediante un diagrama de Venn:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="diagrams_w_text_as_path/es/join-venn.svg" class="img-fluid"></p>
+</div>
+</div>
+<p>Sin embargo, esta no es una buena representación. Puede ayudar a recordar qué uniones preservan las observaciones en qué tabla pero esto tiene una limitante importante: un diagrama de Venn no puede mostrar qué ocurre con las claves que no identifican de manera única una observación.</p>
+</section>
+<section id="join-matches" class="level3" data-number="13.4.4">
+<h3 data-number="13.4.4" class="anchored" data-anchor-id="join-matches"><span class="header-section-number">13.4.4</span> Claves duplicadas</h3>
+<p>Hasta ahora todos los diagramas han asumido que las claves son únicas. Pero ese no siempre es así. Esta sección explica qué ocurre en esos casos. Existen dos posibilidades:</p>
+<ol type="1">
+<li>Una tabla tiene claves duplicadas. Esto es útil cuando quieres agregar información adicional dado que típicamente existe una relación uno a muchos.</li>
+</ol>
+<p>::: {.cell} ::: {.cell-output-display} <img src="diagrams_w_text_as_path/es/join-one-to-many.svg" class="img-fluid"> ::: :::</p>
+<p>Nota que hemos puesto la columna clave en una posición ligeramente distinta en el output. Esto refleja que la clave es una clave primaria en <code>y</code> y una clave foránea en <code>x</code>.</p>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a> <span class="sc">~</span>key, <span class="sc">~</span>val_x,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>, <span class="st">"x1"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>, <span class="st">"x2"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>, <span class="st">"x3"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>, <span class="st">"x4"</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a> <span class="sc">~</span>key, <span class="sc">~</span>val_y,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>, <span class="st">"y1"</span>,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>, <span class="st">"y2"</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(x, y, <span class="at">by =</span> <span class="st">"key"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 4 × 3      key val_x val_y    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  1     1 x1    y1     2     2 x2    y2     3     2 x3    y2     4     1 x4    y1</code> ::: :::</p>
+<ol type="1">
+<li>Ambas tablas tienen claves duplicadas. Esto es usualmente un error debido a que en ninguna de las tablas las claves identifican de manera única una observación. Cuando unes claves duplicadas, se obtienen todas las posibles combinaciones, es decir, el producto cartesiano:</li>
+</ol>
+<p>::: {.cell} ::: {.cell-output-display} <img src="diagrams_w_text_as_path/es/join-many-to-many.svg" class="img-fluid"> ::: :::</p>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a> <span class="sc">~</span>key, <span class="sc">~</span>val_x,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>, <span class="st">"x1"</span>,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>, <span class="st">"x2"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>, <span class="st">"x3"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>, <span class="st">"x4"</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a> <span class="sc">~</span>key, <span class="sc">~</span>val_y,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>, <span class="st">"y1"</span>,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>, <span class="st">"y2"</span>,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>, <span class="st">"y3"</span>,</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>, <span class="st">"y4"</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(x, y, <span class="at">by =</span> <span class="st">"key"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stderr} <code>Warning in left_join(x, y, by = "key"): Detected an unexpected many-to-many relationship between `x` and `y`.    ℹ Row 2 of `x` matches multiple rows in `y`.    ℹ Row 2 of `y` matches multiple rows in `x`.    ℹ If a many-to-many relationship is expected, set `relationship =      "many-to-many"` to silence this warning.</code> :::</p>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 6 × 3        key val_x val_y      &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    1     1 x1    y1       2     2 x2    y2       3     2 x2    y3       4     2 x3    y2       5     2 x3    y3       6     3 x4    y4</code> ::: :::</p>
+</section>
+<section id="join-by" class="level3" data-number="13.4.5">
+<h3 data-number="13.4.5" class="anchored" data-anchor-id="join-by"><span class="header-section-number">13.4.5</span> Definiendo las columnas clave</h3>
+<p>Hasta ahora, los pares de tablas siempre se han unido de acuerdo a una única variable y esa variable tiene el mismo nombre en ambas tablas. Esta restricción se expresa de la forma <code>by = "key"</code>. Puedes usar otros valores de <code>by</code> para conectar las tablas de otras maneras:</p>
+<ul>
+<li>Por defecto, <code>by = NULL</code>, usa todas las variables que aparecen en ambas tablas, lo que se conoce como unión <strong>natural</strong>. Por ejemplo, las tablas vuelos y clima coinciden en sus variables comunes: <code>anio</code>, <code>mes</code>, <code>dia</code>, <code>hora</code> y <code>origen</code>.</li>
+</ul>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>vuelos2 <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">left_join</span>(clima)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stderr} <code>Joining with `by = join_by(anio, mes, dia, hora, origen)`</code> :::</p>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 336,776 × 18      anio   mes   dia  hora origen destino codigo_cola aerolinea temperatura     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;           &lt;dbl&gt;   1  2013     1     1     5 EWR    IAH     N14228      UA               39.0   2  2013     1     1     5 LGA    IAH     N24211      UA               39.9   3  2013     1     1     5 JFK    MIA     N619AA      AA               39.0   4  2013     1     1     5 JFK    BQN     N804JB      B6               39.0   5  2013     1     1     6 LGA    ATL     N668DN      DL               39.9   6  2013     1     1     5 EWR    ORD     N39463      UA               39.0   7  2013     1     1     6 EWR    FLL     N516JB      B6               37.9   8  2013     1     1     6 LGA    IAD     N829AS      EV               39.9   9  2013     1     1     6 JFK    MCO     N593JB      B6               37.9  10  2013     1     1     6 LGA    ORD     N3ALAA      AA               39.9  # ℹ 336,766 more rows  # ℹ 9 more variables: punto_rocio &lt;dbl&gt;, humedad &lt;dbl&gt;, direccion_viento &lt;dbl&gt;,  #   velocidad_viento &lt;dbl&gt;, velocidad_rafaga &lt;dbl&gt;, precipitacion &lt;dbl&gt;,  #   presion &lt;dbl&gt;, visibilidad &lt;dbl&gt;, fecha_hora &lt;dttm&gt;</code> ::: :::</p>
+<ul>
+<li>Un vector de caracteres, <code>by = "x"</code>. Esto es similar a una unión natural, pero usa algunas de las variables comunes. Por ejemplo, <code>vuelos</code> y <code>aviones</code> tienen la variable <code>anio</code>, pero esta significa cosas distintas en cada tabla por lo que queremos unir por <code>codigo_cola</code>.</li>
+</ul>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>vuelos2 <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">left_join</span>(aviones, <span class="at">by =</span> <span class="st">"codigo_cola"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 336,776 × 16     anio.x   mes   dia  hora origen destino codigo_cola aerolinea anio.y tipo          &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;      1   2013     1     1     5 EWR    IAH     N14228      UA          1999 Ala fij…   2   2013     1     1     5 LGA    IAH     N24211      UA          1998 Ala fij…   3   2013     1     1     5 JFK    MIA     N619AA      AA          1990 Ala fij…   4   2013     1     1     5 JFK    BQN     N804JB      B6          2012 Ala fij…   5   2013     1     1     6 LGA    ATL     N668DN      DL          1991 Ala fij…   6   2013     1     1     5 EWR    ORD     N39463      UA          2012 Ala fij…   7   2013     1     1     6 EWR    FLL     N516JB      B6          2000 Ala fij…   8   2013     1     1     6 LGA    IAD     N829AS      EV          1998 Ala fij…   9   2013     1     1     6 JFK    MCO     N593JB      B6          2004 Ala fij…  10   2013     1     1     6 LGA    ORD     N3ALAA      AA            NA &lt;NA&gt;      # ℹ 336,766 more rows  # ℹ 6 more variables: fabricante &lt;chr&gt;, modelo &lt;chr&gt;, motores &lt;int&gt;,  #   asientos &lt;int&gt;, velocidad &lt;int&gt;, tipo_motor &lt;chr&gt;</code> ::: :::</p>
+<p>Nota que la variable <code>anio</code> (que aparece en los dos data frames de entrada, pero que no es igual en ambos casos) se desambigua con un sufijo en el output.</p>
+<ul>
+<li>Un vector de caracteres con nombres: <code>by = c("a" = "b")</code>. Esto va a unir la variable <code>a</code> en la tabla <code>x</code> con la variabla <code>b</code> en la tabla <code>y</code>. Las variables de <code>x</code> se usarán en el output.</li>
+</ul>
+<p>Por ejemplo, si queremos dibujar un mapa necesitamos combinar los datos de vuelos con los datos de aeropuertos, que contienen la ubicación de cada uno (<code>latitud</code> y <code>longitud</code>). Cada vuelo tiene un <code>aeropuerto</code> de origen y destino, por lo que necesitamos especficar cuál queremos unir:</p>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>vuelos2 <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">left_join</span>(aeropuertos, <span class="fu">c</span>(<span class="st">"origen"</span> <span class="ot">=</span> <span class="st">"codigo_aeropuerto"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 336,776 × 15      anio   mes   dia  hora origen destino codigo_cola aerolinea nombre   latitud     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt;   1  2013     1     1     5 EWR    IAH     N14228      UA        Newark …    40.7   2  2013     1     1     5 LGA    IAH     N24211      UA        La Guar…    40.8   3  2013     1     1     5 JFK    MIA     N619AA      AA        John F …    40.6   4  2013     1     1     5 JFK    BQN     N804JB      B6        John F …    40.6   5  2013     1     1     6 LGA    ATL     N668DN      DL        La Guar…    40.8   6  2013     1     1     5 EWR    ORD     N39463      UA        Newark …    40.7   7  2013     1     1     6 EWR    FLL     N516JB      B6        Newark …    40.7   8  2013     1     1     6 LGA    IAD     N829AS      EV        La Guar…    40.8   9  2013     1     1     6 JFK    MCO     N593JB      B6        John F …    40.6  10  2013     1     1     6 LGA    ORD     N3ALAA      AA        La Guar…    40.8  # ℹ 336,766 more rows  # ℹ 5 more variables: longitud &lt;dbl&gt;, altura &lt;dbl&gt;, zona_horaria &lt;dbl&gt;,  #   horario_verano &lt;chr&gt;, zona_horaria_iana &lt;chr&gt;</code> :::</p>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>vuelos2 <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">left_join</span>(aeropuertos, <span class="fu">c</span>(<span class="st">"destino"</span> <span class="ot">=</span> <span class="st">"codigo_aeropuerto"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell-output .cell-output-stdout} <code># A tibble: 336,776 × 15      anio   mes   dia  hora origen destino codigo_cola aerolinea nombre   latitud     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt;   1  2013     1     1     5 EWR    IAH     N14228      UA        George …    30.0   2  2013     1     1     5 LGA    IAH     N24211      UA        George …    30.0   3  2013     1     1     5 JFK    MIA     N619AA      AA        Miami I…    25.8   4  2013     1     1     5 JFK    BQN     N804JB      B6        &lt;NA&gt;        NA     5  2013     1     1     6 LGA    ATL     N668DN      DL        Hartsfi…    33.6   6  2013     1     1     5 EWR    ORD     N39463      UA        Chicago…    42.0   7  2013     1     1     6 EWR    FLL     N516JB      B6        Fort La…    26.1   8  2013     1     1     6 LGA    IAD     N829AS      EV        Washing…    38.9   9  2013     1     1     6 JFK    MCO     N593JB      B6        Orlando…    28.4  10  2013     1     1     6 LGA    ORD     N3ALAA      AA        Chicago…    42.0  # ℹ 336,766 more rows  # ℹ 5 more variables: longitud &lt;dbl&gt;, altura &lt;dbl&gt;, zona_horaria &lt;dbl&gt;,  #   horario_verano &lt;chr&gt;, zona_horaria_iana &lt;chr&gt;</code> ::: :::</p>
+</section>
+<section id="ejercicios-2" class="level3" data-number="13.4.6">
+<h3 data-number="13.4.6" class="anchored" data-anchor-id="ejercicios-2"><span class="header-section-number">13.4.6</span> Ejercicios</h3>
+<ol type="1">
+<li><p>Calcula el atraso promedio por destino y luego une los datos en <code>aeropuertos</code> para que puedas mostrar la distribución espacial de los atrasos. Esta es una forma fácil de dibujar un mapa de los Estados Unidos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>aeropuertos <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">semi_join</span>(vuelos, <span class="fu">c</span>(<span class="st">"codigo_aeropuerto"</span> <span class="ot">=</span> <span class="st">"destino"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(longitud, latitud)) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">borders</span>(<span class="st">"state"</span>) <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">coord_quickmap</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ol>
+<p>(No te preocupes si no entiendes quá hace <code>semi_join()</code>; lo aprenderás a continuación.)</p>
+<p>Quizás quieras usar <code>size</code> o <code>colour</code> para editar los puntos y mostrar el atraso promedio de cada aeropuerto.</p>
+<ol start="2" type="1">
+<li><p>Agrega la ubicación de origen <em>y</em> destino (por ejemplo, <code>latitud</code> y <code>longitud</code>) a <code>vuelos</code>.</p></li>
+<li><p>¿Existe una relación entre la antiguedad de un avión y sus atrasos?</p></li>
+<li><p>¿Qué condiciones climáticas hacen más probables los atrasos?</p></li>
+<li><p>¿Qué sucedió el día 13 de junio de 2013? Muestra el patrón espacial de los atrasos. Luego, usa un buscador para encontrar referencias cruzadas con el clima.</p></li>
+</ol>
+</section>
+<section id="otras-implementaciones" class="level3" data-number="13.4.7">
+<h3 data-number="13.4.7" class="anchored" data-anchor-id="otras-implementaciones"><span class="header-section-number">13.4.7</span> Otras implementaciones</h3>
+<p><code>base::merge()</code> puede realizar los cuatro tipos de uniones de transformación:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>dplyr</th>
+<th>merge</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>inner_join(x, y)</code></td>
+<td><code>merge(x, y)</code></td>
+</tr>
+<tr class="even">
+<td><code>left_join(x, y)</code></td>
+<td><code>merge(x, y, all.x = TRUE)</code></td>
+</tr>
+<tr class="odd">
+<td><code>right_join(x, y)</code></td>
+<td><code>merge(x, y, all.y = TRUE)</code>,</td>
+</tr>
+<tr class="even">
+<td><code>full_join(x, y)</code></td>
+<td><code>merge(x, y, all.x = TRUE, all.y = TRUE)</code></td>
+</tr>
+</tbody>
+</table>
+<p>La ventaja de los verbos específicos de <strong>dplyr</strong> es que muestran de manera clara la intención del código: la diferencia entre las uniones es realmente importante pero se esconde en los argumentos de <code>merge()</code>. Las uniones de <strong>dplyr</strong> son considerablemente más rápidas y no generan problemas con el orden de las filas</p>
+<p>SQL es una inspiración para las convenciones de <strong>dplyr</strong>, por lo que su traducción es directa:</p>
+<table class="table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 59%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>dplyr</th>
+<th>SQL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>inner_join(x, y, by = "z")</code></td>
+<td><code>SELECT * FROM x INNER JOIN y USING (z)</code></td>
+</tr>
+<tr class="even">
+<td><code>left_join(x, y, by = "z")</code></td>
+<td><code>SELECT * FROM x LEFT OUTER JOIN y USING (z)</code></td>
+</tr>
+<tr class="odd">
+<td><code>right_join(x, y, by = "z")</code></td>
+<td><code>SELECT * FROM x RIGHT OUTER JOIN y USING (z)</code></td>
+</tr>
+<tr class="even">
+<td><code>full_join(x, y, by = "z")</code></td>
+<td><code>SELECT * FROM x FULL OUTER JOIN y USING (z)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Nota que “INNER” y “OUTER” son opcionales, por lo que a menudo se omiten.</p>
+<p>Unir distintas variables entre tablas, por ejemplo <code>inner_join(x, y, by = c("a" = "b"))</code>, usa una sintaxis ligeramente distinta en SQL: <code>SELECT * FROM x INNER JOIN y ON x.a = y.b</code>. Como la sintaxis sugiere, SQL soporta un rango más amplio de tipos de uniones que <strong>dplyr</strong>, ya que puedes conectar tablas usando restricciones distintas a las de igualdad (a veces llamadas de no-igualdad).</p>
+</section>
+</section>
+<section id="filtering-joins" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="filtering-joins"><span class="header-section-number">13.5</span> Uniones de filtro</h2>
+<p>Las uniones de filtro unen observaciones de la misma forma que las uniones de transformación pero afectan a las observaciones, no a las variables. Existen dos tipos:</p>
+<ul>
+<li><code>semi_join(x, y)</code> <strong>mantiene</strong> todas las observaciones en <code>x</code> con coincidencias en <code>y</code>.</li>
+<li><code>anti_join(x, y)</code> <strong>descarta</strong> todas las observaciones en <code>x</code> con coincidencias en <code>y</code>.</li>
+</ul>
+<p>Las semi uniones son útiles para unir tablas resumen previamente filtradas con las filas originales. Por ejemplo, imagina que encontraste los diez destinos más populares:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>destinos_populares <span class="ot">&lt;-</span> vuelos <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(destino, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>destinos_populares</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 2
+   destino     n
+   &lt;chr&gt;   &lt;int&gt;
+ 1 ORD     17283
+ 2 ATL     17215
+ 3 LAX     16174
+ 4 BOS     15508
+ 5 MCO     14082
+ 6 CLT     14064
+ 7 SFO     13331
+ 8 FLL     12055
+ 9 MIA     11728
+10 DCA      9705</code></pre>
+</div>
+</div>
+<p>Ahora quieres encontrar cada vuelo que fue a alguno de esos destinos. Puedes construir un filtro:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>vuelos <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(destino <span class="sc">%in%</span> destinos_populares<span class="sc">$</span>destino)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 141,145 × 19
+    anio   mes   dia horario_salida salida_programada atraso_salida
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;          &lt;int&gt;             &lt;int&gt;         &lt;dbl&gt;
+ 1  2013     1     1            542               540             2
+ 2  2013     1     1            554               600            -6
+ 3  2013     1     1            554               558            -4
+ 4  2013     1     1            555               600            -5
+ 5  2013     1     1            557               600            -3
+ 6  2013     1     1            558               600            -2
+ 7  2013     1     1            558               600            -2
+ 8  2013     1     1            558               600            -2
+ 9  2013     1     1            559               559             0
+10  2013     1     1            600               600             0
+# ℹ 141,135 more rows
+# ℹ 13 more variables: horario_llegada &lt;int&gt;, llegada_programada &lt;int&gt;,
+#   atraso_llegada &lt;dbl&gt;, aerolinea &lt;chr&gt;, vuelo &lt;int&gt;, codigo_cola &lt;chr&gt;,
+#   origen &lt;chr&gt;, destino &lt;chr&gt;, tiempo_vuelo &lt;dbl&gt;, distancia &lt;dbl&gt;,
+#   hora &lt;dbl&gt;, minuto &lt;dbl&gt;, fecha_hora &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<p>Pero es difícil extender este enfoque a varias variables. Por ejemplo, imagina que encontraste los diez días con los atrasos promedio más altos. ¿Cómo construirías un filtro que use <code>anio</code>, <code>mes</code> y <code>dia</code> para buscar coincidencias con <code>vuelos</code>?</p>
+<p>Puedes, en cambio, usar <code>semi_join()</code>, que conecta dos tablas de manera similar a una unión de transformación, pero en lugar de agregar nuevas columnas, mantiene las filas en <code>x</code> que tienen coincidencias en <code>y</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>vuelos <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">semi_join</span>(destinos_populares)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(destino)`</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 141,145 × 19
+    anio   mes   dia horario_salida salida_programada atraso_salida
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;          &lt;int&gt;             &lt;int&gt;         &lt;dbl&gt;
+ 1  2013     1     1            542               540             2
+ 2  2013     1     1            554               600            -6
+ 3  2013     1     1            554               558            -4
+ 4  2013     1     1            555               600            -5
+ 5  2013     1     1            557               600            -3
+ 6  2013     1     1            558               600            -2
+ 7  2013     1     1            558               600            -2
+ 8  2013     1     1            558               600            -2
+ 9  2013     1     1            559               559             0
+10  2013     1     1            600               600             0
+# ℹ 141,135 more rows
+# ℹ 13 more variables: horario_llegada &lt;int&gt;, llegada_programada &lt;int&gt;,
+#   atraso_llegada &lt;dbl&gt;, aerolinea &lt;chr&gt;, vuelo &lt;int&gt;, codigo_cola &lt;chr&gt;,
+#   origen &lt;chr&gt;, destino &lt;chr&gt;, tiempo_vuelo &lt;dbl&gt;, distancia &lt;dbl&gt;,
+#   hora &lt;dbl&gt;, minuto &lt;dbl&gt;, fecha_hora &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<p>Gráficamente, un <code>semi_join()</code> se ve de la siguiente forma:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="diagrams_w_text_as_path/es/join-semi.svg" class="img-fluid"></p>
+</div>
+</div>
+<p>Solo la existencia de coincidencias es importante; da igual qué observaciones son coincidentes. Esto significa que las uniones de filtro nunca duplican filas como lo hacen las uniones de transformación:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="diagrams_w_text_as_path/es/join-semi-many.svg" class="img-fluid"></p>
+</div>
+</div>
+<p>La operación inversa de <code>semi_join()</code> es <code>anti_join()</code>. <code>anti_join()</code> mantiene las filas que <em>no</em> tienen coincidencias:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="diagrams_w_text_as_path/es/join-anti.svg" class="img-fluid"></p>
+</div>
+</div>
+<p>Las anti uniones son útiles para encontrar desajustes. Por ejemplo, al conectar <code>aviones</code> y <code>vuelos</code>, podría interesarte saber que existen muchos <code>vuelos</code> que no tienen coincidencias en <code>aviones</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>vuelos <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(aviones, <span class="at">by =</span> <span class="st">"codigo_cola"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(codigo_cola, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 722 × 2
+   codigo_cola     n
+   &lt;chr&gt;       &lt;int&gt;
+ 1 &lt;NA&gt;         2512
+ 2 N725MQ        575
+ 3 N722MQ        513
+ 4 N723MQ        507
+ 5 N713MQ        483
+ 6 N735MQ        396
+ 7 N0EGMQ        371
+ 8 N534MQ        364
+ 9 N542MQ        363
+10 N531MQ        349
+# ℹ 712 more rows</code></pre>
+</div>
+</div>
+<section id="ejercicios-3" class="level3" data-number="13.5.1">
+<h3 data-number="13.5.1" class="anchored" data-anchor-id="ejercicios-3"><span class="header-section-number">13.5.1</span> Ejercicios</h3>
+<ol type="1">
+<li><p>¿Qué significa que a un vuelo le falte <code>codigo_cola</code>? ¿Qué tienen en común los códigos de cola que no tienen registros coincidentes en <code>aviones</code>? (Pista: una variable explica ~90% de los problemas.)</p></li>
+<li><p>Filtra los vuelos para mostrar únicamente los aviones que han realizado al menos cien viajes.</p></li>
+<li><p>Combina <code>datos::vehiculos</code> y <code>datos::comunes</code> para encontrar los registros de los modelos más comunes.</p></li>
+<li><p>Encuentra las 48 horas (en el transcurso del año) que tengan los peores atrasos. Haz una referencia cruzada con la tabla <code>clima</code>. ¿Puedes observar patrones?</p></li>
+<li><p>¿Qué te indica <code>anti_join(vuelos, aeropuertos, by = c("destino" = "codigo_aeropuerto"))</code>? ¿Qué te indica <code>anti_join(aeropuertos, vuelos, by = c("codigo_aeropuerto" = "destino"))</code>?</p></li>
+<li><p>Puedes esperar que exista una relación implícita entre aviones y aerolíneas, dado que cada avión es operado por una única aerolínea. Confirma o descarta esta hipótesis usando las herramientas que aprendiste más arriba.</p></li>
+</ol>
+</section>
+</section>
+<section id="problemas-con-las-uniones" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="problemas-con-las-uniones"><span class="header-section-number">13.6</span> Problemas con las uniones</h2>
+<p>Los datos con los que has estado trabajando en este capítulo han sido limpiados de modo que tengas la menor cantidad de problemas posibles. Tus datos difícilmente estarán tan ordenados, por lo que hay algunas consideraciones y pasos a tener en cuenta para que las uniones funcionen adecuadamente sobre tus propios datos.</p>
+<ol type="1">
+<li><p>Comienza identificando las variables que forman las claves primarias en cada tabla. Usualmente debieras hacerlo considerando tus conocimientos de los datos, no observando empíricamente las combinaciones de variables que resultan en un identificador único. Si te centras en las variables sin pensar en sus significados, puedes tener la (mala) suerte de encontrar una combinación única en tus datos pero que no sea válida en general.</p>
+<p>Por ejemplo, la altura y la longitud identifican de manera única cada aeropuerto, ¡pero no son buenos identificadores!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>  aeropuertos <span class="sc">%&gt;%</span> <span class="fu">count</span>(altura, longitud) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 3
+# ℹ 3 variables: altura &lt;dbl&gt;, longitud &lt;dbl&gt;, n &lt;int&gt;</code></pre>
+</div>
+</div></li>
+<li><p>Verifica que ninguna de las variables en la clave primaria esté perdida. ¡Si hay un valor faltante no podrá identificar una observación!</p></li>
+<li><p>Verifica que las claves foráneas coincidan con las claves primarias en otra tabla. La mejor forma de hacerlo es mediante un <code>anti_join()</code>. Es común que las claves no coincidan debido a errores en la entrada de datos. Arreglar este problema requiere mucho trabajo.</p>
+<p>Si tienes claves perdidas, debes tener cuidado en el uso de unión interior versus unión exterior y considerar cuidadosamente si quieres descartar las filas que no tengan coincidencias.</p></li>
+</ol>
+<p>Ten en cuenta que verificar el número de filas antes y después de unir no es suficiente para asegurar que la unión funcionó de forma exitosa. Si tienes una unión interior con claves duplicadas en ambas tablas, puedes tener la mala suerte de que el número de filas descartadas sea igual al número de filas duplicadas.</p>
+</section>
+<section id="set-operations" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="set-operations"><span class="header-section-number">13.7</span> Operaciones de conjuntos</h2>
+<p>El tipo final de verbo para dos tablas son las operaciones de conjunto. Si bien lo usamos de manera poco frecuente, en ocasiones es útil cuando quieres dividir un filtro complejo en partes maś simples. Todas estas operaciones funcionan con una fila completa, comparando los valores de cada variable. Esto espera que los input <code>x</code> e <code>y</code> tengan las mismas variables y trata las observaciones como conjuntos:</p>
+<ul>
+<li><code>intersect(x, y)</code>: devuelve las observaciones comunes en <code>x</code> e <code>y</code>.</li>
+<li><code>union(x, y)</code>: devuelve las observaciones únicas en <code>x</code> e <code>y</code>.</li>
+<li><code>setdiff(x, y)</code>: devuelve las observaciones en <code>x</code> pero no en <code>y</code>.</li>
+</ul>
+<p>Dados los siguientes datos simples:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>x, <span class="sc">~</span>y,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="dv">1</span>,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>, <span class="dv">1</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>x, <span class="sc">~</span>y,</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="dv">1</span>,</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="dv">2</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Las cuatro posibilidades son:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">intersect</span>(df1, df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+      x     y
+  &lt;dbl&gt; &lt;dbl&gt;
+1     1     1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nota que obtenemos 3 filas, no 4</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">union</span>(df1, df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+      x     y
+  &lt;dbl&gt; &lt;dbl&gt;
+1     1     1
+2     2     1
+3     1     2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setdiff</span>(df1, df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+      x     y
+  &lt;dbl&gt; &lt;dbl&gt;
+1     2     1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setdiff</span>(df2, df1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+      x     y
+  &lt;dbl&gt; &lt;dbl&gt;
+1     1     2</code></pre>
+</div>
+</div>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>NdT. El texto original se refiere al paquete nycflights13 cuya traducción se incluye en el paquete <strong>datos</strong>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./12-tidy.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Datos ordenados</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./14-strings.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Cadenas de caracteres</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
