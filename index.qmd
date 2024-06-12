@@ -25,3 +25,21 @@ Puedes consultar la versión original del libro en [r4ds.had.co.nz/](http://r4ds
 (El libro "R for Data Science" primero se llamó "Data Science with R" en "Hands-On Programming with R")
 
 Esta obra se distribuye bajo los términos y condiciones de la licencia [Creative Commons Atribución-No Comercial-Sin Derivados 4.0](http://creativecommons.org/licenses/by-nc-nd/4.0/us/) vigente en los Estados Unidos de América.
+
+## Información bibliográfica {-}
+
+Entrada BibTeX:
+
+```
+@book{wickham_r_2023,
+	edition = {Primera Edici\'on},
+	title = {R {Para} {Ciencia} de {Datos}},
+	url = {https://r4ds.hadley.nz/},
+	urldate = {2024-05-01},
+	author = {Wickham, Hadley and Cetinkaya-Rundel, Mine and Grolemund, Garrett},
+	translator = {Alfaro, Marcela and Alonso, M
+  'onica and Álvarez, Fernando and Bazurto, Zulemma and Bellini, Yanina and Benítez, Juliana and Caldas, Mar\'ia Paula and Campitelli, Elio and D'Andrea, Florencia and Espada, Rocío and Kunst, Joshua and Loto, Patricia and Mat\'ias, Pamela and Moreno, Lina and Prieto, Paola and Quiroga, Riva and Rodr\'iguez, Luc\'ia and Vargas Sep
+  'ulveda, Mauricio and V\'azquez, Daniela and Vidoni, Melina and Villafa\~ne, Roxana N.},
+	year = {2023},
+}
+```
